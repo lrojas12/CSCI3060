@@ -40,7 +40,7 @@ Enter a command.
 >>> ERROR: There is a session running. Please log out and try again.
 >>> ERROR: Invalid account mode.
 
------------> LOGOUT STANDARD AND ADMINISTRATOR - SUCCESSFUL TEST <------------
+----------> LOGOUT STANDARD AND ADMINISTRATOR - SUCCESSFUL TEST <-----------
 
 You have successfully logged out of your account.
 
@@ -64,6 +64,8 @@ Balance: BALANCE
 Transaction payment plan: PLAN
 Status: STATUS
 
+Enter a command.
+
 ----------------> CREATE ADMINISTRATOR - FAILED TESTS <-----------------
 
 >>> ERROR: The account holder name entered is already in use. Please pick a different one.
@@ -74,6 +76,354 @@ Status: STATUS
 
 >>> ERROR: You need to be an administrator to create a new account.
 
+----------------> DELETE ADMINISTRATOR - SUCCESSFUL TEST <-----------------
+
+Delete transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NU
+Are you sure you want to delete ACC_HOLDER's account ACC_NUM (yes/no)?
+
+The account ACC_NUM has successfully been deleted. NOTE THIS LINE DOESN'T ALWAYS APPLY.
+The deletion of account ACC_NUM has been aborted. NOTE THIS LINE DOESN'T ALWAYS APPLY.
+
+Enter a command.
+
+----------------> DELETE ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder name entered is invalid.
+
+>>> ERROR: You may not delete this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: This is an invalid input.
+
+----------------> DELETE STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: You need to be an administrator to delete an account.
+
+----------------> DISABLE ADMINISTRATOR - SUCCESSFUL TEST <-----------------
+
+Disable transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+
+The account ACC_NUM has successfully been disabled.
+
+Enter a command.
+
+----------------> DISABLE ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder name entered is invalid.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: This account is already disabled.
+
+----------------> DISABLE STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: You need to be an administrator to disable an account.
+
+----------------> ENABLE ADMINISTRATOR - SUCCESSFUL TEST <-----------------
+
+Enable transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+
+The account ACC_NUM has successfully been enabled.
+
+Enter a command.
+
+----------------> ENABLE ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder name entered is invalid.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: This account is already enabled.
+
+----------------> ENABLE STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: You need to be an administrator to enable an account.
+
+--------------> CHANGEPLAN ADMINISTRATOR - SUCCESSFUL TEST <---------------
+
+Change plan transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+
+The transaction payment plan for account ACC_NUM has been successfully changed to PLAN.
+
+Enter a command.
+
+---------------> CHANGEPLAN ADMINISTRATOR - FAILED TESTS <----------------
+
+>>> ERROR: The account holder name entered is invalid.
+
+>>> ERROR: You may not change the transaction payment plan on this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: Disabled accounts can not change transaction payment plans.
+
+----------------> CHANGEPLAN STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: You need to be an administrator to change the plan of an account.
+
+----------------> DEPOSIT ADMINISTRATOR - SUCCESSFUL TEST <-----------------
+
+Deposit transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+Enter amount to deposit: AMOUNT
+
+Funds have been successfully added to the account ACC_NUM.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> DEPOSIT ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder's name is invalid.
+
+>>> ERROR: You may not deposit funds to this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: Disabled accounts may not deposit funds.
+
+>>> ERROR: Newly created accounts may not deposit funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+----------------> DEPOSIT STANDARD - SUCCESSFUL TEST <-----------------
+
+Deposit transaction selected.
+
+Enter account number: ACC_NUM
+Enter amount to deposit: AMOUNT
+
+Funds have been successfully added to your account.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> DEPOSIT STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: The account number does not match your account.
+
+>>> ERROR: The account is disabled; you may not deposit funds.
+
+>>> ERROR: Newly created accounts may not deposit funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+--------------> WITHDRAWAL ADMINISTRATOR - SUCCESSFUL TEST <---------------
+
+Withdrawal transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+Enter amount to withdraw: AMOUNT
+
+Funds have been successfully withdrawn from the account ACC_NUM.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> WITHDRAWAL ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder's name is invalid.
+
+>>> ERROR: You may not withdraw funds to this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: Disabled accounts may not withdraw funds.
+
+>>> ERROR: Newly created accounts may not withdraw funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+----------------> WITHDRAWAL STANDARD - SUCCESSFUL TEST <-----------------
+
+Withdrawal transaction selected.
+
+Enter account number: ACC_NUM
+Enter amount to withdraw: AMOUNT
+
+Funds have been successfully withdrawn from your account.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> WITHDRAWAL STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: The account number does not match your account.
+
+>>> ERROR: The account is disabled; you may not withdraw funds.
+
+>>> ERROR: Newly created accounts may not withdraw funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+--------------> TRANSFER ADMINISTRATOR - SUCCESSFUL TEST <---------------
+
+Transfer transaction selected.
+
+Enter the origin account holder's name: ACC_HOLDER_F
+Enter the origin account number: ACC_NUM_F
+Enter the destination account number: ACC_NUM_T
+Enter amount to transfer: AMOUNT
+
+Funds have successfully transfered from account ACC_NUM_F to account ACC_NUM_T.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> TRANSFER ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The origin account holder's name is invalid.
+
+>>> ERROR: You may not transfer funds from this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: Disabled accounts may not send funds.
+
+>>> ERROR: Newly created accounts may not send funds. Please try again in 24 hours.
+
+>>> ERROR: The destination account number is invalid.
+
+>>> ERROR: Disabled accounts may not receive funds.
+
+>>> ERROR: Newly created accounts may not receive funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+----------------> TRANSFER STANDARD - SUCCESSFUL TEST <-----------------
+
+Transfer transaction selected.
+
+Enter you account number: ACC_NUM_F
+Enter the destination account number: ACC_NUM_T
+Enter amount to transfer: AMOUNT
+
+Funds have been successfully transfered from account ACC_NUM_F to account ACC_NUM_T.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> TRANSFER STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: The account number does not match your account.
+
+>>> ERROR: The account is disabled; you may not send funds.
+
+>>> ERROR: Newly created accounts may not send funds. Please try again in 24 hours.
+
+>>> ERROR: The destination account number is invalid.
+
+>>> ERROR: The destination account is disabled; they may not receive funds.
+
+>>> ERROR: Newly created accounts may not recieve funds. Please try again in 24 hours.
+
+>>> ERROR: The amount entered is invalid.
+
+--------------> PAYBILL ADMINISTRATOR - SUCCESSFUL TEST <---------------
+
+Pay bill transaction selected.
+
+Enter account holder's name: ACC_HOLDER
+Enter account number: ACC_NUM
+Enter company: COMPANY
+Enter amount to pay: AMOUNT
+
+You have successfully paid a bill of AMOUNT from account ACC_NUM to COMPANY.
+New balance: NEW_BALANCE
+
+Enter a command.
+
+----------------> PAYBILL ADMINISTRATOR - FAILED TESTS <-----------------
+
+>>> ERROR: The account holder's name is invalid.
+
+>>> ERROR: You may not pay any bills using this account.
+
+>>> ERROR: The account number does not match the account holder.
+
+>>> ERROR: Disabled accounts may not pay any bills.
+
+>>> ERROR: Newly created accounts may not pay bills. Please try again in 24 hours.
+
+>>> ERROR: The company name is invalid. Must be one of the following: EC, CQ or TV.
+
+>>> ERROR: The amount entered is invalid.
+
+----------------> PAYBILL STANDARD - SUCCESSFUL TEST <-----------------
+
+Pay bill transaction selected.
+
+Enter your account number: ACC_NUM
+Enter company: COMPANY
+Enter amount to pay: AMOUNT
+
+You have successfully paid a bill of AMOUNT to COMPANY.
+
+Enter a command.
+
+----------------> PAYBILL STANDARD - FAILED TESTS <-----------------
+
+>>> ERROR: The account number does not match your account.
+
+>>> ERROR: Your account is disabled; you may not pay any bills.
+
+>>> ERROR: Newly created accounts may not pay bills. Please try again in 24 hours.
+
+>>> ERROR: The company name is invalid. Must be one of the following: EC, CQ or TV.
+
+>>> ERROR: The amount entered is invalid.
+
+-----------> HELP STANDARD AND ADMINISTRATOR - SUCCESSFUL TEST <------------
+
+
+((expression))		((description))
+
+login		Start a session for administrators and standard users. Required to invoke any other commands.
+
+withdrawal	Withdraw money from a bank account.
+
+transfer	Transfer money from one bank account to another.
+
+paybill		Pay a bill to a company from a bank account.
+
+deposit		Deposit money into a bank account.
+
+create		Create a new bank account with initial balance (Privileged transaction).
+
+delete		Deleve a bank account (Privileged transaction).
+
+disable		Disable all transactions in a bank account (Privileged transaction).
+
+enable		Enables all transactions in a bank account (Privileged transaction).
+
+changeplan	Change the transaction payment plan for an account (Privileged transaction).
+
+logout		End a session.
+
+quit		End the program.
+
+>> Note: Privileged transaction commands are only available to bank employees (administrators).
+
+Enter a command.
+
 -------------> OTHER - FAILED TESTS <--------------
 
 >>> ERROR: You must be logged in before invoking any other commands.
+
+>>> ERROR: This is an invalid command. Please refer to the "help" command for more information.
