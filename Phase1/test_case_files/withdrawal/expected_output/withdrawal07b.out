@@ -1,13 +1,31 @@
-Welcome to Watermelon Banking System
-Please login to begin or type in “help” for more information.
-Mode in which you wish to login as:
-Account holder’s name:
-You are currently logged in as Yoji.
-Bank Account Number: 00017
+ __    __      _                           _             
+/ / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __  
+\ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \ 
+ \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
+  \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
+  
+Welcome to Watermelon Banking System. 
+Please log in to begin or enter "help" for more information.
+
+Enter mode in which you wish to log in as: 
+
+Enter account holder's name:
+
+You are currently logged in as Yoji
+BankAccount Number: 00017
 Balance: $00200.00
-Transaction Payment Plan: Non-student
+Transaction PaymentPlan: Non-student
 Status: Active
-Enter account number:
-Enter amount to deposit:
-ERROR: The amount entered is not valid.
+
+Enter a command.
+
+Withdrawal transaction selected.
+
+Enter account number: 
+Enter amount to withdraw:
+
+>>> ERROR: The amount entered is invalid.
+
 You have successfully logged out of your account.
+
+Login or enter "help" for more information.
