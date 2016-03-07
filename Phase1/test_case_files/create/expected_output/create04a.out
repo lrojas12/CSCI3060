@@ -16,8 +16,15 @@ Enter a command.
 Create transaction selected.
 
 Enter new account holder's name: 
+Enter initial balance: 
 
->>> ERROR: The account holder name entered is already in use. Please pick a different one.
+You have successfully created a new account.
+Bank account number: 00019
+Balance: $00000.00
+Transaction payment plan: Student
+Status: Active
+
+Enter a command.
 
 You have successfully logged out of your account.
 
