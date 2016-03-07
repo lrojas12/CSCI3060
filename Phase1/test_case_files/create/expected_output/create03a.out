@@ -17,7 +17,7 @@ Create transaction selected.
 
 Enter new account holder's name: 
 
->>> ERROR: Your account holder name includes invalid characters.
+>>> ERROR: The account holder name entered is already in use. Please pick a different one.
 
 You have successfully logged out of your account.
 

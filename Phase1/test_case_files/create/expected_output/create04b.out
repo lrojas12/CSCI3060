@@ -16,8 +16,15 @@ Enter a command.
 Create transaction selected.
 
 Enter new account holder's name: 
+Enter initial balance: 
 
->>> ERROR: “admin” is a reserved name.
+You have successfully created a new account.
+Bank account number: 00020
+Balance: $99999.99
+Transaction payment plan: Student
+Status: Active
+
+Enter a command.
 
 You have successfully logged out of your account.
 
