@@ -52,7 +52,19 @@ bool TransactionHelper::is_Name_Valid(string name) {
 
 // Checks that both arguments correspond to eachother
 bool TransactionHelper::Matches(string name, int acc_num) {
-  return true;
+
+  bool ret = false;
+
+  for (int i = 0; i < users.size(); i++) {
+    if (((users.at(i).GetName()).compare(name)) == 0) {     
+      if (users.at(i).GetNum() == acc_num) {
+        ret = true;
+        break;
+      }
+      break;
+    }
+  }
+  return ret;
 }
 
 /* Checks that the amound of funds entered is valid
@@ -71,19 +83,57 @@ bool TransactionHelper::is_Amount_Valid(string amount) {
 
 // Checks if the account provided is active or disabled
 bool TransactionHelper::is_Disabled(int acc_num) {
-  return true;
+  
+  bool ret = false;
+
+  for (int i = 0; i < users.size(); i++) {
+    if (((users.at(i).GetNum()) == acc_num)) {
+      string str;    
+      if (users.at(i).GetStatus() == 'D') {
+        ret = true;
+        break;
+      }
+      break;
+    }
+  }
+  return ret;
 }
 
 /* Checks if the user's transaction payment plan
  * (student or non-student)
  */
 bool TransactionHelper::is_Student(int acc_num) {
-  return true;
+  
+  bool ret = false;
+
+  for (int i = 0; i < users.size(); i++) {
+    if (((users.at(i).GetNum()) == acc_num)) {  
+      string str;   
+      if (users.at(i).GetPlan() == 'S') {
+        ret = true;
+        break;
+      }
+      break;
+    }
+  }
+  return ret;
 }
 
 // Outputs the transaction_file vector into a file
-void TransactionHelper::WriteTransferFile() {
-  cout << "Writing transaction file" << endl;
+void TransactionHelper::WriteTransactionFile() {
+  
+  string file_name = "transaction_file.txt";
+
+  ofstream outfile(file_name);
+
+  if (outfile.is_open()) {
+    for (int i = 0; i < transaction_file.size(); i++) {
+      outfile << transaction_file.at(i);
+    }
+    outfile.close();
+  } else {
+    cerr << ">>> ERROR: Unable to open transaction file" << endl;
+  }
 }
 
 /* Loads all accounts' information from the
@@ -139,7 +189,7 @@ cout << " \\  /\\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |" << endl;
 cout << "  \\/  \\/ \\__,_|\\__\\___|_|  |_| |_| |_|\\___|_|\\___/|_| |_|" << endl;  
                                                               
   cout << "\nWelcome to Watermelon Banking System" << endl;
-  cout << "Please log in to begin or type in \"help\" for more information." << endl;
+  cout << "Please log in to begin or type in \"help\" for more information.\n" << endl;
 }
 
 // Allows the users to log in as a STANDARD user
@@ -153,7 +203,7 @@ void TransactionHelper::Login() {
       mode = "admin";
       is_logged = true;
       cout << "\nYou are currently logged in as an administrator." << endl;
-      cout << "\nEnter a command." << endl;
+      cout << "\nEnter a command.\n" << endl;
     } else if (transactions.to_Lower(mode).compare("standard") == 0) {
       mode = "standard";
 
@@ -217,7 +267,7 @@ void TransactionHelper::Logout() {
     mode = "";
     acc_holder = "";
 
-    WriteTransferFile();
+    WriteTransactionFile();
 
   } else {
     // There is no running session to be logged out of

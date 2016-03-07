@@ -63,7 +63,7 @@ class TransactionHelper {
   bool is_Student(int acc_num);
 
   // Outputs the transaction_file vector into a file
-  void WriteTransferFile();
+  void WriteTransactionFile();
 
   /* Loads all accounts' information from the
    * current_bank_accounts_file.txt file (provided by the back end)

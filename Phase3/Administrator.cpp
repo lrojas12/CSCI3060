@@ -32,10 +32,13 @@ void Administrator::Deposit(int acc_num, float amount) {
 
 void Administrator::Create() {
 
+  string padded_acc_num;
   string padded_init_balance;
   string padded_new_name;
   string new_name;
   string init_balance;
+
+  cout << "\nCreate transaction selected.\n" << endl;
 	
   cout << "Enter new account holder's name: ";
   //cin >> new_name;
@@ -47,7 +50,7 @@ void Administrator::Create() {
    */
   if (new_name.length() > 20) {
     new_name = new_name.substr(0, 20);
-    cout << "Your account holder name has been truncated to: " << new_name << endl;
+    cout << "The new account holder's name has been truncated to: " << new_name << endl;
   } else {
     padded_new_name = new_name;
     while (padded_new_name.length() < 20) {
@@ -71,18 +74,24 @@ void Administrator::Create() {
 
     // Assigns the next number in the sequence
     int new_acc_num = last_acc_num + 1;
+
     if (new_acc_num > 99999) {
       cerr << "There are no more bank account numbers available." << endl;
       return;
     } else {
       // Prompt for initial balance and check it's valid
       // Then create new User and add it to the users vector
-      cout << "Enter the initial balance: ";
+      cout << "Enter initial balance: ";
       cin >> init_balance;
 
       padded_init_balance = init_balance;
       while (padded_init_balance.length() < 8) {
         padded_init_balance = "0" + padded_init_balance;
+      }
+
+      padded_acc_num = to_string(new_acc_num);
+      while (padded_acc_num.length() < 5) {
+        padded_acc_num = "0" + padded_acc_num;
       }
 
       if (!(transactions.is_Amount_Valid(init_balance))) {
@@ -99,9 +108,9 @@ void Administrator::Create() {
       users.push_back(new_user);
 
       cout << "You have successfully created a new account." << endl;
-      cout << "Account holder's name: " << new_user.GetName() << endl;
-      cout << "Account number: " << new_user.GetNum() << endl;
-      cout << "Account balance: " << new_user.GetBalance() << endl;
+      cout << "Bank account number: " << padded_acc_num << endl;
+      cout << "Balance: " << padded_init_balance << endl;
+
       if (new_user.GetPlan() == 'S')
         cout << "Transaction payment plan: Student" << endl;
       else if (new_user.GetPlan() == 'N')
@@ -116,7 +125,7 @@ void Administrator::Create() {
       else
         cerr << ">>> ERROR: Could not get status information." << endl;
 
-      string transaction_line = "05 " + padded_new_name + " " + padded_init_balance + "   ";
+      string transaction_line = "05 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
       cout << "Transaction line: " << transaction_line << endl;
       transaction_file.push_back(transaction_line);
     }
