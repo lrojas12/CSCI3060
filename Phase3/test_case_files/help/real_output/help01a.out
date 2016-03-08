@@ -1,0 +1,37 @@
+ __    __      _                           _ 
+/ / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __ 
+\ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \
+ \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
+  \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
+
+Welcome to Watermelon Banking System
+Please log in to begin or type in "help" for more information.
+
+
+((expression))		((description))
+
+login		Start a session for administrators and standard users. Required to invoke any other commands.
+
+withdrawal	Withdraw money from a bank account.
+
+transfer	Transfer money from one bank account to another.
+
+paybill		Pay a bill to a company from a bank account.
+
+deposit		Deposit money into a bank account.
+
+create		Create a new bank account with initial balance (Privileged transaction).
+
+delete		Deleve a bank account (Privileged transaction).
+
+disable		Disable all transactions in a bank account (Privileged transaction).
+
+enable		Enables all transactions in a bank account (Privileged transaction).
+
+changeplan	Change the transaction payment plan for an account (Privileged transaction).
+
+logout		End a session.
+
+quit		End the program.
+
+>> Note: Privileged transaction commands are only available to bank employees (administrators).
