@@ -7,11 +7,14 @@
 Welcome to Watermelon Banking System. 
 Please log in to begin or enter "help" for more information.
 
+
 Enter mode in which you wish to log in as: 
+
 
 You are currently logged in as an administrator.
 
 Enter a command.
+
 
 Create transaction selected.
 
@@ -26,6 +29,7 @@ Transaction payment plan: Non-Student
 Status: Active
 
 Enter a command.
+
 
 You have successfully logged out of your account.
 

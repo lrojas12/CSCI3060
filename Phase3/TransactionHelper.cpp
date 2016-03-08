@@ -260,7 +260,7 @@ void TransactionHelper::Login() {
 // Logs user out from either account - administrator or standard
 void TransactionHelper::Logout() {
   if (is_logged) {
-    cout << "You have successfully logged out of your account." << endl;
+    cout << "\nYou have successfully logged out of your account.\n\nLogin or enter \"help\" for more information.\n" << endl;
 
     // Resets all variables for next user
     is_logged = false;
