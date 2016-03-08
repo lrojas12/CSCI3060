@@ -1,0 +1,33 @@
+ __    __      _                           _             
+/ / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __  
+\ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \ 
+ \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
+  \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
+  
+Welcome to Watermelon Banking System. 
+Please log in to begin or enter "help" for more information.
+
+Enter mode in which you wish to log in as: 
+Account holder’s name: 
+
+You are currently logged in as Tarzan.
+BankAccount Number: 00001
+Balance: $01000.00
+Transaction PaymentPlan: Non-student
+Status: Active
+
+Enter a command. 
+
+Deposit transaction selected.
+
+Enter account number: 
+Enter amount to deposit: 
+
+Funds have been successfully added to your account.
+New balance: $01020.00
+
+Enter a command.
+
+You have successfully logged out of your account.
+
+Login or enter "help" for more information.
