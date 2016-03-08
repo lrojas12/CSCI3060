@@ -31,7 +31,7 @@ class Administrator: public virtual IAccount {
   // This is the create function to create a new user account.
   void Create();
   // This is the delete function to delete an existing user account.
-  void Deleted(int acc_num);
+  void Deleted();
   // This is the disable function to disable an user account that is currently enabled.
   void Disable(int acc_num);
   // This is the enable function to enable an user account that is currently disabled.

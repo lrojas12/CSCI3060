@@ -122,7 +122,7 @@ bool TransactionHelper::is_Student(int acc_num) {
 // Outputs the transaction_file vector into a file
 void TransactionHelper::WriteTransactionFile() {
   
-  string file_name = "transaction_file.txt";
+  string file_name = "transaction_file.tra";
 
   ofstream outfile(file_name);
 

@@ -135,16 +135,83 @@ void Administrator::Create() {
   }
 }
 
-void Administrator::Deleted(int acc_num) {
+void Administrator::Deleted() {
+
+  cout << "BEFORE:" << endl;
+  for (int i = 0; i < users.size(); i++) {
+    cout << i+1 << ") " << users.at(i).GetName() << endl;
+  }
+
+  string padded_acc_holder;
+  string padded_acc_num;
+  string acc_holder;
+  string temp_acc_num;
+  int acc_num;
   string choice;
-  cout << "Are you sure you want to delete account " << acc_num << " (yes/no)? ";
-  cin >> choice;
-  if (choice.compare("yes") == 0)
-    cout << "The account " << acc_num <<  " has been deleted successfully." << endl;
-  else if (choice.compare("no") == 0)
-    cout << "The deletion of account " << acc_num << " has been aborted." << endl;
-  else
-  cerr << "ERROR: This is not a valid input." << endl;
+
+  cout << "\nDelete transaction selected.\n" << endl;
+
+  cout << "Enter account holder's name: ";
+  cin >> acc_holder;
+
+  if (!transactions.HolderExists(acc_holder)) {
+    cerr << "\n>>> ERROR: The account holder name entered is not valid.\n" << endl;
+    return;
+  }
+
+  cout << "Enter account number: ";
+  cin >> temp_acc_num;
+
+  regex re("[0-9]{0,5}");
+  if (regex_match(temp_acc_num, re)) {
+    acc_num = stoi(temp_acc_num);
+  } else {
+    cerr << "\n>>> ERROR: The account number entered is invalid.\n" << endl;
+    return;
+  }
+
+  if (transactions.Matches(acc_holder, acc_num)) {
+
+    padded_acc_holder = acc_holder;
+    while (padded_acc_holder.length() < 20) {
+      padded_acc_holder = padded_acc_holder + " ";
+    }
+
+    padded_acc_num = temp_acc_num;
+    while (padded_acc_num.length() < 5) {
+      padded_acc_num = "0" + padded_acc_num;
+    }
+    cout << "Are you sure you want to delete " << acc_holder << "'s account " << padded_acc_num << " (yes/no)? ";
+    cin >> choice;
+    if (transactions.to_Lower(choice).compare("yes") == 0) {
+      for (int i = 0; i < users.size(); i++) {
+        if (users.at(i).GetNum() == acc_num) {
+          cout << "i: " << i << endl;
+          users.erase(users.begin() + i);
+          break;
+        }
+        break;
+      }
+  
+      cout << "The account " << padded_acc_num << " has successfully been deleted." << endl;
+  
+      cout << "AFTER:" << endl;
+      for (int i = 0; i < users.size(); i++) {
+        cout << i+1 << ") " << users.at(i).GetName() << endl;
+      }
+
+      string transaction_line = "06 " + padded_acc_holder + " " + padded_acc_num + "            ";
+      transaction_file.push_back(transaction_line);
+      cout << "\nEnter a command.\n" << endl;
+    }
+    else if (transactions.to_Lower(choice).compare("no") == 0)
+      cout << "The deletion of account " << acc_num << " has been aborted." << endl;
+    else
+      cerr << "\n>>> ERROR: This is not a valid input.\n" << endl;
+
+  } else {
+      cerr << "\n>>> ERROR: The account number entered does not match the account holder name.\n" << endl;
+  }
 }
 
 void Administrator::Disable(int acc_num) {

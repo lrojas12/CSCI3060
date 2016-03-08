@@ -7,11 +7,13 @@
 Welcome to Watermelon Banking System. 
 Please log in to begin or enter "help" for more information.
 
+
 Enter mode in which you wish to log in as: 
 
 You are currently logged in as an administrator.
 
 Enter a command.
+
 
 Create transaction selected.
 
@@ -19,6 +21,7 @@ Enter new account holder's name:
 Enter initial balance: 
 
 >>> ERROR: The initial balance entered is not valid.
+
 
 You have successfully logged out of your account.
 

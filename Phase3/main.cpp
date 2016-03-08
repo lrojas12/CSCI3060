@@ -81,11 +81,7 @@ int main (int argc, char *argv[]) {
       // If command is DELETE (Privileged)
       else if (transactions.to_Lower(command).compare("delete") == 0) {
         if (transactions.is_Admin()) {
-          cout << "Enter account holder's name: ";
-          cin >> acc_holder;
-          cout << "Enter account number: ";
-          cin >> acc_num;
-          a.Deleted(acc_num);
+          a.Deleted();
         } else {
           cerr << "\n>>> ERROR: You need to be an administrator to delete an account.\n" << endl;
         }
