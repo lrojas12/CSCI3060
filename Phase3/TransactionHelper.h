@@ -52,7 +52,7 @@ class TransactionHelper {
   /* Checks that the amound of funds entered is valid
    * (e.g. formatting). Done using regex.
    */
-  bool is_Amount_Valid(float amount);
+  bool is_Amount_Valid(string amount);
 
   // Checks if the account provided is active or disabled
   bool is_Disabled(int acc_num);
@@ -63,7 +63,7 @@ class TransactionHelper {
   bool is_Student(int acc_num);
 
   // Outputs the transaction_file vector into a file
-  void WriteTransferFile();
+  void WriteTransactionFile();
 
   /* Loads all accounts' information from the
    * current_bank_accounts_file.txt file (provided by the back end)

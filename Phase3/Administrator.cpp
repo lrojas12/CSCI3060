@@ -32,8 +32,13 @@ void Administrator::Deposit(int acc_num, float amount) {
 
 void Administrator::Create() {
 
+  string padded_acc_num;
+  string padded_init_balance;
+  string padded_new_name;
   string new_name;
-  float init_balance;
+  string init_balance;
+
+  cout << "\nCreate transaction selected.\n" << endl;
 	
   cout << "Enter new account holder's name: ";
   //cin >> new_name;
@@ -45,25 +50,87 @@ void Administrator::Create() {
    */
   if (new_name.length() > 20) {
     new_name = new_name.substr(0, 20);
-    cout << "Your account holder name has been truncated to: " << new_name << endl;
+    cout << "The new account holder's name has been truncated to: " << new_name << endl;
+  } else {
+    padded_new_name = new_name;
+    while (padded_new_name.length() < 20) {
+      padded_new_name = padded_new_name + " ";
+    }
   }
 
   /* If the name does not exist (e.g. is unique) then 
    * check if it fits the format required
    */
-  if (!transactions.HolderExists(new_name) && new_name.compare("admin") != 0
-    && transactions.is_Name_Valid(new_name)) {
-    // Assign new account number here using
-    // Prompt for initial balance and check it's valid
-    // Then create new User and add it to the users vector
-    cout << "Enter the initial balance: " << endl;
-    cin >> init_balance;
-    cout << "You have successfully created a new account." << endl;
-    cout << "Account number: " << endl;
-    cout << "Account holder's name: " << new_name << endl;
-    cout << "Account balance: " << init_balance << endl;
+  if (!(transactions.HolderExists(new_name)) && (new_name.compare("admin") != 0) && (transactions.is_Name_Valid(new_name))) {
+    // Get the last element from vector users
+
+    int last_acc_num;
+    
+    for (int i = 0; i < users.size(); i++) {
+      if (i == users.size() - 3) {
+        last_acc_num = users.at(i).GetNum();
+      }
+    }
+
+    // Assigns the next number in the sequence
+    int new_acc_num = last_acc_num + 1;
+
+    if (new_acc_num > 99999) {
+      cerr << "There are no more bank account numbers available." << endl;
+      return;
+    } else {
+      // Prompt for initial balance and check it's valid
+      // Then create new User and add it to the users vector
+      cout << "Enter initial balance: ";
+      cin >> init_balance;
+
+      padded_init_balance = init_balance;
+      while (padded_init_balance.length() < 8) {
+        padded_init_balance = "0" + padded_init_balance;
+      }
+
+      padded_acc_num = to_string(new_acc_num);
+      while (padded_acc_num.length() < 5) {
+        padded_acc_num = "0" + padded_acc_num;
+      }
+
+      if (!(transactions.is_Amount_Valid(init_balance))) {
+        cerr << ">>> ERROR: Please enter a valid initial balance." << endl;
+        return;
+      }
+
+      User new_user;
+      new_user.SetName(new_name);
+      new_user.SetNum(new_acc_num);
+      new_user.SetBalance(stof(init_balance));
+      new_user.SetStatus('A');
+      new_user.SetPlan('N');
+      users.push_back(new_user);
+
+      cout << "You have successfully created a new account." << endl;
+      cout << "Bank account number: " << padded_acc_num << endl;
+      cout << "Balance: " << padded_init_balance << endl;
+
+      if (new_user.GetPlan() == 'S')
+        cout << "Transaction payment plan: Student" << endl;
+      else if (new_user.GetPlan() == 'N')
+        cout << "Transaction payment plan: Non-student" << endl;
+      else 
+        cerr << ">>> ERROR: Could not get payment plan information." << endl;     
+      
+      if (new_user.GetStatus() == 'D')
+        cout << "Status: Disabled" << endl;
+      else if (new_user.GetStatus() == 'A')
+        cout << "Status: Active" << endl;
+      else
+        cerr << ">>> ERROR: Could not get status information." << endl;
+
+      string transaction_line = "05 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
+      cout << "Transaction line: " << transaction_line << endl;
+      transaction_file.push_back(transaction_line);
+    }
   } else {
-    cerr << "ERROR: This account name is already in use. Please pick a different one." << endl;
+    cerr << ">>> ERROR: This account name is already in use. Please pick a different one." << endl;
   }
 }
 

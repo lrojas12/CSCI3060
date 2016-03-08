@@ -62,22 +62,7 @@ int main (int argc, char *argv[]) {
 
       // If command is LOGIN
       if (transactions.to_Lower(command).compare("login") == 0)
-        if (!is_logged) {
-          cout << "Enter mode in which you wish to log in as: ";
-          cin >> mode;
-
-          if (transactions.to_Lower(mode).compare("admin") == 0) {
-            mode = "admin";
-            is_logged = true;
-            cout << "You are currently logged in as an administrator." << endl;
-          } else if (transactions.to_Lower(mode).compare("standard") == 0) {
-            transactions.Login();
-          } else {
-            cerr << "ERROR: Invalid account mode." << endl;
-          }
-        } else {
-          cerr << "ERROR: There is a session running. Please log out and try again." << endl;
-      }
+        transactions.Login();
 
       // If command is LOGOUT
       else if (transactions.to_Lower(command).compare("logout") == 0)
