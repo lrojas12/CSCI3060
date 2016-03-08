@@ -120,7 +120,7 @@ void Administrator::Paybill() {
 }
 
 void Administrator::Deposit() {
-  
+
   string padded_acc_holder;
   string padded_acc_num;
   string padded_amount;
@@ -195,7 +195,7 @@ void Administrator::Deposit() {
     for (int i = 0; i < users.size(); i++) {
       if (users.at(i).GetNum() == acc_num) {
 
-        if (((amount + users.at(i).GetBalance()) <= 99999.99) && (amount > 0.0)) {
+        if (((amount + users.at(i).GetBalance()) < 100000.00) && (amount > 0.0)) {
           new_balance = users.at(i).GetBalance() + amount;
           users.at(i).SetBalance(new_balance);
           break;
@@ -322,7 +322,7 @@ void Administrator::Create() {
 
       cout << "\nEnter a command.\n" << endl;
 
-      string transaction_line = "05 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
+      string transaction_line = "04 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
       transaction_file.push_back(transaction_line);
     }
   } else {
