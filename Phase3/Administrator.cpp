@@ -95,7 +95,7 @@ void Administrator::Create() {
       }
 
       if (!(transactions.is_Amount_Valid(init_balance))) {
-        cerr << ">>> ERROR: Please enter a valid initial balance." << endl;
+        cerr << ">>> ERROR: The initial balance entered is not valid." << endl;
         return;
       }
 
@@ -131,14 +131,13 @@ void Administrator::Create() {
       transaction_file.push_back(transaction_line);
     }
   } else {
-    cerr << ">>> ERROR: This account name is already in use. Please pick a different one." << endl;
+    cerr << ">>> ERROR: The account name entered is already in use. Please pick a different one." << endl;
   }
 }
 
 void Administrator::Deleted(int acc_num) {
   string choice;
-  cout << "Are you sure you want to delete " << acc_holder << "\'s account " <<
-           acc_num << " (yes/no)? ";
+  cout << "Are you sure you want to delete account " << acc_num << " (yes/no)? ";
   cin >> choice;
   if (choice.compare("yes") == 0)
     cout << "The account " << acc_num <<  " has been deleted successfully." << endl;

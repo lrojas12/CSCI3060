@@ -74,9 +74,9 @@ int main (int argc, char *argv[]) {
           if (transactions.is_Admin()) 
             a.Create();
           else
-            cerr << "ERROR: You need to be an administrator to create a new account." << endl;
+            cerr << "\n>>> ERROR: You need to be an administrator to create a new account.\n" << endl;
         } else 
-          cerr << "ERROR: Must be logged in before invoking any other commands." << endl;
+          cerr << "\n>>> ERROR: Must be logged in before invoking any other commands." << endl;
 
       // If command is DELETE (Privileged)
       else if (transactions.to_Lower(command).compare("delete") == 0) {
@@ -87,7 +87,7 @@ int main (int argc, char *argv[]) {
           cin >> acc_num;
           a.Deleted(acc_num);
         } else {
-          cerr << "ERROR: You need to be an administrator to delete an account." << endl;
+          cerr << "\n>>> ERROR: You need to be an administrator to delete an account.\n" << endl;
         }
 
       // If command is DISABLE (Privileged)
@@ -99,7 +99,7 @@ int main (int argc, char *argv[]) {
           cin >> acc_num;
           a.Disable(acc_num);
         } else {
-          cerr << "ERROR: You need to be an administrator to disable an account." << endl;			
+          cerr << "\n>>> ERROR: You need to be an administrator to disable an account.\n" << endl;			
         }
 
       // If command is ENABLE (Privileged)
@@ -111,7 +111,7 @@ int main (int argc, char *argv[]) {
           cin >> acc_num;
           a.Enable(acc_num);
         } else {
-          cerr << "ERROR: You need to be an administrator to enable an account." << endl;			
+          cerr << "\n>>> ERROR: You need to be an administrator to enable an account.\n" << endl;			
         }
       // If command is DEPOSIT
       } else if (transactions.to_Lower(command).compare("deposit") == 0) {
@@ -202,7 +202,7 @@ int main (int argc, char *argv[]) {
           cin >> acc_num;
           a.Changeplan(acc_num);
         } else {
-          cerr << "ERROR: You need to be an administrator to change transcation payment plans." << endl;			
+          cerr << "\n>>> ERROR: You need to be an administrator to change transcation payment plans.\n" << endl;			
         }
 
       // If command is HELP
@@ -214,13 +214,13 @@ int main (int argc, char *argv[]) {
         if (!is_logged)
           return 1;
         else
-          cerr << "ERROR: You may not quit while logged in." << endl;
+          cerr << "\n>>> ERROR: You may not quit while logged in.\n" << endl;
       } else {
-        cerr << "ERROR: Invalid command." << endl;
+        cerr << "\n>>> ERROR: Invalid command.\n" << endl;
       }
     }
   } else {
-     cerr << "ERROR: Too many arguments." << endl;
+     cerr << "\n>>> ERROR: Too many arguments.\n" << endl;
      return -1;
   }
 }

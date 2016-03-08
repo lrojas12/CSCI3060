@@ -10,7 +10,6 @@ Please log in to begin or enter "help" for more information.
 
 Enter mode in which you wish to log in as: 
 
-
 You are currently logged in as an administrator.
 
 Enter a command.
@@ -25,7 +24,7 @@ Enter initial balance:
 You have successfully created a new account.
 Bank account number: 00021
 Balance: $00500.00
-Transaction payment plan: Non-Student
+Transaction payment plan: Non-student
 Status: Active
 
 Enter a command.

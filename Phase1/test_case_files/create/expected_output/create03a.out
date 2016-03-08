@@ -7,17 +7,20 @@
 Welcome to Watermelon Banking System. 
 Please log in to begin or enter "help" for more information.
 
+
 Enter mode in which you wish to log in as: 
 
 You are currently logged in as an administrator.
 
 Enter a command.
 
+
 Create transaction selected.
 
 Enter new account holder's name: 
 
 >>> ERROR: The account holder name entered is already in use. Please pick a different one.
+
 
 You have successfully logged out of your account.
 
