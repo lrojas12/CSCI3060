@@ -51,11 +51,11 @@ void Administrator::Create() {
   if (new_name.length() > 20) {
     new_name = new_name.substr(0, 20);
     cout << "The new account holder's name has been truncated to: " << new_name << endl;
-  } else {
-    padded_new_name = new_name;
-    while (padded_new_name.length() < 20) {
-      padded_new_name = padded_new_name + " ";
-    }
+  }
+
+  padded_new_name = new_name;
+  while (padded_new_name.length() < 20) {
+    padded_new_name = padded_new_name + " ";
   }
 
   /* If the name does not exist (e.g. is unique) then 
@@ -95,7 +95,7 @@ void Administrator::Create() {
       }
 
       if (!(transactions.is_Amount_Valid(init_balance))) {
-        cerr << ">>> ERROR: Please enter a valid initial balance." << endl;
+        cerr << ">>> ERROR: The initial balance entered is not valid." << endl;
         return;
       }
 
@@ -107,9 +107,9 @@ void Administrator::Create() {
       new_user.SetPlan('N');
       users.push_back(new_user);
 
-      cout << "You have successfully created a new account." << endl;
+      cout << "\nYou have successfully created a new account." << endl;
       cout << "Bank account number: " << padded_acc_num << endl;
-      cout << "Balance: " << padded_init_balance << endl;
+      cout << "Balance: $" << padded_init_balance << endl;
 
       if (new_user.GetPlan() == 'S')
         cout << "Transaction payment plan: Student" << endl;
@@ -125,19 +125,19 @@ void Administrator::Create() {
       else
         cerr << ">>> ERROR: Could not get status information." << endl;
 
+      cout << "\nEnter a command.\n" << endl;
+
       string transaction_line = "05 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
-      cout << "Transaction line: " << transaction_line << endl;
       transaction_file.push_back(transaction_line);
     }
   } else {
-    cerr << ">>> ERROR: This account name is already in use. Please pick a different one." << endl;
+    cerr << ">>> ERROR: The account name entered is already in use. Please pick a different one." << endl;
   }
 }
 
 void Administrator::Deleted(int acc_num) {
   string choice;
-  cout << "Are you sure you want to delete " << acc_holder << "\'s account " <<
-           acc_num << " (yes/no)? ";
+  cout << "Are you sure you want to delete account " << acc_num << " (yes/no)? ";
   cin >> choice;
   if (choice.compare("yes") == 0)
     cout << "The account " << acc_num <<  " has been deleted successfully." << endl;

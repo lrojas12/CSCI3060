@@ -132,7 +132,7 @@ void TransactionHelper::WriteTransactionFile() {
     }
     outfile.close();
   } else {
-    cerr << ">>> ERROR: Unable to open transaction file" << endl;
+    cerr << "\n>>> ERROR: Unable to open transaction file\n" << endl;
   }
 }
 
@@ -169,7 +169,7 @@ void TransactionHelper::LoadAccounts() {
 
     infile.close();
   } else {
-    cerr << "ERROR: File \"" << file_name << "\" was not found." << endl;
+    cerr << "\n>>> ERROR: File \"" << file_name << "\" was not found.\n" << endl;
   exit(-1);
   }
 
@@ -204,8 +204,16 @@ void TransactionHelper::Login() {
       is_logged = true;
       cout << "\nYou are currently logged in as an administrator." << endl;
       cout << "\nEnter a command.\n" << endl;
+
+      transaction_file.push_back("10                                     A ");
+
     } else if (transactions.to_Lower(mode).compare("standard") == 0) {
+
       mode = "standard";
+      string padded_acc_num;
+      stringstream stream;
+      string padded_balance;
+      string padded_acc_holder;
 
       // Save the account holder's name
       cout << "Enter account holder's name: ";
@@ -220,47 +228,69 @@ void TransactionHelper::Login() {
 
         is_logged = true;
 
-        for (int i = 0; i < users.size(); i++)
+        for (int i = 0; i < users.size(); i++) {
           if (users.at(i).GetName().compare(acc_holder) == 0) {
             curr_user = users.at(i);
           }
+        }
+
+        padded_acc_holder = acc_holder;
+        while(padded_acc_holder.length() < 20) {
+          padded_acc_holder = padded_acc_holder + " ";
+        }
+
+        padded_acc_num = to_string(curr_user.GetNum());
+        while(padded_acc_num.length() < 5) {
+          //cout << "[DEBUGGING] In second while loop" << endl;
+          padded_acc_num = "0" + padded_acc_num;
+        }
+
+        //padded_balance = to_string(curr_user.GetBalance());
+        stream << fixed << setprecision(2) << curr_user.GetBalance();
+        padded_balance = stream.str();
+        while(padded_balance.length() < 8) {
+          padded_balance = "0" + padded_balance;
+        }
 
         // Output the accounts' information in a user-friendly/readable way
         cout << "\nYou are currently logged in as " << curr_user.GetName() << "." << endl;
-        cout << "Bank account number: " << curr_user.GetNum() << endl;
-        cout << "Balance: " << curr_user.GetBalance() << endl;
+        cout << "Bank account number: " << padded_acc_num << endl;
+        cout << "Balance: $" << padded_balance << endl;
         if (curr_user.GetPlan() == 'S')
           cout << "Transaction payment plan: Student" << endl;
         else if (curr_user.GetPlan() == 'N')
           cout << "Transaction payment plan: Non-student" << endl;
         else 
-          cerr << "ERROR: Could not get payment plan information." << endl;     
+          cerr << "\n>>> ERROR: Could not get payment plan information.\n" << endl;     
         
         if (curr_user.GetStatus() == 'D')
           cout << "Status: Disabled" << endl;
         else if (curr_user.GetStatus() == 'A')
           cout << "Status: Active" << endl;
         else
-          cerr << ">>> ERROR: Could not get status information." << endl;
+          cerr << "\n>>> ERROR: Could not get status information.\n" << endl;
 
-        cout << "\nEnter a command." << endl;  
+        cout << "\nEnter a command.\n" << endl; 
+
+        string transaction_line = "10 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
+        transaction_file.push_back(transaction_line);
 
       } else {
         // The name is not found in the "database"
-        cerr << ">>> ERROR: The account holder entered is invalid." << endl;
+        cerr << "\n>>> ERROR: The account holder entered is invalid.\n" << endl;
       }
     } else {
-      cerr << ">>> ERROR: Invalid account mode." << endl;
+      cerr << "\n>>> ERROR: Invalid account mode.\n" << endl;
     }
   } else {
-    cerr << ">>> ERROR: There is a session running. Please log out and try again." << endl;
+    cerr << "\n>>> ERROR: There is a session running. Please log out and try again.\n" << endl;
   }
 }
 
 // Logs user out from either account - administrator or standard
 void TransactionHelper::Logout() {
   if (is_logged) {
-    cout << "You have successfully logged out of your account." << endl;
+    cout << "\nYou have successfully logged out of your account.\n\nLogin or enter \"help\" for more information.\n" << endl;
 
     // Resets all variables for next user
     is_logged = false;
@@ -271,7 +301,7 @@ void TransactionHelper::Logout() {
 
   } else {
     // There is no running session to be logged out of
-    cerr << "ERROR: You are not currently logged into an account." << endl;
+    cerr << "\n>>> ERROR: You are not currently logged into an account.\n" << endl;
   }
 }
 
@@ -288,7 +318,7 @@ void TransactionHelper::PrintHelp() {
     }
     infile.close();
   } else {
-    cerr << "ERROR: File \"" << file_name << "\" was not found." << endl;
+    cerr << "\n>>>ERROR: File \"" << file_name << "\" was not found.\n" << endl;
     exit(-1);
   }
 }
