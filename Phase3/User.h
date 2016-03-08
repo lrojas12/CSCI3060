@@ -6,6 +6,7 @@
 
 #ifndef USER_H
 #define USER_H
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -16,7 +17,7 @@
 #include "Standard.h"
 
 using namespace std;
-
+*/
 /*
  * User class holds the account holder name. Has functions to change
  * the data of the user and has transaction functions.
@@ -26,13 +27,13 @@ class User {
   string acc_holder_;
 
  protected:
-  Standard std_acc_;
+  //Standard std_acc_;
 
  public:
   User(){};
   //	User(string acc_holder, int acc_num, float acc_balance, char acc_status, char acc_plan);
-  ~User(){};
-		
+  ~User(){}
+	/*	
   // Get account holder name.
   string GetName() {return acc_holder_;}
   // Get account number.
@@ -43,6 +44,8 @@ class User {
   char GetStatus() {return std_acc_.GetStatus();}
   // Get account plan.
   char GetPlan() {return std_acc_.GetPlan();}
+  // Get the funds that were deposited in this day
+  float GetDeposited() {return std_acc_.GetDeposited();}
 
   // Set account holder name.
   void SetName(string name) {acc_holder_ = name;}
@@ -54,6 +57,8 @@ class User {
   void SetStatus(char status) {std_acc_.SetStatus(status);}
   // Set account plan.
   void SetPlan(char plan) {std_acc_.SetPlan(plan);}
+  // Change the value for recently deposited funds
+  void SetDeposited(float deposited) {std_acc_.SetDeposited(deposited);}
 
   // Withdraw from the current user account.
   void Withdrawal() {std_acc_.Withdrawal();}
@@ -63,6 +68,7 @@ class User {
   void Paybill() {std_acc_.Paybill();}
   // Deposit money into the current user account.
   void Deposit() {std_acc_.Deposit();}
+  */
 };
 
 #endif

@@ -14,7 +14,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "User.h"
 #include "TransactionHelper.h"
 #include "Standard.h"
 #include "Administrator.h"
@@ -31,9 +30,9 @@ Administrator a;
  * Needed in order to access and edit them from any
  * class.
  */
-User curr_user;
-vector<User> users;
-vector<User> new_users;
+Standard curr_user;
+vector<Standard> users;
+vector<Standard> new_users;
 vector<string> transaction_file;
 string mode;
 string acc_holder;
@@ -105,35 +104,47 @@ int main (int argc, char *argv[]) {
 
       // If command is DEPOSIT
       } else if (transactions.to_Lower(command).compare("deposit") == 0) {
-        if (transactions.is_Admin()) {
-          a.Deposit();
-        } else {
-          s.Deposit();
-        }
+        if (is_logged) {  
+          if (transactions.is_Admin()) {
+            a.Deposit();
+          } else {
+            s.Deposit();
+          }
+        } else 
+          cerr << "\n>>> ERROR: Must be logged in before invoking any other commands.\n" << endl;
 
       // If command is WITHDRAWAL
       } else if (transactions.to_Lower(command).compare("withdrawal") == 0) {
-        if (transactions.is_Admin()) {
-          a.Withdrawal();
-        } else {
-          s.Withdrawal();
-        }
+        if (is_logged) {  
+          if (transactions.is_Admin()) {
+            a.Withdrawal();
+          } else {
+            s.Withdrawal();
+          }
+        } else
+          cerr << "\n>>> ERROR: Must be logged in before invoking any other commands.\n" << endl;
 
       // If command is TRANSFER
       } else if (transactions.to_Lower(command).compare("transfer") == 0) {
-        if (transactions.is_Admin()) {
-          a.Transfer();
-        } else {
-          s.Transfer();
-        }
+        if (is_logged) {
+          if (transactions.is_Admin()) {
+            a.Transfer();
+          } else {
+            s.Transfer();
+          }
+        } else
+          cerr << "\n>>> ERROR: Must be logged in before invoking any other commands.\n" << endl;
 
       // If command is PAYBILL
       } else if (transactions.to_Lower(command).compare("paybill") == 0) {
-        if (transactions.is_Admin()) {
-          a.Paybill();
-        } else {
-          s.Paybill();
-        }
+        if (is_logged) {  
+          if (transactions.is_Admin()) {
+            a.Paybill();
+          } else {
+            s.Paybill();
+          }
+        } else
+          cerr << "\n>>> ERROR: Must be logged in before invoking any other commands.\n" << endl;
 
       // If command is CHANGEPLAN
       } else if (transactions.to_Lower(command).compare("changeplan") == 0) {

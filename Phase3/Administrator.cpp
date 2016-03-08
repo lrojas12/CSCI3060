@@ -82,6 +82,11 @@ void Administrator::Withdrawal() {
     for (int i = 0; i < users.size(); i++) {
       if (users.at(i).GetNum() == acc_num) {
 
+        if ((users.at(i).GetBalance() - users.at(i).GetDeposited()) < amount) {
+          cerr << "\n>>> ERROR: You may not withdraw recently deposited funds.\n" << endl;
+          return;
+        }
+
         if (amount <= users.at(i).GetBalance() && (amount > 0.0) && fmod(amount, 5.0) == 0) {
           new_balance = users.at(i).GetBalance() - amount;
           users.at(i).SetBalance(new_balance);
@@ -112,6 +117,7 @@ void Administrator::Withdrawal() {
 }
 
 void Administrator::Transfer() {
+
   string padded_acc_holder_f;
   string padded_acc_holder_t;
   string padded_acc_num_f;
@@ -231,13 +237,24 @@ void Administrator::Transfer() {
     }
 
     for (int i = 0; i < users.size(); i++) {
+    
       for (int j = 0; j < users.size(); j++) {
         if (users.at(i).GetNum() == acc_num_f && users.at(j).GetNum() == acc_num_t) {
+
+          if ((users.at(i).GetBalance() - users.at(i).GetDeposited()) < amount) {
+            cerr << "\n>>> ERROR: You may not transfer recently deposited funds.\n" << endl;
+            return;
+          }
+
+          cout << "Balance: " << users.at(i).GetBalance() << endl;
+          cout << "Recently deposited: " << users.at(i).GetDeposited() << endl;
+
           if (amount <= users.at(i).GetBalance() && (amount > 0.0) && (amount + users.at(j).GetBalance()) < 100000.00) {
             new_balance_f = users.at(i).GetBalance() - amount;
             new_balance_t = users.at(j).GetBalance() + amount;
             users.at(i).SetBalance(new_balance_f);
             users.at(j).SetBalance(new_balance_t);
+            users.at(j).SetDeposited(users.at(j).GetDeposited() + amount);
             break;
           } else {
             cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
@@ -352,6 +369,11 @@ void Administrator::Paybill() {
     for (int i = 0; i < users.size(); i++) {
       if (users.at(i).GetNum() == acc_num) {
 
+        if ((users.at(i).GetBalance() - users.at(i).GetDeposited()) < amount) {
+          cerr << "\n>>> ERROR: You may not pay bills using recently deposited funds.\n" << endl;
+          return;
+        }
+
         if (amount <= users.at(i).GetBalance() && amount > 0.0) {
           new_balance = users.at(i).GetBalance() - amount;
           users.at(i).SetBalance(new_balance);
@@ -456,10 +478,10 @@ void Administrator::Deposit() {
 
     for (int i = 0; i < users.size(); i++) {
       if (users.at(i).GetNum() == acc_num) {
-
         if (((amount + users.at(i).GetBalance()) < 100000.00) && (amount > 0.0)) {
           new_balance = users.at(i).GetBalance() + amount;
           users.at(i).SetBalance(new_balance);
+          users.at(i).SetDeposited(users.at(i).GetDeposited() + amount);
           break;
         } else {
           cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
@@ -555,7 +577,7 @@ void Administrator::Create() {
         return;
       }
 
-      User new_user;
+      Standard new_user;
       new_user.SetName(new_name);
       new_user.SetNum(new_acc_num);
       new_user.SetBalance(stof(init_balance));
@@ -855,4 +877,6 @@ void Administrator::Changeplan() {
   } else {
       cerr << "\n>>> ERROR: The account number entered does not match the account holder name.\n" << endl;
   }
+
+  curr_user.GetName();
 }

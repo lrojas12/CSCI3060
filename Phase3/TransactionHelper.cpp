@@ -5,7 +5,7 @@
  */
 
 #include "TransactionHelper.h"
-#include "User.h"
+//#include "User.h"
 
 /* To compare user input - should accept variations
  * (e.g. "Standard", "standard", "STANDARD", etc)
@@ -45,7 +45,7 @@ bool TransactionHelper::NumExists(int acc_num) {
   bool ret = false;
 
   for (int i = 0; i < users.size(); i++) {
-    if (users.at(i).GetNum() == 0) {			
+    if (users.at(i).GetNum() == acc_num) {			
       ret = true;
       break;
     }
@@ -180,7 +180,7 @@ void TransactionHelper::LoadAccounts() {
     while (true) {
 
       infile >> acc_num >> acc_holder >> acc_status >> acc_balance >> acc_plan;
-      User u;
+      Standard u;
 
       if(infile.eof())
         break;

@@ -15,8 +15,7 @@
 #include <regex>
 #include "IAccount.h"
 #include "TransactionHelper.h"
-
-using namespace std;
+#include "User.h"
 
 /*
  * Standard is for standard accounts. Has variables for the current
@@ -24,9 +23,12 @@ using namespace std;
  * data. Has implementations of the transaction functions.
  */
 class Standard: public virtual IAccount {
+  
  private:
+  string acc_holder_;
   int acc_num_;
   float acc_balance_;
+  float acc_newly_deposited_;
   char acc_status_;
   char acc_plan_;
 
@@ -35,6 +37,8 @@ class Standard: public virtual IAccount {
   //	Standard(int acc_num, float acc_balance, char acc_status, char acc_plan);
   ~Standard() {} // MAYBE THIS COULD BE PART OF THE DELETE FUNCTION - SAME JOB
 		
+  // Get account holder name.
+  string GetName() {return acc_holder_;}
   // Get the account number.
   int GetNum() {return acc_num_;}
   // Get the account balance.
@@ -43,7 +47,11 @@ class Standard: public virtual IAccount {
   char GetStatus() {return acc_status_;}
   // Get the account plan.
   char GetPlan() {return acc_plan_;}
+  // Get the funds that were deposited in this day
+  float GetDeposited() {return acc_newly_deposited_;}
 
+  // Set account holder name.
+  void SetName(string name) {acc_holder_ = name;}
   // Change the account number.
   void SetNum(int num) {acc_num_ = num;}
   // Change the account balance.
@@ -52,8 +60,10 @@ class Standard: public virtual IAccount {
   void SetStatus(char status) {acc_status_ = status;}
   // Change the account plan.
   void SetPlan(char plan) {acc_plan_ = plan;}
+  // Change the value for recently deposited funds
+  void SetDeposited(float deposited) {acc_newly_deposited_ = deposited;}
 
-  //	void login(string acc_holder);
+  // void login(string acc_holder);
   // Withdraw from the current user account.
   void Withdrawal();
   // Transfer from the current user account to another user account.

@@ -15,15 +15,16 @@
 #include <regex>
 #include <sstream>
 #include <iomanip>
+#include "Standard.h"
 
 using namespace std;
 
-class User;
+class Standard;
 class TransactionHelper;
 
-extern User curr_user;
-extern vector<User> users;
-extern vector<User> new_users;
+extern Standard curr_user;
+extern vector<Standard> users;
+extern vector<Standard> new_users;
 extern vector<string> transaction_file;
 extern string mode;
 extern string acc_holder;
