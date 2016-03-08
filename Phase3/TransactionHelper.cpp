@@ -39,6 +39,20 @@ bool TransactionHelper::HolderExists(string name) {
   return ret;
 }
 
+// Check if the account number inputed exists in the "database"
+bool TransactionHelper::NumExists(int acc_num) {
+
+  bool ret = false;
+
+  for (int i = 0; i < users.size(); i++) {
+    if (users.at(i).GetNum() == 0) {			
+      ret = true;
+      break;
+    }
+  }
+  return ret;
+}
+
 /* Check that the new account holder name entered follows the
  * required constraints: non-empty.
  */

@@ -44,6 +44,9 @@ class TransactionHelper {
   // Check if the account holder name inputed exists in the "database"
   bool HolderExists(string name);
 
+  // Check if the account number inputed exists in the "database"
+  bool NumExists(int acc_num);
+
   /* Check that the new account holder name entered follows the
    * required constraints. Done using regex.
    */

@@ -171,11 +171,13 @@ void Administrator::Transfer() {
     regex re_t("[0-9]{0,5}");
     if (regex_match(temp_acc_num_t, re_t)) {
       acc_num_t = stoi(temp_acc_num_t);
-    //} else if () {
-    // Need to check if destination account number exists.
-      //cerr << "\n >>> ERROR: The destination account number entered is invalid.\n" << endl;
     } else {
       cerr << "\n>>> ERROR: The account number entered is invalid.\n" << endl;
+      return;
+    }
+
+    if (!transactions.NumExists(acc_num_t)) {
+      cerr << "\n >>> ERROR: The destination account number entered is invalid.\n" << endl;
       return;
     }
 
