@@ -23,7 +23,7 @@
  * data. Has implementations of the transaction functions.
  */
 class Standard: public virtual IAccount {
-  
+
  private:
   string acc_holder_;
   int acc_num_;
