@@ -112,7 +112,157 @@ void Administrator::Withdrawal() {
 }
 
 void Administrator::Transfer() {
-  cout << "Funds have been successfully transfered from account " << endl;
+  string padded_acc_holder_f;
+  string padded_acc_holder_t;
+  string padded_acc_num_f;
+  string padded_acc_num_t;
+  string padded_amount;
+  string padded_new_balance_f;
+  string padded_new_balance_t;
+  string acc_holder_f;
+  string acc_holder_t;
+  string temp_acc_num_f;
+  string temp_acc_num_t;
+  string temp_amount;
+  stringstream stream;
+  float amount;
+  float new_balance_f = 0.0;
+  float new_balance_t = 0.0;
+  int acc_num_f;
+  int acc_num_t;
+
+  cout << "\nTransfer transaction selected.\n" << endl;
+
+  cout << "Enter the origin account holder's name: ";
+  cin >> acc_holder_f;
+
+  if (!transactions.HolderExists(acc_holder_f)) {
+    cerr << "\n>>> ERROR: The origin account holder's name is invalid.\n" << endl;
+    return;
+  } else if (acc_holder_f.compare("END_OF_FILE") == 0) {
+    cerr << "\n>>> ERROR: You may not transfer funds from this account.\n" << endl;
+    return;
+  }
+
+  cout << "Enter origin account number: ";
+  cin >> temp_acc_num_f;
+
+  regex re_f("[0-9]{0,5}");
+  if (regex_match(temp_acc_num_f, re_f)) {
+    acc_num_f = stoi(temp_acc_num_f);
+  } else {
+    cerr << "\n>>> ERROR: The account number entered is invalid.\n" << endl;
+    return;
+  }
+
+  if (transactions.Matches(acc_holder_f, acc_num_f)) {
+
+    if (transactions.is_Disabled(acc_num_f)) {
+      cerr << "\n>>> ERROR: Disabled accounts may not send funds.\n" << endl;
+      return;
+    } else if (transactions.is_New(acc_num_f)) {
+      cerr << "\n>>> ERROR: Newly created accounts may not send funds. Please try again in 24 hours.\n" << endl;
+      return;
+    }
+
+    cout << "Enter destination account number: ";
+    cin >> temp_acc_num_t;
+
+    regex re_t("[0-9]{0,5}");
+    if (regex_match(temp_acc_num_t, re_t)) {
+      acc_num_t = stoi(temp_acc_num_t);
+    //} else if () {
+    // Need to check if destination account number exists.
+      //cerr << "\n >>> ERROR: The destination account number entered is invalid.\n" << endl;
+    } else {
+      cerr << "\n>>> ERROR: The account number entered is invalid.\n" << endl;
+      return;
+    }
+
+    if (transactions.is_Disabled(acc_num_t)) {
+      cerr << "\n>>> ERROR: Disabled accounts may not receive funds.\n" << endl;
+      return;
+    } else if (transactions.is_New(acc_num_t)) {
+      cerr << "\n>>> ERROR: Newly created accounts may not receive funds. Please try again in 24 hours.\n" << endl;
+      return;
+    }
+
+    cout << "Enter amount to transfer: ";
+    cin >> temp_amount;
+
+    if (transactions.is_Amount_Valid(temp_amount)) {
+      amount = stof(temp_amount);
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+      return;
+    }
+
+    for (int i = 0; i < users.size(); i++) {
+      if (users.at(i).GetNum() == acc_num_t) {
+        acc_holder_t = users.at(i).GetName();
+      }
+    }
+
+    padded_acc_holder_f = acc_holder_f;
+    while (padded_acc_holder_f.length() < 20) {
+      padded_acc_holder_f = padded_acc_holder_f + " ";
+    }
+
+    padded_acc_holder_t = acc_holder_t;
+    while (padded_acc_holder_t.length() < 20) {
+      padded_acc_holder_t = padded_acc_holder_t + " ";
+    }
+
+    padded_acc_num_f = temp_acc_num_f;
+    while (padded_acc_num_f.length() < 5) {
+      padded_acc_num_f = "0" + padded_acc_num_f;
+    }
+
+    padded_acc_num_t = temp_acc_num_t;
+    while (padded_acc_num_t.length() < 5) {
+      padded_acc_num_t = "0" + padded_acc_num_t;
+    }
+
+    padded_amount = temp_amount;
+    while (padded_amount.length() < 8) {
+      padded_amount = "0" + padded_amount;
+    }
+
+    for (int i = 0; i < users.size(); i++) {
+      for (int j = 0; j < users.size(); j++) {
+        if (users.at(i).GetNum() == acc_num_f && users.at(j).GetNum() == acc_num_t) {
+          if (amount <= users.at(i).GetBalance() && (amount > 0.0) && (amount + users.at(j).GetBalance()) < 100000.00) {
+            new_balance_f = users.at(i).GetBalance() - amount;
+            new_balance_t = users.at(j).GetBalance() + amount;
+            users.at(i).SetBalance(new_balance_f);
+            users.at(j).SetBalance(new_balance_t);
+            break;
+          } else {
+            cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+            return;
+          }
+        }
+      }
+    }
+
+    stream << fixed << setprecision(2) << new_balance_f;
+    padded_new_balance_f = stream.str();
+    while (padded_new_balance_f.length() < 8) {
+      padded_new_balance_f = "0" + padded_new_balance_f;
+    }
+  
+    cout << "\nFunds have been successfully transfered from account " << padded_acc_num_f << " to account " << padded_acc_num_t << "." << endl;
+    cout << "New balance: $" + padded_new_balance_f << endl;
+
+    string transaction_line = "02 " + padded_acc_holder_f + " " + padded_acc_num_f + " " + padded_amount + "   ";
+    transaction_file.push_back(transaction_line);
+    transaction_line = "02 " + padded_acc_holder_t + " " + padded_acc_num_t + " " + padded_amount + "   ";
+    transaction_file.push_back(transaction_line);
+    cout << "\nEnter a command.\n" << endl;
+
+  } else {
+      cerr << "\n>>> ERROR: The account number entered does not match the account holder name.\n" << endl;
+  }
 }
 
 void Administrator::Paybill() {
