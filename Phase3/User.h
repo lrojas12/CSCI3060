@@ -56,16 +56,13 @@ class User {
   void SetPlan(char plan) {std_acc_.SetPlan(plan);}
 
   // Withdraw from the current user account.
-  void Withdrawal(int acc_num_, float amount) {
-    std_acc_.Withdrawal(acc_num_, amount);}
+  void Withdrawal() {std_acc_.Withdrawal();}
   // Transfer from the current user account to another user account.
-  void Transfer(int acc_num_f, int acc_num_t, float amount) {
-    std_acc_.Transfer(acc_num_f, acc_num_t, amount);}
+  void Transfer() {std_acc_.Transfer();}
   // Pay a bill from the current user account to a company.
-  void Paybill(int acc_num_, string company, float amount) {
-    std_acc_.Paybill(acc_num_, company, amount);}
+  void Paybill() {std_acc_.Paybill();}
   // Deposit money into the current user account.
-  void Deposit(int acc_num_, float amount) {std_acc_.Deposit(acc_num_, amount);}
+  void Deposit() {std_acc_.Deposit();}
 };
 
 #endif

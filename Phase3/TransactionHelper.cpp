@@ -61,7 +61,6 @@ bool TransactionHelper::Matches(string name, int acc_num) {
         ret = true;
         break;
       }
-      break;
     }
   }
   return ret;
@@ -93,7 +92,6 @@ bool TransactionHelper::is_Disabled(int acc_num) {
         ret = true;
         break;
       }
-      break;
     }
   }
   return ret;
@@ -113,6 +111,20 @@ bool TransactionHelper::is_Student(int acc_num) {
         ret = true;
         break;
       }
+    }
+  }
+  return ret;
+}
+
+/* Checks if the user was created recently
+ */
+bool TransactionHelper::is_New(int acc_num) {
+  
+  bool ret = false;
+
+  for (int i = 0; i < new_users.size(); i++) {
+    if (new_users.at(i).GetNum() == acc_num) {     
+      ret = true;
       break;
     }
   }

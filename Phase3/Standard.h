@@ -55,13 +55,13 @@ class Standard: public virtual IAccount {
 
   //	void login(string acc_holder);
   // Withdraw from the current user account.
-  void Withdrawal(int acc_num_, float amount);
+  void Withdrawal();
   // Transfer from the current user account to another user account.
-  void Transfer(int acc_num_f, int acc_num_t, float amount);
+  void Transfer();
   // Pay a bill to a company from the current user account.
-  void Paybill(int acc_num_, string company, float amount);
+  void Paybill();
   // Deposit money into the current user account.
-  void Deposit(int acc_num_, float amount);
+  void Deposit();
   //	bool logout();
 };
 

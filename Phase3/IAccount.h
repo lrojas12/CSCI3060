@@ -23,13 +23,13 @@ class IAccount {
  public:
   virtual ~IAccount() {}
   // Interface for withdrawal function.
-  virtual void Withdrawal(int acc_num, float amount) = 0;
+  virtual void Withdrawal() = 0;
   // Interface for transfer function.
-  virtual void Transfer(int acc_num_f, int acc_num_t, float amount) = 0;
+  virtual void Transfer() = 0;
   // Interface for paybill function.
-  virtual void Paybill(int acc_num, string company, float amount) = 0;
+  virtual void Paybill() = 0;
   // Interface for deposit function
-  virtual void Deposit(int acc_num, float amount) = 0;
+  virtual void Deposit() = 0;
 };
 
 #endif

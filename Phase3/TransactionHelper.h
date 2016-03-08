@@ -23,6 +23,7 @@ class TransactionHelper;
 
 extern User curr_user;
 extern vector<User> users;
+extern vector<User> new_users;
 extern vector<string> transaction_file;
 extern string mode;
 extern string acc_holder;
@@ -63,6 +64,8 @@ class TransactionHelper {
    * (student or non-student)
    */
   bool is_Student(int acc_num);
+
+  bool is_New(int acc_num);
 
   // Outputs the transaction_file vector into a file
   void WriteTransactionFile();
