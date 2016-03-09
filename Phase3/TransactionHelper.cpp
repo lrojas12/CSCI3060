@@ -154,7 +154,7 @@ void TransactionHelper::WriteTransactionFile() {
 
   if (outfile.is_open()) {
     for (int i = 0; i < transaction_file.size(); i++) {
-      outfile << transaction_file.at(i);
+      outfile << transaction_file.at(i) + "\n";
     }
     outfile.close();
   } else {
@@ -212,8 +212,8 @@ cout << "\\ \\/  \\/ / _` | __/ _ \\ '__| '_ ` _ \\ / _ \\ |/ _ \\| '_ \\" << en
 cout << " \\  /\\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |" << endl;  
 cout << "  \\/  \\/ \\__,_|\\__\\___|_|  |_| |_| |_|\\___|_|\\___/|_| |_|" << endl;  
                                                               
-  cout << "\nWelcome to Watermelon Banking System" << endl;
-  cout << "Please log in to begin or type in \"help\" for more information.\n" << endl;
+  cout << "\nWelcome to Watermelon Banking System." << endl;
+  cout << "Please log in to begin or enter \"help\" for more information.\n" << endl;
 }
 
 // Allows the users to log in as a STANDARD user

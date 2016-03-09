@@ -166,9 +166,9 @@ int main (int argc, char *argv[]) {
       // If command is QUIT
       } else if (transactions.to_Lower(command).compare("quit") == 0) {
         if (!is_logged)
-          return 1;
+          return 0;
         else
-          cerr << "\n>>> ERROR: You may not quit while logged in.\n" << endl;
+          cout << ">>> ERROR: You may not quit while logged in." << endl;
       } else {
         cerr << "\n>>> ERROR: Invalid command.\n" << endl;
       }
