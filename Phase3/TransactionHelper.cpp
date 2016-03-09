@@ -324,9 +324,9 @@ void TransactionHelper::Logout() {
     acc_holder = "";
 
     if (is_Admin()) {
-      transaction_file.push_back("10                                     A ");
+      transaction_file.push_back("00                                     A ");
     } else {
-      string transaction_line = "10 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
+      string transaction_line = "00 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
       transaction_file.push_back(transaction_line);
     }
 
