@@ -9,7 +9,6 @@ Please log in to begin or enter "help" for more information.
 
 
 Enter mode in which you wish to log in as: 
-
 You are currently logged in as an administrator.
 
 Enter a command.
@@ -42,6 +41,9 @@ logout		End a session.
 quit		End the program.
 
 >> Note: Privileged transaction commands are only available to bank employees (administrators).
+
+Enter a command.
+
 
 You have successfully logged out of your account.
 

@@ -35,3 +35,6 @@ logout		End a session.
 quit		End the program.
 
 >> Note: Privileged transaction commands are only available to bank employees (administrators).
+
+Enter a command.
+

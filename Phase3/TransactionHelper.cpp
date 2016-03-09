@@ -296,7 +296,7 @@ void TransactionHelper::Login() {
 
         cout << "\nEnter a command.\n" << endl; 
 
-        string transaction_line = "10 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
+        string transaction_line = "10 " + padded_acc_holder + " " + padded_acc_num + "          S ";
         transaction_file.push_back(transaction_line);
 
       } else {
@@ -307,7 +307,7 @@ void TransactionHelper::Login() {
       cerr << "\n>>> ERROR: Invalid account mode.\n" << endl;
     }
   } else {
-    cerr << "\n>>> ERROR: There is a session running. Please log out and try again.\n" << endl;
+    cout << "\n>>> ERROR: There is a session running. Please log out and try again.\n" << endl;
   }
 }
 
@@ -371,6 +371,7 @@ void TransactionHelper::PrintHelp() {
       cout << line << endl;
     }
     infile.close();
+    cout << "\nEnter a command.\n" << endl;
   } else {
     cerr << "\n>>>ERROR: File \"" << file_name << "\" was not found.\n" << endl;
     exit(-1);
