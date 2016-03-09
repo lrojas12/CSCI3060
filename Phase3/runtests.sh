@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# To run this code use ./runtests.sh
+
 cd test_case_files
 
 # Goes through all transaction files and creates the real_output folder it does not exist.
