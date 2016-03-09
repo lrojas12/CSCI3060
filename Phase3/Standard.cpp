@@ -260,7 +260,8 @@ void Standard::Paybill() {
   string company;
   stringstream stream;
   float amount;
-  float new_balance = 0.0;
+  float new_balance;
+  float company_count;
   int acc_num;
 
   cout << "\nPay bill transaction selected.\n" << endl;
@@ -300,14 +301,6 @@ void Standard::Paybill() {
     return;
   }
 
-  if (copmany.compare("EC") == 0) {
-
-  } else if (company.compare("TV")) {
-
-  } else {
-
-  }
-
   cout << "Enter amount to pay: ";
   cin >> temp_amount;
 
@@ -321,6 +314,29 @@ void Standard::Paybill() {
   if ((curr_user.GetBalance() - curr_user.GetDeposited()) < amount) {
     cerr << "\n>>> ERROR: You may not pay bills using recently deposited funds.\n" << endl;
     return;
+  }
+
+  if (comany.compare("EC") == 0) {
+    company_count = curr_user.GetECCount() + amount;
+    if (company_count > 2000.00) {
+      cerr << "\n>>> ERROR: The limit to pay per company per day is $2000.00.\n" << endl;
+      return;
+    }
+    curr_user.SetECCount(company_count);
+  } else if (company.compare("TV") == 0) {
+    company_count = curr_user.GetTVCount() + amount;
+    if (company_count > 2000.00) {
+      cerr << "\n>>> ERROR: The limit to pay per company per day is $2000.00.\n" << endl;
+      return;
+    }
+    curr_user.SetTVCount(company_count);
+  } else {
+    company_count = curr_user.GetCQCount() + amount;
+    if (company_count > 2000.00) {
+      cerr << "\n>>> ERROR: The limit to pay per company per day is $2000.00.\n" << endl;
+      return;
+    }
+    curr_user.SetCQCount(company_count);
   }
 
   padded_acc_holder = curr_user.GetName();
@@ -445,7 +461,7 @@ void Standard::Deposit() {
   cout << "\nFunds have been successfully added to the account " << padded_acc_num << "." << endl;
   cout << "New balance: $" + padded_new_balance << endl;
 
-  string transaction_line = "01 " + padded_acc_holder + " " + padded_acc_num + " " + padded_amount + "   ";
+  string transaction_line = "04 " + padded_acc_holder + " " + padded_acc_num + " " + padded_amount + "   ";
   transaction_file.push_back(transaction_line);
   cout << "\nEnter a command.\n" << endl;
 
