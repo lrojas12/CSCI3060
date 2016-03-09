@@ -323,7 +323,12 @@ void TransactionHelper::Logout() {
     mode = "";
     acc_holder = "";
 
-    
+    if (is_Admin()) {
+      transaction_file.push_back("10                                     A ");
+    } else {
+      string transaction_line = "10 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
+      transaction_file.push_back(transaction_line);
+    }
 
     WriteTransactionFile();
 
