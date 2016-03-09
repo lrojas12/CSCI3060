@@ -6,14 +6,15 @@
   
 Welcome to Watermelon Banking System. 
 Please log in to begin or enter "help" for more information.
+
 Enter mode in which you wish to log in as: 
 
 Enter account holder's name:
 
 You are currently logged in as Tarzan.
-BankAccount Number: 00001
+Bank account number: 00001
 Balance: $01000.00
-Transaction PaymentPlan: Non-student
+Transaction payment plan: Non-student
 Status: Active
 
 Enter a command.

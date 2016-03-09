@@ -56,8 +56,6 @@ int main (int argc, char *argv[]) {
     // Permanently listening for commands
     while(true) {
       cin >> command;
-      cout << "Test: " << command << endl;
-      cout << "Command length: " << command.length() << endl;
 
       // If command is LOGIN
       if (transactions.to_Lower(command).compare("login") == 0)
@@ -170,7 +168,7 @@ int main (int argc, char *argv[]) {
         if (!is_logged)
           return 0;
         else
-          cerr << "\n>>> ERROR: You may not quit while logged in.\n" << endl;
+          cout << ">>> ERROR: You may not quit while logged in." << endl;
       } else {
         cerr << "\n>>> ERROR: Invalid command.\n" << endl;
       }
