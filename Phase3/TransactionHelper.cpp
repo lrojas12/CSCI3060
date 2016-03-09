@@ -165,9 +165,7 @@ void TransactionHelper::WriteTransactionFile() {
 /* Loads all accounts' information from the
  * current_bank_accounts_file.txt file (provided by the back end)
  */
-void TransactionHelper::LoadAccounts() {
-
-  string file_name = "current_bank_accounts_file.txt";
+void TransactionHelper::LoadAccounts(string file_name) {
 
   ifstream infile(file_name);
 
@@ -315,20 +313,43 @@ void TransactionHelper::Login() {
 
 // Logs user out from either account - administrator or standard
 void TransactionHelper::Logout() {
+
+  string padded_acc_holder;
+  string padded_acc_num;
+  int acc_num;
+
   if (is_logged) {
+
     cout << "\nYou have successfully logged out of your account.\n\nLogin or enter \"help\" for more information.\n" << endl;
+
+    if (is_Admin()) {
+      transaction_file.push_back("00                                     A ");
+    } else {
+
+      for (int i = 0; i < users.size(); i++) {
+        if (users.at(i).GetName().compare(acc_holder) == 0) {
+          acc_num = users.at(i).GetNum();
+        }
+      }
+
+      padded_acc_holder = acc_holder;
+      while (padded_acc_holder.length() < 20) {
+        padded_acc_holder = padded_acc_holder + " ";
+      }
+
+      padded_acc_num = to_string(acc_num);
+      while (padded_acc_num.length() < 5) {
+        padded_acc_num = "0" + padded_acc_num;
+      }
+
+      string transaction_line = "00 " + padded_acc_holder + " " + padded_acc_num + "          S ";
+      transaction_file.push_back(transaction_line);
+    }
 
     // Resets all variables for next user
     is_logged = false;
     mode = "";
     acc_holder = "";
-
-    if (is_Admin()) {
-      transaction_file.push_back("00                                     A ");
-    } else {
-      string transaction_line = "00 " + padded_acc_holder + " " + padded_acc_num + " " + padded_balance + " S ";
-      transaction_file.push_back(transaction_line);
-    }
 
     WriteTransactionFile();
 

@@ -13,5 +13,16 @@ You are currently logged in as an administrator.
 
 Enter a command.
 
-Enter account holder's name: Enter account number: Are you sure you want to delete Bruce's account 3 (yes/no)? The account 3 has been deleted successfully.
+
+Delete transaction selected.
+
+Enter account holder's name: Enter account number: Are you sure you want to delete Bruce's account 00003 (yes/no)? 
+The account 00003 has successfully been deleted.
+
+Enter a command.
+
+
 You have successfully logged out of your account.
+
+Login or enter "help" for more information.
+

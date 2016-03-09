@@ -316,7 +316,7 @@ void Standard::Paybill() {
     return;
   }
 
-  if (comany.compare("EC") == 0) {
+  if (company.compare("EC") == 0) {
     company_count = curr_user.GetECCount() + amount;
     if (company_count > 2000.00) {
       cerr << "\n>>> ERROR: The limit to pay per company per day is $2000.00.\n" << endl;
@@ -339,6 +339,14 @@ void Standard::Paybill() {
     curr_user.SetCQCount(company_count);
   }
 
+  if (amount <= curr_user.GetBalance() && amount > 0.0) {
+    new_balance = curr_user.GetBalance() - amount;
+    curr_user.SetBalance(new_balance);
+  } else {
+    cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+    return;
+  }
+
   padded_acc_holder = curr_user.GetName();
   while (padded_acc_holder.length() < 20) {
     padded_acc_holder = padded_acc_holder + " ";
@@ -358,14 +366,6 @@ void Standard::Paybill() {
   padded_new_balance = stream.str();
   while (padded_new_balance.length() < 8) {
     padded_new_balance = "0" + padded_new_balance;
-  }
-
-  if (amount <= curr_user.GetBalance() && amount > 0.0) {
-    new_balance = curr_user.GetBalance() - amount;
-    curr_user.SetBalance(new_balance);
-  } else {
-    cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
-    return;
   }
 
   cout << "\nYou have successfully paid a bill of " << padded_amount << " from account " << padded_acc_num << " to " << company << "." << endl;

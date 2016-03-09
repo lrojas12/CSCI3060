@@ -54,9 +54,9 @@ class Standard: public virtual IAccount {
   // Get the funds that were deposited in this day
   float GetDeposited() {return acc_newly_deposited_;}
   // Keep track of the limit of payments per company
-  int GetECCount() {return EC_count_;}
-  int GetCQCount() {return CQ_count_;}
-  int GetTVCount() {return TV_count_;}
+  float GetECCount() {return EC_count_;}
+  float GetCQCount() {return CQ_count_;}
+  float GetTVCount() {return TV_count_;}
 
   // Set account holder name.
   void SetName(string name) {acc_holder_ = name;}
@@ -71,9 +71,9 @@ class Standard: public virtual IAccount {
   // Change the value for recently deposited funds
   void SetDeposited(float deposited) {acc_newly_deposited_ = deposited;}
   // Keep track of the limit of payments per company
-  int SetECCount(float amount) {EC_count_ = amount;}
-  int SetCQCount(float amount) {CQ_count_ = amount;}
-  int SetTVCount(float amount) {TV_count_ = amount;}
+  void SetECCount(float amount) {EC_count_ = amount;}
+  void SetCQCount(float amount) {CQ_count_ = amount;}
+  void SetTVCount(float amount) {TV_count_ = amount;}
 
   // void login(string acc_holder);
   // Withdraw from the current user account.

@@ -77,7 +77,7 @@ class TransactionHelper {
   /* Loads all accounts' information from the
    * current_bank_accounts_file.txt file (provided by the back end)
    */
-  void LoadAccounts();
+  void LoadAccounts(string file_name);
 
   // Prints out the welcome message.
   void PrintWelcomeMessage();

@@ -41,14 +41,17 @@ TransactionHelper transactions;
 
 int main (int argc, char *argv[]) {
 
-  transactions.LoadAccounts();
-  transactions.PrintWelcomeMessage();
-
+  string file_name;
   string command;
   is_logged = false;
 
   // For command line input only
-  if (argc == 1) {
+  if (argc >= 2) {
+
+    file_name = argv[1];
+
+    transactions.LoadAccounts(file_name);
+    transactions.PrintWelcomeMessage();
 
     // Permanently listening for commands
     while(true) {
@@ -171,7 +174,7 @@ int main (int argc, char *argv[]) {
       }
     }
   } else {
-     cerr << "\n>>> ERROR: Too many arguments.\n" << endl;
-     return -1;
+    cerr << "\n>>> ERROR: Please enter an argument for current users.\n" << endl;
+    return -1;
   }
 }

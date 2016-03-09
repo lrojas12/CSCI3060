@@ -14,19 +14,6 @@ You are currently logged in as an administrator.
 Enter a command.
 
 
-Create transaction selected.
+Delete transaction selected.
 
-Enter new account holder's name: Enter initial balance: 
-You have successfully created a new account.
-Bank account number: 00018
-Balance: $99999.99
-Transaction payment plan: Non-student
-Status: Active
-
-Enter a command.
-
-
-You have successfully logged out of your account.
-
-Login or enter "help" for more information.
-
+Enter account holder's name: Enter account number: 
