@@ -59,7 +59,7 @@ c
 for j in "login" "login"; do
 	for k in 01a 01b 01c 02a 02b 03a 04a 04b 05a 05b;do
 
-		./exe current_bank_accounts.txt < ./test_case_files/login/input/"$j$k.in" > ./test_case_files/login/real_output/"$j$k.out" 2>/dev/null
+		./exe current_bank_accounts.txt < ./test_case_files/login/input/"$j$k.in" > ./test_case_files/login/real_output/"$j$k.out"
 
 		echo ""
 		echo ""
@@ -98,7 +98,7 @@ for j in "logout" "logout"; do
 		echo "Transaction File Difference: "
 		diff ./test_case_files/logout/expected_transaction/"$j$k.tra" "transaction_file.tra"
 
-	done
+	done 
 done
 
 # create testing
