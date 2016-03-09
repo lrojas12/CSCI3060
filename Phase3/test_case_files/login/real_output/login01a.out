@@ -4,23 +4,11 @@
  \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
   \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
 
-<<<<<<< HEAD
-Welcome to Watermelon Banking System
-Please log in to begin or type in "help" for more information.
-
-
-Enter mode in which you wish to log in as: 
-=======
 Welcome to Watermelon Banking System.
 Please log in to begin or enter "help" for more information.
 
 
 Enter mode in which you wish to log in as: 
-<<<<<<< HEAD
-=======
-
->>>>>>> 41b5762211b2fbeff41befeb6bafd94fce3636a1
->>>>>>> f7a779bd065edd40a6e33596192db39efa3450af
 You are currently logged in as an administrator.
 
 Enter a command.
