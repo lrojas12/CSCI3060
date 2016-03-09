@@ -133,8 +133,9 @@ void Standard::Transfer() {
     return;
   }
 
-  if (curr_user.GetNum() == acc_num_f) {
+  if (curr_user.GetNum() != acc_num_f) {
     cerr << "\n>>> ERROR: The account number does not match your account.\n" << endl;
+    cout << "Current user: " << curr_user.GetNum() << ", Account Number: " << acc_num_f << endl;
     return;
   }
 
@@ -277,7 +278,7 @@ void Standard::Paybill() {
     return;
   }
 
-  if (curr_user.GetNum() == acc_num) {
+  if (curr_user.GetNum() != acc_num) {
     cerr << "\n>>> ERROR: The account number does not match your account.\n" << endl;
     return;
   }
@@ -403,7 +404,7 @@ void Standard::Deposit() {
     return;
   }
 
-  if (curr_user.GetNum() == acc_num) {
+  if (curr_user.GetNum() != acc_num) {
     cerr << "\n>>> ERROR: The account number does not match your account.\n" << endl;
     return;
   }

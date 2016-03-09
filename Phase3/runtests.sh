@@ -13,8 +13,16 @@ cd ..
 for j in "quit" "quit"; do
 	for k in 01a 02a 02b;do
 
-		./exe current_bank_accounts.txt < ./test_case_files/quit/input/"$j$k.in" > ./test_case_files/quit/real_output/"$j$k.out" 2>/dev/null
-
+        infile="";
+        infile+="$j";
+        infile+="$k";
+        outfile=infile;
+        outfile+=".out";
+        infile+=".in";
+        
+		echo "./exe current_bank_accounts.txt < ./test_case_files/quit/input/"$j$k.in" > ./test_case_files/quit/real_output/"$j$k.out" 2>/dev/null"
+        
+        echo "$j$k.in"
 		echo ""
 		echo ""
 		echo "================================================================================"
@@ -28,6 +36,8 @@ for j in "quit" "quit"; do
 		echo ""
 		echo "Transaction File Difference: "
 		diff ./test_case_files/quit/expected_transaction/"$j$k.tra" "transaction_file.tra"
+        
+        read
 
 	done
 done
@@ -51,10 +61,12 @@ for j in "help" "help"; do
 		echo ""
 		echo "Transaction File Difference: "
 		diff ./test_case_files/help/expected_transaction/"$j$k.tra" "transaction_file.tra"
+        
+        read
 
 	done
 done
-c
+
 # login testing
 for j in "login" "login"; do
 	for k in 01a 01b 01c 02a 02b 03a 04a 04b 05a 05b;do
@@ -75,6 +87,8 @@ for j in "login" "login"; do
 		echo "Transaction File Difference: "
 		diff ./test_case_files/login/expected_transaction/"$j$k.tra" "transaction_file.tra"
 
+        read
+    
 	done
 done
 
@@ -97,6 +111,8 @@ for j in "logout" "logout"; do
 		echo ""
 		echo "Transaction File Difference: "
 		diff ./test_case_files/logout/expected_transaction/"$j$k.tra" "transaction_file.tra"
+        
+        read
 
 	done
 done
@@ -120,14 +136,16 @@ for j in "create" "create"; do
 		echo ""
 		echo "Transaction File Difference: "
 		diff ./test_case_files/create/expected_transaction/"$j$k.tra" "transaction_file.tra"
-
+        
+        read
+        
 	done
 done
 
 # delete testing
 for j in "delete" "delete"; do
 	for k in 01a 01b 02a 03a 04a 05a 06a; do
-
+    
 		./exe current_bank_accounts.txt < ./test_case_files/delete/input/"$j$k.in" > ./test_case_files/delete/real_output/"$j$k.out" 2>/dev/null
 
 		echo ""

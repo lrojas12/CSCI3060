@@ -1,0 +1,41 @@
+ __    __      _                           _ 
+/ / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __ 
+\ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \
+ \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
+  \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
+
+Welcome to Watermelon Banking System
+Please log in to begin or type in "help" for more information.
+
+Test: login
+Command length: 5
+
+Enter mode in which you wish to log in as: Enter account holder's name: 
+You are currently logged in as Bruce.
+Bank account number: 00003
+Balance: $01000.00
+Transaction payment plan: Non-student
+Status: Active
+
+Enter a command.
+
+Test: transfer
+Command length: 8
+
+Transfer transaction selected.
+
+Enter you account number: Enter destination account number: Enter amount to transfer: 
+Funds have been successfully transfered from account 00003 to account 00002.
+New balance: $00980.00
+
+Enter a command.
+
+Test: logout
+Command length: 6
+
+You have successfully logged out of your account.
+
+Login or enter "help" for more information.
+
+Test: quit
+Command length: 4

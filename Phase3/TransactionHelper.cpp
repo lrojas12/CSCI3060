@@ -154,7 +154,7 @@ void TransactionHelper::WriteTransactionFile() {
 
   if (outfile.is_open()) {
     for (int i = 0; i < transaction_file.size(); i++) {
-      outfile << transaction_file.at(i);
+      outfile << transaction_file.at(i) + "\n";
     }
     outfile.close();
   } else {
