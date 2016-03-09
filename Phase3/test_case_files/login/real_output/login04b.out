@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
  __    __      _                           _ 
 / / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __ 
 \ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \
@@ -8,4 +10,15 @@ Welcome to Watermelon Banking System.
 Please log in to begin or enter "help" for more information.
 
 
+<<<<<<< HEAD
 Enter mode in which you wish to log in as: Enter account holder's name: 
+=======
+<<<<<<< HEAD
+Enter mode in which you wish to log in as: Enter account holder's name: 
+=======
+Enter mode in which you wish to log in as: 
+Enter account holder's name: 
+>>>>>>> 41b5762211b2fbeff41befeb6bafd94fce3636a1
+>>>>>>> f7a779bd065edd40a6e33596192db39efa3450af
+>>>>>>> 49e7629fa962859404dcbd29e9246f133528f964
+>>>>>>> a6b50ba4a4bc8a2e13a4cf02c49fa418bf67367d
