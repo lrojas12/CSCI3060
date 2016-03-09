@@ -323,6 +323,8 @@ void TransactionHelper::Logout() {
     mode = "";
     acc_holder = "";
 
+    
+
     WriteTransactionFile();
 
   } else {
