@@ -4,8 +4,21 @@
  \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
   \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
 
+<<<<<<< HEAD
+Welcome to Watermelon Banking System
+Please log in to begin or type in "help" for more information.
+
+
+Enter mode in which you wish to log in as: Enter account holder's name: 
+=======
 Welcome to Watermelon Banking System.
 Please log in to begin or enter "help" for more information.
 
 
+<<<<<<< HEAD
 Enter mode in which you wish to log in as: Enter account holder's name: 
+=======
+Enter mode in which you wish to log in as: 
+Enter account holder's name: 
+>>>>>>> 41b5762211b2fbeff41befeb6bafd94fce3636a1
+>>>>>>> f7a779bd065edd40a6e33596192db39efa3450af
