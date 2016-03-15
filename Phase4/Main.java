@@ -4,8 +4,8 @@ import java.util.*;
 public class Main {
 	
   public static List<String> mergedTransferFiles = new ArrayList<String>();
-  public static List<String> oldMasterAccounts = new ArrayList<String>();
-  public static List<String> newMasterAccounts = new ArrayList<String>();
+  public static List<String> masterAccounts = new ArrayList<String>();
+//public static List<String> newMasterAccounts = new ArrayList<String>();
 
   /*
    * Reads in the old master bank accounts file and stores it.
@@ -54,22 +54,22 @@ public class Main {
       }*/
 
       // Read in old master bank accounts file.
-      storeFile(oldMasterFileName, oldMasterAccounts);
+      storeFile(oldMasterFileName, masterAccounts);
 
       // Read in and merge all transaction files.
       mergeFiles(transferFileNames);
 
-      
+      /*
       System.out.println("\nMaster Bank Accounts File\n");
-      for (int i=0; i<oldMasterAccounts.size(); i++) {
-      	System.out.println(oldMasterAccounts.get(i));
+      for (int i=0; i<masterAccounts.size(); i++) {
+      	System.out.println(masterAccounts.get(i));
       }
 
       System.out.println("\nMerged Transfer Files\n");
       for (int i=0; i<mergedTransferFiles.size(); i++) {
       	System.out.println(mergedTransferFiles.get(i));
       }
-      
+      */
     }
   }
 }
