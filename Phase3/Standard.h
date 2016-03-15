@@ -16,7 +16,6 @@
 #include <math.h>
 #include "IAccount.h"
 #include "TransactionHelper.h"
-#include "User.h"
 
 /*
  * Standard is for standard accounts. Has variables for the current

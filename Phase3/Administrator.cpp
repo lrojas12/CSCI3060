@@ -701,7 +701,7 @@ void Administrator::Create() {
       cout << "\nEnter a command.\n" << endl;
 
       // Log create for transaction file.
-      string transaction_line = "04 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   \n";
+      string transaction_line = "04 " + padded_new_name + " " + padded_acc_num + " " + padded_init_balance + "   ";
       transaction_file.push_back(transaction_line);
     }
   } else {

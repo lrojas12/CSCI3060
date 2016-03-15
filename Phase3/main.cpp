@@ -48,6 +48,8 @@ int main (int argc, char *argv[]) {
   // For command line input only
   if (argc >= 2) {
 
+    system("rm transaction_file_*.tra");
+
     file_name = argv[1];
 
     transactions.LoadAccounts(file_name);

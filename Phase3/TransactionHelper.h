@@ -48,6 +48,8 @@ class TransactionHelper {
   // Check if the account number inputed exists in the "database"
   bool NumExists(int acc_num);
 
+  bool FileExists(string file_name);
+
   /* Check that the new account holder name entered follows the
    * required constraints. Done using regex.
    */

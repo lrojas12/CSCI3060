@@ -13,7 +13,6 @@
 #include <string>
 #include <math.h>
 #include "IAccount.h"
-//#include "User.h"
 #include "Standard.h"
 #include "TransactionHelper.h"
 

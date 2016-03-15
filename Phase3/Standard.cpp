@@ -59,6 +59,9 @@ void Standard::Withdrawal() {
 
   if (amount <= curr_user.GetBalance() && (500.00 >= amount > 0.0) && (fmod(amount, 5.0) == 0)) {
 
+    /*
+     * Done in the Back End
+     * 
     if (curr_user.GetPlan() == 'S')
       new_balance = curr_user.GetBalance() - amount - 0.05;
     else if (curr_user.GetPlan() == 'N')
@@ -67,7 +70,9 @@ void Standard::Withdrawal() {
       cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
       return;
     }
+    */
 
+    new_balance = curr_user.GetBalance() - amount;
     curr_user.SetBalance(new_balance);
   
   } else {
@@ -231,6 +236,9 @@ void Standard::Transfer() {
 
       if (amount <= curr_user.GetBalance() && (1000.00 >= amount > 0.0) && (amount + users.at(i).GetBalance()) < 100000.00) {
 
+        /*
+        * Done in the Back End
+        * 
         if (curr_user.GetPlan() == 'S')
           new_balance_f = curr_user.GetBalance() - amount - 0.05;
         else if (curr_user.GetPlan() == 'N')
@@ -239,7 +247,8 @@ void Standard::Transfer() {
           cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
           return;
         }
-
+        */
+        new_balance_f = curr_user.GetBalance() - amount;
         new_balance_t = users.at(i).GetBalance() + amount;
         curr_user.SetBalance(new_balance_f);
         users.at(i).SetBalance(new_balance_t);
@@ -362,6 +371,9 @@ void Standard::Paybill() {
 
   if (amount <= curr_user.GetBalance() && amount > 0.0) {
 
+   /*
+    * Done in the Back End
+    * 
     if (curr_user.GetPlan() == 'S')
       new_balance = curr_user.GetBalance() - amount - 0.05;
     else if (curr_user.GetPlan() == 'N')
@@ -370,7 +382,9 @@ void Standard::Paybill() {
       cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
       return;
     }
+    */
 
+    new_balance = curr_user.GetBalance() - amount;
     curr_user.SetBalance(new_balance);
   } else {
     cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
@@ -460,6 +474,9 @@ void Standard::Deposit() {
 
   if (((amount + curr_user.GetBalance()) < 100000.00) && (amount > 0.0)) {
 
+    /*
+    * Done in the Back End
+    *
     if (curr_user.GetPlan() == 'S')
       new_balance = curr_user.GetBalance() + amount - 0.05;
     else if (curr_user.GetPlan() == 'N')
@@ -468,7 +485,9 @@ void Standard::Deposit() {
       cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
       return;
     }
+    */
 
+    new_balance = curr_user.GetBalance() + amount;
     curr_user.SetBalance(new_balance);
     curr_user.SetDeposited(curr_user.GetDeposited() + amount);
     

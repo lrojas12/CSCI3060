@@ -53,6 +53,19 @@ bool TransactionHelper::NumExists(int acc_num) {
   return ret;
 }
 
+bool TransactionHelper::FileExists(string file_name) {
+
+  ifstream infile;
+  infile.open(file_name);
+
+  if (!infile)
+    return false;
+  else
+    return true;
+
+  infile.close();
+}
+
 /* Check that the new account holder name entered follows the
  * required constraints: non-empty.
  */
@@ -148,7 +161,14 @@ bool TransactionHelper::is_New(int acc_num) {
 // Outputs the transaction_file vector into a file
 void TransactionHelper::WriteTransactionFile() {
   
-  string file_name = "transaction_file.tra";
+  int i = 1;
+
+  string file_name = "transaction_file_" + to_string(i) + ".tra";
+
+  while (FileExists(file_name)) {
+    i++;
+    file_name = "transaction_file_" + to_string(i) + ".tra";
+  }
 
   ofstream outfile(file_name);
 
@@ -182,7 +202,7 @@ void TransactionHelper::LoadAccounts(string file_name) {
 
       if(infile.eof())
         break;
-      //	User u(acc_holder, acc_num, acc_balance, acc_status, acc_plan);
+
       u.SetName(acc_holder);
       u.SetNum(acc_num);
       u.SetBalance(acc_balance);
@@ -196,12 +216,6 @@ void TransactionHelper::LoadAccounts(string file_name) {
     cerr << "\n>>> ERROR: File \"" << file_name << "\" was not found.\n" << endl;
   exit(-1);
   }
-
-  /*
-  for (int i = 0; i < users.size(); i++) {
-    cout << users.at(i).GetName() << " " <<users.at(i).GetNum() << " " << users.at(i).GetBalance() <<endl;
-  }
-  */
 }
 
 void TransactionHelper::PrintWelcomeMessage() {
