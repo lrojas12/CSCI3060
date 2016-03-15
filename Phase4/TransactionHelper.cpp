@@ -343,6 +343,7 @@ void TransactionHelper::Logout() {
       for (int i = 0; i < users.size(); i++) {
         if (users.at(i).GetName().compare(acc_holder) == 0) {
           acc_num = users.at(i).GetNum();
+          users.at(i) = curr_user;
         }
       }
 

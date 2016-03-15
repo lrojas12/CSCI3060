@@ -28,7 +28,7 @@ class Standard: public virtual IAccount {
   string acc_holder_;
   int acc_num_;
   float acc_balance_;
-  float acc_newly_deposited_;
+  float acc_newly_deposited_ = 0.0;
   char acc_status_;
   char acc_plan_;
   float EC_count_;

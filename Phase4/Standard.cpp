@@ -144,7 +144,7 @@ void Standard::Transfer() {
 
   cout << "\nTransfer transaction selected.\n" << endl;
 
-  cout << "Enter you account number: ";
+  cout << "Enter your account number: ";
   cin >> temp_acc_num_f;
 
   regex re_f("[0-9]{0,5}");
@@ -157,7 +157,6 @@ void Standard::Transfer() {
 
   if (curr_user.GetNum() != acc_num_f) {
     cerr << "\n>>> ERROR: The account number does not match your account.\n" << endl;
-    cout << "Current user: " << curr_user.GetNum() << ", Account Number: " << acc_num_f << endl;
     return;
   }
 
@@ -183,7 +182,7 @@ void Standard::Transfer() {
   }
 
   if (!transactions.NumExists(acc_num_t)) {
-    cerr << "\n >>> ERROR: The destination account number entered is invalid.\n" << endl;
+    cerr << "\n>>> ERROR: The destination account number entered is invalid.\n" << endl;
     return;
   }
 
@@ -234,49 +233,44 @@ void Standard::Transfer() {
   }
 
   if ((curr_user.GetBalance() - curr_user.GetDeposited()) < amount) {
-    for (int i = 0; i < GetDeposited.length(); i++) {
-      
-    }
+    cout << "Recently deposited: " << curr_user.GetDeposited() << endl;
     cerr << "\n>>> ERROR: You may not transfer recently deposited funds.\n" << endl;
-    return;
-  }
-
-
-  if (curr_user.GetPlan() == 'S') {
-    // STUFF HERE
-  } else if (curr_user.GetPlan() == 'N') {
-    // STUFF HERE
-  } else {
-    cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
     return;
   }
 
   for (int i = 0; i < users.size(); i++) {
     if (users.at(i).GetNum() == acc_num_t) {
 
-      if (amount <= curr_user.GetBalance() && (1000.00 >= amount > 0.0) && (amount + users.at(i).GetBalance()) < 100000.00) {
+      if (curr_user.GetPlan() == 'S') {
 
-        /*
-        * Done in the Back End
-        * 
-        if (curr_user.GetPlan() == 'S')
-          new_balance_f = curr_user.GetBalance() - amount - 0.05;
-        else if (curr_user.GetPlan() == 'N')
-          new_balance_f = curr_user.GetBalance() - amount - 0.10;
-        else {
-          cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
+        if (amount <= curr_user.GetBalance() + 0.05 && (1000.00 >= amount > 0.0) && (amount + users.at(i).GetBalance()) < 100000.00) {
+
+          new_balance_f = curr_user.GetBalance() - amount;
+          new_balance_t = users.at(i).GetBalance() + amount;
+          curr_user.SetBalance(new_balance_f);
+          users.at(i).SetBalance(new_balance_t);
+          users.at(i).SetDeposited(users.at(i).GetDeposited() + amount);
+
+        } else {
+          cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
           return;
         }
-        */
-        new_balance_f = curr_user.GetBalance() - amount;
-        new_balance_t = users.at(i).GetBalance() + amount;
-        curr_user.SetBalance(new_balance_f);
-        users.at(i).SetBalance(new_balance_t);
-        users.at(i).SetDeposited(users.at(i).GetDeposited() + amount);
-        break;
+      } else if (curr_user.GetPlan() == 'N') {
 
+        if (amount <= curr_user.GetBalance() + 0.10 && (1000.00 >= amount > 0.0) && (amount + users.at(i).GetBalance()) < 100000.00) {
+
+          new_balance_f = curr_user.GetBalance() - amount;
+          new_balance_t = users.at(i).GetBalance() + amount;
+          curr_user.SetBalance(new_balance_f);
+          users.at(i).SetBalance(new_balance_t);
+          users.at(i).SetDeposited(users.at(i).GetDeposited() + amount);
+
+        } else {
+          cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+          return;
+        }
       } else {
-        cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+        cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
         return;
       }
     }
@@ -389,25 +383,26 @@ void Standard::Paybill() {
     curr_user.SetCQCount(company_count);
   }
 
-  if (amount <= curr_user.GetBalance() && amount > 0.0) {
+  if (curr_user.GetPlan() == 'S') {
+    if (amount <= curr_user.GetBalance() + 0.05 && amount > 0.0) {
 
-   /*
-    * Done in the Back End
-    * 
-    if (curr_user.GetPlan() == 'S')
-      new_balance = curr_user.GetBalance() - amount - 0.05;
-    else if (curr_user.GetPlan() == 'N')
-      new_balance = curr_user.GetBalance() - amount - 0.10;
-    else {
-      cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
+      new_balance = curr_user.GetBalance() - amount;
+      curr_user.SetBalance(new_balance);
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
       return;
     }
-    */
+  } else if (curr_user.GetPlan() == 'N') {
+    if (amount <= curr_user.GetBalance() + 0.10 && amount > 0.0) {
 
-    new_balance = curr_user.GetBalance() - amount;
-    curr_user.SetBalance(new_balance);
+      new_balance = curr_user.GetBalance() - amount;
+      curr_user.SetBalance(new_balance);
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+      return;
+    }
   } else {
-    cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+    cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
     return;
   }
 
@@ -492,27 +487,30 @@ void Standard::Deposit() {
     return;
   }
 
-  if (((amount + curr_user.GetBalance()) < 100000.00) && (amount > 0.0)) {
+  if (curr_user.GetPlan() == 'S') {
+    if (((amount + curr_user.GetBalance() + 0.05) < 100000.00) && (amount > 0.0)) {
 
-    /*
-    * Done in the Back End
-    *
-    if (curr_user.GetPlan() == 'S')
-      new_balance = curr_user.GetBalance() + amount - 0.05;
-    else if (curr_user.GetPlan() == 'N')
-      new_balance = curr_user.GetBalance() + amount - 0.10;
-    else {
-      cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
+      new_balance = curr_user.GetBalance() + amount;
+      curr_user.SetBalance(new_balance);
+      curr_user.SetDeposited(curr_user.GetDeposited() + amount);
+    
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
       return;
     }
-    */
+  } else if (curr_user.GetPlan() == 'N') {
+    if (((amount + curr_user.GetBalance() + 0.10) < 100000.00) && (amount > 0.0)) {
 
-    new_balance = curr_user.GetBalance() + amount;
-    curr_user.SetBalance(new_balance);
-    curr_user.SetDeposited(curr_user.GetDeposited() + amount);
-    
+      new_balance = curr_user.GetBalance() + amount;
+      curr_user.SetBalance(new_balance);
+      curr_user.SetDeposited(curr_user.GetDeposited() + amount);
+      
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+      return;
+    }
   } else {
-    cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+    cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
     return;
   }
 
