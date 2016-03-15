@@ -12,21 +12,21 @@ public class Main {
    */
   public static void storeFile(String fileName, List<String> arrayList) {
 
-  	// Creates a buffered reader for the old master bank accounts file
+  	// Creates a buffered reader for the file based on file name given.
   	try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
       String line;
       // Reads in the file line by line
       while ((line = br.readLine()) != null) {
-      	// Stores the line.
+      	// Stores the line based on list to store in.
         arrayList.add(line);
       }
     } catch (IOException e) {
-      System.err.println("ERROR: Could not read old master bank accounts file.");
+      System.err.println("ERROR: Could not read in file.");
     }
   }
 
   /*
-   * Reads in, merges and then stores the transaction files.
+   * Merges and stores all transaction files.
    */
   public static void mergeFiles(String[] array) {
 
