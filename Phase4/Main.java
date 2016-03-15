@@ -45,13 +45,7 @@ public class Main {
     } else {
 
       String oldMasterFileName = args[0];
-      //System.out.println("inputMaster: " + oldMasterFileName);
-
       String[] transferFileNames = Arrays.copyOfRange(args, 1, args.length);
-
-      /*for (int i = 0; i < transferFileNames.length; i++) {
-        System.out.println(transferFileNames[i]);
-      }*/
 
       // Read in old master bank accounts file.
       storeFile(oldMasterFileName, oldMasterAccounts);
