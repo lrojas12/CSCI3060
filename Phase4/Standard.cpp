@@ -234,6 +234,9 @@ void Standard::Transfer() {
   }
 
   if ((curr_user.GetBalance() - curr_user.GetDeposited()) < amount) {
+    for (int i = 0; i < GetDeposited.length(); i++) {
+      
+    }
     cerr << "\n>>> ERROR: You may not transfer recently deposited funds.\n" << endl;
     return;
   }
