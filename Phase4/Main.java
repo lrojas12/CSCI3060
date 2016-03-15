@@ -3,8 +3,6 @@ import java.util.*;
 
 public class Main {
 	
-  public static String oldMasterFileName;
-  public static String[] transferFileNames;
   public static List<String> mergedTransferFiles = new ArrayList<String>();
   public static List<String> oldMasterAccounts = new ArrayList<String>();
   public static List<String> newMasterAccounts = new ArrayList<String>();
@@ -12,40 +10,29 @@ public class Main {
   /*
    * Reads in the old master bank accounts file and stores it.
    */
-  public static void storeMasterFile() {
+  public static void storeFile(String fileName, List<String> arrayList) {
 
   	// Creates a buffered reader for the old master bank accounts file
-  	try (BufferedReader br = new BufferedReader(new FileReader(oldMasterFileName))) {
+  	try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
       String line;
       // Reads in the file line by line
       while ((line = br.readLine()) != null) {
       	// Stores the line.
-        oldMasterAccounts.add(line);
+        arrayList.add(line);
       }
     } catch (IOException e) {
-      System.err.println("ERROR: Trouble reading in old master bank accounts file.");
+      System.err.println("ERROR: Could not read old master bank accounts file.");
     }
   }
 
   /*
    * Reads in, merges and then stores the transaction files.
    */
-  public static void mergeTransferFiles() {
+  public static void mergeFiles(String[] array) {
 
     // Loops over every transaction file.
-  	for (int i=0; i<transferFileNames.length; i++) {
-
-      // Creates a buffered read for the transaction files.
-      try (BufferedReader br = new BufferedReader(new FileReader(transferFileNames[i]))) {
-        String line;
-        // Reads in the files line by line
-        while ((line = br.readLine()) != null) {
-          // Stores the line.
-          mergedTransferFiles.add(line);
-        }
-      } catch (IOException e) {
-        System.err.println("ERROR: Trouble reading in transaction files.");
-      }
+  	for (int i=0; i<array.length; i++) {
+      storeFile(array[i], mergedTransferFiles);
     }
   }
 
@@ -57,31 +44,32 @@ public class Main {
 
     } else {
 
-      oldMasterFileName = args[0];
+      String oldMasterFileName = args[0];
       //System.out.println("inputMaster: " + oldMasterFileName);
 
-      transferFileNames = Arrays.copyOfRange(args, 1, args.length);
+      String[] transferFileNames = Arrays.copyOfRange(args, 1, args.length);
 
       /*for (int i = 0; i < transferFileNames.length; i++) {
         System.out.println(transferFileNames[i]);
       }*/
 
       // Read in old master bank accounts file.
-      storeMasterFile();
+      storeFile(oldMasterFileName, oldMasterAccounts);
 
       // Read in and merge all transaction files.
-      mergeTransferFiles();
+      mergeFiles(transferFileNames);
 
-      System.out.println("\n\nMaster Bank Accounts File\n");
-
+      
+      System.out.println("\nMaster Bank Accounts File\n");
       for (int i=0; i<oldMasterAccounts.size(); i++) {
       	System.out.println(oldMasterAccounts.get(i));
       }
 
-      System.out.println("\n\nMerged Transfer Files\n");
+      System.out.println("\nMerged Transfer Files\n");
       for (int i=0; i<mergedTransferFiles.size(); i++) {
       	System.out.println(mergedTransferFiles.get(i));
       }
+      
     }
   }
 }
