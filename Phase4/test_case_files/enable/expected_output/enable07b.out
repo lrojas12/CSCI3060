@@ -1,0 +1,36 @@
+ __    __      _                           _             
+/ / /\ \ \__ _| |_ ___ _ __ _ __ ___   ___| | ___  _ __  
+\ \/  \/ / _` | __/ _ \ '__| '_ ` _ \ / _ \ |/ _ \| '_ \ 
+ \  /\  / (_| | ||  __/ |  | | | | | |  __/ | (_) | | | |
+  \/  \/ \__,_|\__\___|_|  |_| |_| |_|\___|_|\___/|_| |_|
+  
+Welcome to Watermelon Banking System. 
+Please log in to begin or enter "help" for more information.
+
+Enter mode in which you wish to log in as: MODE
+
+You are currently logged in as an administrator.
+
+Enter a command.
+
+Enable transaction selected.
+
+Enter account holder's name: 
+Enter account number:
+
+The account 00005 has successfully been enabled.
+
+Enter a command.
+
+Enter origin account holder’s name:
+Enter origin number:
+Enter amount to deposit: 
+
+Funds have been successfully added to the account 00005.
+New balance: $10010.00
+
+Enter a command.
+
+You have successfully logged out of your account.
+
+Login or enter "help" for more information.

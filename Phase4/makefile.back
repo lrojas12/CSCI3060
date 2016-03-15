@@ -1,0 +1,3 @@
+all:
+	@javac *.java
+	@java Main master_bank_accounts_file.txt transaction_file_*.tra
