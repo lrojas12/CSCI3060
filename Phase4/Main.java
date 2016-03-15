@@ -5,9 +5,9 @@ public class Main {
 	
   public static String oldMasterFileName;
   public static String[] transferFileNames;
-  public static List<String> merged_transfer_files = new ArrayList<String>();
-  public static List<String> old_master_accounts = new ArrayList<String>();
-  public static List<String> new_master_accounts = new ArrayList<String>();
+  public static List<String> mergedTransferFiles = new ArrayList<String>();
+  public static List<String> oldMasterAccounts = new ArrayList<String>();
+  public static List<String> newMasterAccounts = new ArrayList<String>();
 
   public static void main(String[] args) {
 
