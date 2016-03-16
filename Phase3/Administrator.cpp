@@ -641,7 +641,7 @@ void Administrator::Create() {
     // Assigns the next number in the sequence
     int new_acc_num = last_acc_num + 1;
 
-    if (new_acc_num > 99999) {
+    if (new_acc_num > 99998) {
       cerr << "There are no more bank account numbers available." << endl;
       return;
     } else {

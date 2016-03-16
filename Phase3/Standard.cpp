@@ -57,31 +57,38 @@ void Standard::Withdrawal() {
     return;
   }
 
-  if (amount <= curr_user.GetBalance() && (500.00 >= amount > 0.0) && (fmod(amount, 5.0) == 0)) {
+  if (curr_user.GetPlan() == 'S') {
+    if (amount <= 0.05 + curr_user.GetBalance() && (500.00 >= amount > 0.0) && (fmod(amount, 5.0) == 0)) {
 
-    /*
-     * Done in the Back End
-     * 
-    if (curr_user.GetPlan() == 'S')
-      new_balance = curr_user.GetBalance() - amount - 0.05;
-    else if (curr_user.GetPlan() == 'N')
-      new_balance = curr_user.GetBalance() - amount - 0.10;
-    else {
-      cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
+      new_balance = curr_user.GetBalance() - amount;
+      curr_user.SetBalance(new_balance);
+  
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
       return;
     }
-    */
 
-    new_balance = curr_user.GetBalance() - amount;
-    curr_user.SetBalance(new_balance);
+    if ((curr_user.GetBalance() - 0.05 - curr_user.GetDeposited()) < amount) {
+      cerr << "\n>>> ERROR: You may not withdraw recently deposited funds.\n" << endl;
+      return;
+    }
+  } else if (curr_user.GetPlan() == 'N') {
+    if (amount <= 0.10 + curr_user.GetBalance() && (500.00 >= amount > 0.0) && (fmod(amount, 5.0) == 0)) {
+
+      new_balance = curr_user.GetBalance() - amount;
+      curr_user.SetBalance(new_balance);
   
-  } else {
-    cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
-    return;
-  }
+    } else {
+      cerr << "\n>>> ERROR: The amount entered is invalid.\n" << endl;
+      return;
+    }
 
-  if ((curr_user.GetBalance() - curr_user.GetDeposited()) < amount) {
-    cerr << "\n>>> ERROR: You may not withdraw recently deposited funds.\n" << endl;
+    if ((curr_user.GetBalance() - 0.10 - curr_user.GetDeposited()) < amount) {
+      cerr << "\n>>> ERROR: You may not withdraw recently deposited funds.\n" << endl;
+      return;
+    }
+  } else {
+    cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
     return;
   }
 
@@ -228,6 +235,16 @@ void Standard::Transfer() {
 
   if ((curr_user.GetBalance() - curr_user.GetDeposited()) < amount) {
     cerr << "\n>>> ERROR: You may not transfer recently deposited funds.\n" << endl;
+    return;
+  }
+
+
+  if (curr_user.GetPlan() == 'S') {
+    // STUFF HERE
+  } else if (curr_user.GetPlan() == 'N') {
+    // STUFF HERE
+  } else {
+    cerr << "\n>>> ERROR: Unable to retrieve transaction payment plan information.\n" << endl;
     return;
   }
 
