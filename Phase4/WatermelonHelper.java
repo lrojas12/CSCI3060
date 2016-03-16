@@ -25,13 +25,13 @@ public class WatermelonHelper {
 		accPlan = line.substring(43);
 	}
 
-	public static boolean isAdmin(char accMode) {
-		if (accMode == 'A') {
-			return true;
-		} else if (accMode == 'S') {
+	public static boolean isAdmin(char accPlan) {
+		if (accPlan == 'A' || accPlan == 'S') {
 			return false;
+		} else if (accPlan == ' ') {
+			return true;
 		} else {
-			System.err.println("ERROR: Unable to retrieve account mode.");
+			System.err.println("ERROR ERROR: Unable to retrieve account mode.");
 			return false;
 			// Skip to the next line
 		}

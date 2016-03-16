@@ -4,6 +4,7 @@ import java.util.*;
 public class User {
 
 	private String accHolder;
+
   	private int accNum;
   	private float accBalance;
   	private char accStatus;
@@ -12,17 +13,17 @@ public class User {
 
   	User() {}
 
-	User(String holder, int num, float balance, char status, int tranCount, char plan) {
+    User(String holder, int num, float balance, char status, int tranCount, char plan) {
 		
-		accHolder = holder;
-		accNum = num;
-		accBalance = balance;
-		accStatus = status;
-		numTran = tranCount;
-		accPlan = plan;
-	}
+  		accHolder = holder;
+  		accNum = num;
+  		accBalance = balance;
+  		accStatus = status;
+  		numTran = tranCount;
+  		accPlan = plan;
+  	}
 
- 	// Get account holder name.
+ 	  // Get account holder name.
   	public String getName() {
   		return this.accHolder;
   	}
@@ -53,22 +54,22 @@ public class User {
   	}
 
   	// Set account holder name.
-  	public void SetName(String name) {
+  	public void setName(String name) {
   		this.accHolder = name;
   	}
   	
   	// Change the account number.
-  	public void SetNum(int num) {
+  	public void setNum(int num) {
   		this.accNum = num;
   	}
   	
   	// Change the account balance.
-  	public void SetBalance(float balance) {
+  	public void setBalance(float balance) {
   		this.accBalance = balance;
   	}
   	
   	// Change the account status.
-  	public void SetStatus(char status) {
+  	public void setStatus(char status) {
   		this.accStatus = status;
   	}
 	
@@ -78,7 +79,7 @@ public class User {
  	}
   	
   	// Change the account plan.
-  	public void SetPlan(char plan) {
+  	public void setPlan(char plan) {
   		this.accPlan = plan;
   	}
 }
