@@ -117,7 +117,6 @@ void Standard::Withdrawal() {
   cout << "New balance: $" + padded_new_balance << endl;
 
   string transaction_line = "01 " + padded_acc_holder + " " + padded_acc_num + " " + padded_amount + "   ";
-  cout << "Transaction line: " << transaction_line << endl;
   transaction_file.push_back(transaction_line);
   cout << "\nEnter a command.\n" << endl;
 }
