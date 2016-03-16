@@ -5,7 +5,9 @@ public class Main {
 	
   public static List<String> mergedTransferFiles = new ArrayList<String>();
   public static List<String> masterAccounts = new ArrayList<String>();
-//public static List<String> newMasterAccounts = new ArrayList<String>();
+  public static List<String> currentAccounts = new ArrayList<String>();
+  public static List<User> userAccounts = new ArrayList<User>();
+  public static User currUser;
 
   /*
    * Reads in the old master bank accounts file and stores it.
@@ -64,6 +66,12 @@ public class Main {
       	System.out.println(mergedTransferFiles.get(i));
       }
       */
+
+      // Create a User List based on masterAccounts for easy access to variables
+      WatermelonHelper.getAllMasterAccounts(masterAccounts);
+
+      UpdateMaster.updateMaster();
+
     }
   }
 }
