@@ -22,7 +22,7 @@ public class WatermelonHelper {
     accHolderT = line.substring(3, 23).trim();
     accNumT = line.substring(24, 29);
     accBalanceT = line.substring(30, 38);
-    misc = line.substring(40);
+    misc = line.substring(39);
   }
 
   /**
@@ -47,12 +47,12 @@ public class WatermelonHelper {
    * @return          true if admin, otherwise false
    */
   public static boolean isAdmin(char accPlan) {
-    if (accPlan == 'A' || accPlan == 'S') {
+    if (accPlan == 'N' || accPlan == 'S') {
       return false;
     } else if (accPlan == ' ') {
       return true;
     } else {
-      System.err.println("ERROR ERROR: Unable to retrieve account mode.");
+      System.err.println("ERROR: Unable to retrieve account mode.");
       return false;
       // Skip to the next line
     }
@@ -69,6 +69,15 @@ public class WatermelonHelper {
 
       // Tokenizes the master bank accounts file line.
       tokenizeMaster(line);
+
+      /*
+      System.out.println("Account holder: " + accHolderM.trim());
+      System.out.println("Account number: " + Integer.parseInt(accNumM));
+      System.out.println("Account balance: " + Float.valueOf(accBalanceM).floatValue());
+      System.out.println("Status: " + accStatus.charAt(0));
+      System.out.println("Transaction number: " + Integer.parseInt(numTran));
+      System.out.println("Account plan: " + accPlan.charAt(0));
+      */
 
       // Stores the tokenized bank account.
       User user = new User(accHolderM.trim(), Integer.parseInt(accNumM),
@@ -101,4 +110,4 @@ public class WatermelonHelper {
   public static boolean isNumberUnique(int accNum) {
     return true;
   }
-}
+} 

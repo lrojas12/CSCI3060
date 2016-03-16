@@ -50,6 +50,8 @@ public class Main {
 
   public static void main(String[] args) {
 
+  	currUser = new User();
+
     if (args.length < 2 || args[1].equals("transaction_file_*.tra")) {
 
       System.err.println("ERROR: At least 2 arguments are needed: <old_master_accounts> <transaction_files>");
@@ -80,8 +82,8 @@ public class Main {
       // Create a User List based on masterAccounts for easy access to variables
       WatermelonHelper.getAllMasterAccounts(masterAccounts);
 
-      // Gives exception error
-      //UpdateMaster.updateMaster();
+      // Update the master bank accounts file.
+      UpdateMaster.updateMaster();
     }
   }
 }

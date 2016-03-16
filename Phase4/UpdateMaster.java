@@ -71,12 +71,12 @@ public class UpdateMaster {
 
       // Login
       case "10":
-        //login();
+        login(Integer.parseInt(WatermelonHelper.accNumT));
         break;
 			
       // Logout
       case "00":
-        //logout();
+        logout();
         break;
 
       default:
@@ -226,7 +226,7 @@ public class UpdateMaster {
     } else if (WatermelonHelper.misc.equals("A ")) {
       // ?????????
     } else {
-      // ERRROOORRRR
+      System.err.println("ERROR: Problem with login information.");
     }
 		
     // Update actual User value with currUser copy
@@ -238,6 +238,7 @@ public class UpdateMaster {
    * Updates master bank account file using logout transaction.
    */
   public static void logout() {
+    Main.currUser = new User();
     System.out.println("Logout transaction.");
   }
 }
