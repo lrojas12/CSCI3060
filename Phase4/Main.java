@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * @author Luisa Rojas
+ * @author Truyen Truong
+ * @author Danesh Parthipan
+ */
 public class Main {
 	
   public static List<String> mergedTransferFiles = new ArrayList<String>();
@@ -9,8 +14,11 @@ public class Main {
   public static List<User> userAccounts = new ArrayList<User>();
   public static User currUser;
 
-  /*
+  /**
    * Reads in the old master bank accounts file and stores it.
+   *
+   * @param fileName    file from which the old master bank accounts file is being read from
+   * @param arrayList   list to which the old master bank accounts file is being stored in
    */
   public static void storeFile(String fileName, List<String> arrayList) {
 
@@ -27,8 +35,10 @@ public class Main {
     }
   }
 
-  /*
+  /**
    * Merges and stores all transaction files.
+   *
+   * @param array list of transaction files to be merged
    */
   public static void mergeFiles(String[] array) {
 
@@ -72,7 +82,6 @@ public class Main {
 
       // Gives exception error
       //UpdateMaster.updateMaster();
-
     }
   }
 }

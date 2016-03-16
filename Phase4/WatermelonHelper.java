@@ -1,11 +1,21 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * @author Luisa Rojas
+ * @author Truyen Truong
+ * @author Danesh Parthipan
+ */
 public class WatermelonHelper {
 
   public static String flag, accHolderT, accNumT, accBalanceT, misc;
   public static String accNumM, accHolderM, accStatus, accBalanceM, numTran, accPlan;
 
+  /**
+   * Tokenizes a line in a bank transaction file.
+   *
+   * @param line   transaction line being tokenized
+   */
   public static void tokenizeTransaction(String line) {
 		
     flag = line.substring(0, 2);
@@ -15,6 +25,11 @@ public class WatermelonHelper {
     misc = line.substring(40);
   }
 
+  /**
+   * Tokenizes a line in a master bank accounts file.
+   *
+   * @param line   master bank accounts file line being tokenized
+   */
   public static void tokenizeMaster(String line) {
 		
     accNumM = line.substring(0, 5);
@@ -25,6 +40,12 @@ public class WatermelonHelper {
     accPlan = line.substring(43);
   }
 
+  /**
+   * Checks if the current account plan is an admin or is standard.
+   *
+   * @param accPlan   account plan being checked
+   * @return          true if admin, otherwise false
+   */
   public static boolean isAdmin(char accPlan) {
     if (accPlan == 'A' || accPlan == 'S') {
       return false;
@@ -37,10 +58,19 @@ public class WatermelonHelper {
     }
   }
 
+  /**
+   * Tokenizes, and stores the master bank accounts file lines.
+   *
+   * @param masterList   list containing the not tokenized master bank account file lines
+   */
   public static void getAllMasterAccounts(List<String> masterList) {
     for (int i = 0; i < masterList.size(); i++) {
       String line = masterList.get(i);
+
+      // Tokenizes the master bank accounts file line.
       tokenizeMaster(line);
+
+      // Stores the tokenized bank account.
       User user = new User(accHolderM.trim(), Integer.parseInt(accNumM),
                            Float.valueOf(accBalanceM).floatValue(), accStatus.charAt(0),
                            Integer.parseInt(numTran), accPlan.charAt(0));
@@ -48,14 +78,26 @@ public class WatermelonHelper {
     }
   }
 
+  /**
+   * Rewrites the master bank accounts file.
+   */
   public static void rewriteMasterFile() {
     // Output masterAccounts to a master_bank_accounts_file.txt
   }
 
+  /**
+   * Rewrites the current bank accounts file.
+   */
   public static void rewriteCurrentFile() {
     // Output currentAccounts to a current_bank_accounts_file.txt
   }
 
+  /**
+   * Checks if an account number is unique.
+   *
+   * @param accNum   account number being checked for uniqueness
+   * @return         true if unique, otherwise false
+   */
   public static boolean isNumberUnique(int accNum) {
     return true;
   }
