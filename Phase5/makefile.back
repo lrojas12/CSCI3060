@@ -1,0 +1,3 @@
+all:
+	@javac User.java WatermelonHelper.java UpdateMaster.java Main.java
+	@java Main master_bank_accounts_file.txt transaction_file_*.tra
