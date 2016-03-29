@@ -105,20 +105,23 @@ public class UpdateMaster {
 		
     if (admin == true) {
       for (int i=0; i<Main.userAccounts.size(); i++) {
-      	if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount) {
+      	if (Main.userAccounts.get(i).getNum() == accNum &&
+      		Main.userAccounts.get(i).getBalance() >= amount) {
       	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);  
       	}
       }
     } else {
       if (Main.currUser.getPlan() == 'S') {
         for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount+0.05) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum &&
+      	  	  Main.userAccounts.get(i).getBalance() >= amount+0.05) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);  
       	  }
         }
       } else if (Main.currUser.getPlan() == 'N') {
         for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount+0.10) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum &&
+      	  	  Main.userAccounts.get(i).getBalance() >= amount+0.10) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.10);
       	  }
         }
@@ -137,10 +140,10 @@ public class UpdateMaster {
    * @param admin     if current logged in is admin
    */
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
+  	System.out.println("Transfer transaction.");
     // If standard, deduct fee
     withdrawal(accNumF, amount, Utilities.isAdmin(Main.currUser.getPlan()));
     deposit(accNumT, amount, true); // No fees charged
-    System.out.println("Transfer transaction.");
   }
 
   /**
@@ -151,8 +154,8 @@ public class UpdateMaster {
    * @param admin    if current logged in is admin
    */
   public static void paybill(int accNum, float amount, boolean admin) {
+  	System.out.println("Paybill transaction.");
     withdrawal(accNum, amount, admin);
-    System.out.println("Paybill transaction.");
   }
 
   /**
@@ -164,19 +167,37 @@ public class UpdateMaster {
    */
   public static void deposit(int accNum, float amount, boolean admin) {
 		
+    System.out.println("Deposit transaction.");
+
     if (admin == true) {
-      // Add amount to balance
+      for (int i=0; i<Main.userAccounts.size(); i++) {
+      	if (Main.userAccounts.get(i).getNum() == accNum && 
+      		Main.userAccounts.get(i).getBalance() + amount < 100000.00 &&
+      		Main.userAccounts.get(i).getBalance() + amount >= 0.0) {
+      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount);  
+      	}
+      }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-        // Add amount to balance and deduct fee
+        for (int i=0; i<Main.userAccounts.size(); i++) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum && 
+      		Main.userAccounts.get(i).getBalance() + amount-(float)0.05 < 100000.00 &&
+      		Main.userAccounts.get(i).getBalance() + amount-(float)0.05 >= 0.0) {
+      	      Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.05);  
+      	  }
+        }
       } else if (Main.currUser.getPlan() == 'N') {
-        // Add amount to balance and deduct fee
+        for (int i=0; i<Main.userAccounts.size(); i++) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum && 
+      		Main.userAccounts.get(i).getBalance() + amount-(float)0.10 < 100000.00 &&
+      		Main.userAccounts.get(i).getBalance() + amount-(float)0.10 >= 0.0) {
+      	      Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10);  
+      	  }
+        }
       } else {
         // Error
       }
     }
-
-    System.out.println("Deposit transaction.");
   }
 
   /**
@@ -189,7 +210,7 @@ public class UpdateMaster {
   public static void create(String newAccHolder, int newAccNum, float initBalance) {
     // Check newAccNum is unique
     // A and N are default for status and plan
-    System.out.println("Logout transaction.");
+    System.out.println("Create transaction.");
   }
 
   /**

@@ -83,8 +83,8 @@ public class Main {
       UpdateMaster.updateMaster();
 
       System.out.println("\nMaster Bank Accounts File\n");
-      for (int i=0; i<masterAccounts.size(); i++) {
-      	System.out.println(masterAccounts.get(i));
+      for (int i=0; i<userAccounts.size(); i++) {
+      	System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance());
       }
     }
   }
