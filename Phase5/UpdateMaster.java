@@ -122,27 +122,28 @@ public class UpdateMaster {
   public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
     int accIndex = Utilities.getAccIndex(accNum);
+    float accBalance = Main.userAccounts.get(accIndex).getBalance();
+    int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
     if (admin) {
-      	if (Main.userAccounts.get(accIndex).getBalance() >= amount) {
-
-      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount);
+      	if (accBalance >= amount) {
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount);
       	  return true;
       }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.05) {
+      	if (accBalance >= amount+0.05) {
 
-      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount-(float)0.05);
-          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);  
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.05);
+          Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);  
 
       	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
       	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.10) {
 
-      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount-(float)0.10);
-          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.10);
+          Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
 
       	 return true;
         }
@@ -174,9 +175,11 @@ public class UpdateMaster {
       	
       	deposit(accNumF, amount, true);
         if (!admin) {
+        
+          int accIndexF = Utilities.getAccIndex(accNumF);
 
-          Main.userAccounts.get(Utilities.getAccIndex(accNumF)).setNumTran(
-               Main.userAccounts.get(Utilities.getAccIndex(accNumF)).getNumTran()-1);
+          Main.userAccounts.get(accIndexF).setNumTran(
+               Main.userAccounts.get(accIndexF).getNumTran()-1);
         }
       }
     }
@@ -203,29 +206,31 @@ public class UpdateMaster {
   public static boolean deposit(int accNum, float amount, boolean admin) {
 		
     int accIndex = Utilities.getAccIndex(accNum);
+    float accBalance = Main.userAccounts.get(accIndex).getBalance();
+    int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
     if (admin) {
-      if (Main.userAccounts.get(accIndex).getBalance() + amount < 100000.00 &&
-      	  Main.userAccounts.get(accIndex).getBalance() + amount >= 0.0) {
-
-      	Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount); 
+      if (accBalance + amount < 100000.00 && accBalance + amount >= 0.0) {
+      	Main.userAccounts.get(accIndex).setBalance(accBalance+amount); 
       	return true;
       }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-      	if (Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.05 < 100000.00 &&
-      		  Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.05 >= 0.0) {
+      	if (accBalance + amount-(float)0.05 < 100000.00 &&
+      		  accBalance + amount-(float)0.05 >= 0.0) {
 
-      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.05);  
-      	  Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance+amount-(float)0.05);  
+      	  Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
+
       	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
       	if (Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 < 100000.00 &&
       		  Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 >= 0.0) {
 
-      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.10); 
-          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1); 
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance+amount-(float)0.10); 
+          Main.userAccounts.get(accIndex).setNumTran(accTranNum+1); 
+
       	  return true;  
         }
       } else {
