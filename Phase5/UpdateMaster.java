@@ -57,7 +57,9 @@ public class UpdateMaster {
 			
       // Create
       case "05":
-        //create();
+        create(Utilities.accHolderT,
+        	   Integer.parseInt(Utilities.accNumT),
+               Float.valueOf(Utilities.accBalanceT).floatValue());
         break;
 			
       // Delete
@@ -230,6 +232,7 @@ public class UpdateMaster {
     	initBalance >= 0 && initBalance < 100000.00) {
 
       User newUser = new User(newAccHolder, newAccNum, initBalance, 'A', 0, 'N');
+      Main.userAccounts.add(Main.userAccounts.size()-1, newUser);
     }
   }
 
