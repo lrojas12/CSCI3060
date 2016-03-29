@@ -117,7 +117,7 @@ public class Utilities {
   /**
    * Rewrites the master bank accounts file.
    */
-  /*
+  
   public static void rewriteMasterFile(String oldMasterFileName) {
 
     String fileName = oldMasterFileName;
@@ -156,7 +156,7 @@ public class Utilities {
       //System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
 
     }
-  }*/
+  }
 
   /**
    * Rewrites the current bank accounts file.
