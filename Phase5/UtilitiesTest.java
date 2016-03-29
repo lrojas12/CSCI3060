@@ -17,14 +17,14 @@ import org.junit.Test;
 public class UtilitiesTest {
     
     @Test
-    public void test1() {
+    public void stack_sample_test1() {
         Stack s = new Stack();
 		s.push(5);
         assertEquals(5,s.peek());
     }
 	
 	@Test
-	public void test2(){
+	public void stack_sample_test2(){
 		Stack r = new Stack();
 		r.push(3);
 		r.push(5);
