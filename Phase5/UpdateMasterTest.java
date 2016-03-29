@@ -17,21 +17,9 @@ import org.junit.Test;
 public class UpdateMasterTest {
     
     @Test
-    public void stack_sample_test1() {
-        Stack s = new Stack();
-		s.push(5);
-        assertEquals(5,s.peek());
+    public void test1() {
+    	
     }
-	
-	@Test
-	public void stack_sample_test2(){
-		Stack r = new Stack();
-		r.push(3);
-		r.push(5);
-		r.push(7);
-		assertEquals(7,r.pop());
-		assertEquals(r.peek(),5);
-	}
     
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(UpdateMasterTestTest.class);

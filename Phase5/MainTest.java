@@ -20,7 +20,9 @@ import org.junit.Test;
 public class MainTest {
     
     @Test
-    public void test() {}
+    public void test() {
+    	
+    }
 
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(MainTest.class);
