@@ -22,4 +22,16 @@
 
 [   ] Add headers to *all* source code files.
 
-[   ] Change `WatermelonHelper.java` class name to something else.
+[ **x** ] Change `WatermelonHelper.java` class name to something else.
+
+[   ] Format failed constraint errors: The error message should contain the **type** and **description** of the error and the **transaction** that caused it to occur.
+
+[   ] Format *fatal* errors: The message should contain the **type**, **description** and **file** that cause the error.
+
+
+[   ] Add the transaction tracking where missing.
+
+[   ] Check transaction file formatting
+
+[   ] Check account numbers assigned to accounts in the front end are, indeed, unique.
+
