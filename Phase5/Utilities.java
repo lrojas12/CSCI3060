@@ -114,6 +114,15 @@ public class Utilities {
    * @return         true if unique, otherwise false
    */
   public static boolean isNumberUnique(int accNum) {
-    return true;
+    
+    boolean isUnique = true;
+
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getNum() == accNum) {
+        isUnique = false;
+      }
+    }
+
+    return isUnique;
   }
 } 
