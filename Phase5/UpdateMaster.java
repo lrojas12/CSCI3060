@@ -43,12 +43,16 @@ public class UpdateMaster {
 
       // Paybill
       case "03":
-        //paybill();
+        paybill(Integer.parseInt(Utilities.accNumT),
+                Float.valueOf(Utilities.accBalanceT).floatValue(),
+                Utilities.isAdmin(Main.currUser.getPlan()));
         break;
 			
       // Deposit
       case "04":
-        //deposit();
+        deposit(Integer.parseInt(Utilities.accNumT),
+                Float.valueOf(Utilities.accBalanceT).floatValue(),
+                Utilities.isAdmin(Main.currUser.getPlan()));
         break;
 			
       // Create
@@ -58,7 +62,7 @@ public class UpdateMaster {
 			
       // Delete
       case "06":
-        //delete();
+        delete(Integer.parseInt(Utilities.accNumT));
         break;
 			
       // Disable
@@ -78,7 +82,9 @@ public class UpdateMaster {
 
       // Login
       case "10":
-        login(Integer.parseInt(Utilities.accNumT));
+      	if (Utilities.accNumT.trim().length() > 0) {
+        	login(Integer.parseInt(Utilities.accNumT));
+    	}
         break;
 			
       // Logout
@@ -309,7 +315,7 @@ public class UpdateMaster {
         }
       }
     } else if (Utilities.misc.equals("A ")) {
-      // ?????????
+      Main.currUser = new User();
     } else {
       System.err.println("ERROR: Problem with login information.");
     }
