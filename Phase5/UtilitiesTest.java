@@ -17,19 +17,19 @@ import org.junit.Test;
 public class UtilitiesTest {
     
     @Test
-    public void isAdmintest1() {
+    public void isAdminTest1() {
 
     	assertEquals(false, Utilities.isAdmin('N'));
 	}
 
     @Test
-    public void isAdmintest2() {
+    public void isAdminTest2() {
 
     	assertEquals(true, Utilities.isAdmin(' '));
 	}
 
     @Test
-    public void isAdmintest3() {
+    public void isAdminTest3() {
 
     	assertEquals(false, Utilities.isAdmin('R'));
 	}
