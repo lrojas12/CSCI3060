@@ -126,6 +126,12 @@ public class UpdateMaster {
   public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
     int accIndex = Utilities.getAccIndex(accNum);
+
+    if (accIndex == -1) {
+      System.err.println("ERROR <<withdrawal>>: The account to be withdrawn from does not exist.");
+      return;
+    }
+
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
     int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
@@ -233,6 +239,12 @@ public class UpdateMaster {
   public static boolean deposit(int accNum, float amount, boolean admin) {
 		
     int accIndex = Utilities.getAccIndex(accNum);
+
+    if (accIndex == -1) {
+      System.err.println("ERROR <<deposit>>: The account to be deposited into does not exist.");
+      return;
+    }
+
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
     int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
