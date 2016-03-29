@@ -28,12 +28,12 @@
 
 [   ] Format *fatal* errors: The message should contain the **type**, **description** and **file** that cause the error.
 
-[   ] Add the transaction tracking where missing.
+[ **x** ] Add the transaction tracking where missing.
 
 [   ] Check transaction file formatting (*fatal error*)
 
 [  **x** ] Check account numbers assigned to accounts in the front end are, indeed, unique
 
-[   ] Get rid of redundancy
+[ **x** ] Get rid of redundancy
 
-[   ] Add comments and code format
+[ **x** ] Add comments and code format
