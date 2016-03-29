@@ -15,9 +15,9 @@ public class UpdateMaster {
   public static void updateMaster() {
 
     // For each line in the merged transfer files list.
-    for (int i = 0; i < Main.mergedTransferFiles.size(); i++) {
+    for (int i = 0; i < Main.transferFile.size(); i++) {
       // Tokenize it.
-      WatermelonHelper.tokenizeTransaction(Main.mergedTransferFiles.get(i));
+      WatermelonHelper.tokenizeTransaction(Main.transferFile.get(i));
 
       // Chooses transaction based off flag.
       switch(WatermelonHelper.flag) {

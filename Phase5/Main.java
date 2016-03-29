@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Main {
 	
-  public static List<String> mergedTransferFiles = new ArrayList<String>();
+  public static List<String> transferFile = new ArrayList<String>();
   public static List<String> masterAccounts = new ArrayList<String>();
   public static List<String> currentAccounts = new ArrayList<String>();
   public static List<User> userAccounts = new ArrayList<User>();
@@ -35,37 +35,24 @@ public class Main {
     }
   }
 
-  /**
-   * Merges and stores all transaction files.
-   *
-   * @param array list of transaction files to be merged
-   */
-  public static void mergeFiles(String[] array) {
-
-    // Loops over every transaction file.
-  	for (int i=0; i<array.length; i++) {
-      storeFile(array[i], mergedTransferFiles);
-    }
-  }
-
   public static void main(String[] args) {
 
   	currUser = new User();
 
-    if (args.length < 2 || args[1].equals("transaction_file_*.tra")) {
+    if (args.length != 2) {
 
-      System.err.println("ERROR: At least 2 arguments are needed: <old_master_accounts> <transaction_files>");
+      System.err.println("ERROR: Must be 2 arguments: <old_master_accounts> <transaction_file>");
 
     } else {
 
       String oldMasterFileName = args[0];
-      String[] transferFileNames = Arrays.copyOfRange(args, 1, args.length);
+      String transferFileName = args[1];
 
       // Read in old master bank accounts file.
       storeFile(oldMasterFileName, masterAccounts);
 
-      // Read in and merge all transaction files.
-      mergeFiles(transferFileNames);
+      // Read in transaction file.
+      storeFile(transferFileName, transferFile);
 
       /*
       System.out.println("\nMaster Bank Accounts File\n");
@@ -74,8 +61,8 @@ public class Main {
       }
 
       System.out.println("\nMerged Transfer Files\n");
-      for (int i=0; i<mergedTransferFiles.size(); i++) {
-      	System.out.println(mergedTransferFiles.get(i));
+      for (int i=0; i<transferFile.size(); i++) {
+      	System.out.println(transferFile.get(i));
       }
       */
 
