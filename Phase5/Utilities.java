@@ -97,15 +97,6 @@ public class Utilities {
       // Tokenizes the master bank accounts file line.
       tokenizeMaster(line);
 
-      /*
-      System.out.println("Account holder: " + accHolderM.trim());
-      System.out.println("Account number: " + Integer.parseInt(accNumM));
-      System.out.println("Account balance: " + Float.valueOf(accBalanceM).floatValue());
-      System.out.println("Status: " + accStatus.charAt(0));
-      System.out.println("Transaction number: " + Integer.parseInt(numTran));
-      System.out.println("Account plan: " + accPlan.charAt(0));
-      */
-
       // Stores the tokenized bank account.
       User user = new User(accHolderM.trim(), Integer.parseInt(accNumM),
                            Float.valueOf(accBalanceM).floatValue(), accStatus.charAt(0),
@@ -117,7 +108,6 @@ public class Utilities {
   /**
    * Rewrites the master bank accounts file.
    */
-  
   public static void rewriteMasterFile(String fileName) {
     
     try {
@@ -142,8 +132,6 @@ public class Utilities {
         }
 
         paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
-
-        //paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
         while (paddedBalance.length() < 8) {
           paddedBalance = "0" + paddedBalance;
         }
@@ -170,7 +158,6 @@ public class Utilities {
    * Rewrites the current bank accounts file.
    */
   public static void rewriteCurrentFile() {
-    // Output currentAccounts to a current_bank_accounts_file.txt
 
     String fileName = "current_bank_accounts_file.txt";
 
@@ -195,8 +182,6 @@ public class Utilities {
         }
 
         paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
-
-        //paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
         while (paddedBalance.length() < 8) {
           paddedBalance = "0" + paddedBalance;
         }

@@ -121,8 +121,6 @@ public class UpdateMaster {
    */
   public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
-    System.out.println("Withdrawal transaction.");
-		
     if (admin) {
       for (int i=0; i<Main.userAccounts.size(); i++) {
       	if (Main.userAccounts.get(i).getNum() == accNum &&
@@ -165,7 +163,7 @@ public class UpdateMaster {
    * @param admin     if current logged in is admin
    */
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
-  	System.out.println("Transfer transaction.");
+
     // If standard, deduct fee
     if (withdrawal(accNumF, amount, admin)) {
       if(!deposit(accNumT, amount, true)) {
@@ -190,7 +188,6 @@ public class UpdateMaster {
    * @param admin    if current logged in is admin
    */
   public static void paybill(int accNum, float amount, boolean admin) {
-  	System.out.println("Paybill transaction.");
     withdrawal(accNum, amount, admin);
   }
 
@@ -203,8 +200,6 @@ public class UpdateMaster {
    */
   public static boolean deposit(int accNum, float amount, boolean admin) {
 		
-    System.out.println("Deposit transaction.");
-
     if (admin) {
       for (int i=0; i<Main.userAccounts.size(); i++) {
       	if (Main.userAccounts.get(i).getNum() == accNum && 
@@ -253,7 +248,6 @@ public class UpdateMaster {
   public static void create(String newAccHolder, int newAccNum, float initBalance) {
     // Check newAccNum is unique
     // A and N are default for status and plan
-    System.out.println("Create transaction.");
 
     if (Utilities.isNameUnique(newAccHolder) && Utilities.isNumberUnique(newAccNum) &&
     	initBalance >= 0 && initBalance < 100000.00) {
@@ -269,7 +263,6 @@ public class UpdateMaster {
    * @param accNum   account number being deleted
    */
   public static void delete(int accNum) {
-    System.out.println("Delete transaction.");
 
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum) {
@@ -285,7 +278,6 @@ public class UpdateMaster {
    * @param accNum   account number being disabled
    */
   public static void disable(int accNum) {
-    System.out.println("Disable transaction.");
 
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum &&
@@ -303,7 +295,6 @@ public class UpdateMaster {
    * @param plan     plan being changed to
    */
   public static void changeplan(int accNum, char plan) {
-    System.out.println("Change Plan transaction.");
 
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum &&
@@ -321,7 +312,6 @@ public class UpdateMaster {
    * @param accNum   account number being enabled
    */
   public static void enable(int accNum) {
-    System.out.println("Enable transaction.");
 
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum &&
@@ -350,10 +340,6 @@ public class UpdateMaster {
     } else {
       System.err.println("ERROR: Problem with login information.");
     }
-		
-    // Update actual User value with currUser copy
-
-    System.out.println("Login transaction.");
   }
 
   /**
@@ -361,6 +347,5 @@ public class UpdateMaster {
    */
   public static void logout() {
     Main.currUser = new User();
-    System.out.println("Logout transaction.");
   }
 }
