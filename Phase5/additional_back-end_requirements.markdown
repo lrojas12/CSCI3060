@@ -19,3 +19,5 @@
 ######To do
 
 [   ] Add headers to *all* source code files.
+
+[   ] Change `WatermelonHelper.java` class name to something else.
