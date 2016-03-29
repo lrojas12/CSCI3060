@@ -38,7 +38,16 @@ public class UpdateMaster {
 
       // Transfer
       case "02":
-        //transfer();
+        
+        int accNumF = Integer.parseInt(Utilities.accNumT);
+
+        i++;
+        Utilities.tokenizeTransaction(Main.transferFile.get(i));
+        
+        transfer(accNumF, Integer.parseInt(Utilities.accNumT),
+        	     Float.valueOf(Utilities.accBalanceT).floatValue(),
+                 Utilities.isAdmin(Main.currUser.getPlan()));
+
         break;
 
       // Paybill
@@ -108,16 +117,16 @@ public class UpdateMaster {
    * @param amount   amount being withdrawn
    * @param admin    if current logged in is admin
    */
-  public static void withdrawal(int accNum, float amount, boolean admin) {
+  public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
     System.out.println("Withdrawal transaction.");
 		
-    if (admin == true) {
+    if (admin) {
       for (int i=0; i<Main.userAccounts.size(); i++) {
       	if (Main.userAccounts.get(i).getNum() == accNum &&
       		Main.userAccounts.get(i).getBalance() >= amount) {
       	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);  
-      	  return;
+      	  return true;
       	}
       }
     } else {
@@ -126,7 +135,7 @@ public class UpdateMaster {
       	  if (Main.userAccounts.get(i).getNum() == accNum &&
       	  	  Main.userAccounts.get(i).getBalance() >= amount+0.05) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);  
-      	    return;
+      	    return true;
       	  }
         }
       } else if (Main.currUser.getPlan() == 'N') {
@@ -134,13 +143,15 @@ public class UpdateMaster {
       	  if (Main.userAccounts.get(i).getNum() == accNum &&
       	  	  Main.userAccounts.get(i).getBalance() >= amount+0.10) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.10);
-      	    return;
+      	    return true;
       	  }
         }
       } else {
-        // Error
+        System.err.println("ERROR: Unable to get payment plan information.");
       }
     }
+
+    return false;
   }
 
   /**
@@ -154,8 +165,19 @@ public class UpdateMaster {
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
   	System.out.println("Transfer transaction.");
     // If standard, deduct fee
-    withdrawal(accNumF, amount, admin);
-    deposit(accNumT, amount, true); // No fees charged
+    if (withdrawal(accNumF, amount, admin)) {
+      if(!deposit(accNumT, amount, true)) {
+      	if (Main.currUser.getPlan() == 'N') {
+      		amount += 0.10;
+      	} else if (Main.currUser.getPlan() == 'S') {
+      		amount += 0.05;
+      	} else {
+      		System.err.println("ERROR: Unable to get payment plan information.");
+      	}
+      	
+      	deposit(accNumF, amount, true);
+      }
+    }
   }
 
   /**
@@ -177,17 +199,17 @@ public class UpdateMaster {
    * @param amount   amount being deposited
    * @param admin    if current logged in is admin
    */
-  public static void deposit(int accNum, float amount, boolean admin) {
+  public static boolean deposit(int accNum, float amount, boolean admin) {
 		
     System.out.println("Deposit transaction.");
 
-    if (admin == true) {
+    if (admin) {
       for (int i=0; i<Main.userAccounts.size(); i++) {
       	if (Main.userAccounts.get(i).getNum() == accNum && 
       		Main.userAccounts.get(i).getBalance() + amount < 100000.00 &&
       		Main.userAccounts.get(i).getBalance() + amount >= 0.0) {
       	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount); 
-      	  return;
+      	  return true;
       	}
       }
     } else {
@@ -198,7 +220,7 @@ public class UpdateMaster {
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.05 >= 0.0) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.05);  
       	    Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
-      	    return;
+      	    return true;
       	  }
         }
       } else if (Main.currUser.getPlan() == 'N') {
@@ -208,13 +230,15 @@ public class UpdateMaster {
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.10 >= 0.0) {
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10); 
             Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1); 
-      	    return;  
+      	    return true;  
       	  }
         }
       } else {
-        System.err.println("ERROR: Problem reading in current user plan.");
+        System.err.println("ERROR: Unable to get payment plan information.");
       }
     }
+
+    return false;
   }
 
   /**
