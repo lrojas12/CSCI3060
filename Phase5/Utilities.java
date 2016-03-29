@@ -1,11 +1,17 @@
-import java.io.*;
-import java.util.*;
-
 /**
+ * This class will contain every method needed to aid the rest of the classes
+ * involved in the system.
+ *
+ * Utilities.java
+ * 
  * @author Luisa Rojas
  * @author Truyen Truong
  * @author Danesh Parthipan
  */
+
+import java.io.*;
+import java.util.*;
+
 public class Utilities {
 
   public static String flag, accHolderT, accNumT, accBalanceT, misc;

@@ -1,11 +1,20 @@
-import java.io.*;
-import java.util.*;
-
 /**
+ * This software is the back-end design of the Watermelon Banking System.
+ * It is to be ran as a console application.
+ * Input(s): File input only (<\old_master_accounts> <\merged_transaction_files>).
+ * Output(s): File output only (new_current_bank_accounts_file and
+ *        new_master_bank_accounts_file).
+ *
+ * Main.java
+ * 
  * @author Luisa Rojas
  * @author Truyen Truong
  * @author Danesh Parthipan
  */
+
+import java.io.*;
+import java.util.*;
+
 public class Main {
 	
   public static List<String> transferFile = new ArrayList<String>();

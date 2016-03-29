@@ -1,11 +1,18 @@
-import java.io.*;
-import java.util.*;
-
 /**
+ * This class will contain methods related to the real changes that need to be
+ * made to the "old" master accounts file in order to update it into the "new"
+ * master accounts file.
+ *
+ * UpdateMaster.java
+ * 
  * @author Luisa Rojas
  * @author Truyen Truong
  * @author Danesh Parthipan
  */
+
+import java.io.*;
+import java.util.*;
+
 public class UpdateMaster {
 
   /**
