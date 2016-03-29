@@ -108,6 +108,25 @@ public class Utilities {
   }
 
   /**
+   * Checks if an account holder name is unique.
+   *
+   * @param name   account number being checked for uniqueness
+   * @return       true if unique, otherwise false
+   */
+  public static boolean isNameUnique(String name) {
+    
+    boolean isUnique = true;
+
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getName().equals(name)) {
+        isUnique = false;
+      }
+    }
+
+    return isUnique;
+  }
+
+  /**
    * Checks if an account number is unique.
    *
    * @param accNum   account number being checked for uniqueness

@@ -219,6 +219,12 @@ public class UpdateMaster {
     // Check newAccNum is unique
     // A and N are default for status and plan
     System.out.println("Create transaction.");
+
+    if (Utilities.isNameUnique(newAccHolder) && Utilities.isNumberUnique(newAccNum) &&
+    	initBalance >= 0 && initBalance < 100000.00) {
+
+      User newUser = new User(newAccHolder, newAccNum, initBalance, 'A', 0, 'N');
+    }
   }
 
   /**
