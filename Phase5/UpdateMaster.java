@@ -108,7 +108,10 @@ public class UpdateMaster {
       }
     }
 
+    // Rewrites the master bank accounts file.
     Utilities.rewriteMasterFile(Main.oldMasterFileName);
+
+    // Rewrites the current bank accounts file.
     Utilities.rewriteCurrentFile();
   }
 
@@ -118,6 +121,7 @@ public class UpdateMaster {
    * @param accNum   account number being withdrawn from
    * @param amount   amount being withdrawn
    * @param admin    if current logged in is admin
+   * @return         withdrawal if deposit succeeded, false if deposit failed
    */
   public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
@@ -125,33 +129,43 @@ public class UpdateMaster {
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
     int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
+    // If current logged in user is admin.
     if (admin) {
-      	if (accBalance >= amount) {
-      	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount);
-      	  return true;
+      // Check if balance is valid.
+      if (accBalance >= amount) {
+        //  Change account balance with amount.
+      	Main.userAccounts.get(accIndex).setBalance(accBalance-amount);
+      	return true;
       }
+    // If current logged in user is standard.
     } else {
       if (Main.currUser.getPlan() == 'S') {
+        // Check if balance is valid with fee.
       	if (accBalance >= amount+0.05) {
-
+          // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.05);
+          // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);  
 
       	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
+        // Check if balance is valid with fee.
       	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.10) {
-
+          // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.10);
+          // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
 
       	 return true;
         }
       } else {
+        // Error message for invalid payment plan.
         System.err.println("ERROR: Unable to get payment plan information.");
       }
     }
 
+    // Returns false if transaction is not performed.
     return false;
   }
 
@@ -164,18 +178,23 @@ public class UpdateMaster {
    * @param admin     if current logged in is admin
    */
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
-
+    // Executes withdrawal and checks for success.
     if (withdrawal(accNumF, amount, admin)) {
+      // Executes deposit and checks for success.
       if(!deposit(accNumT, amount, true)) {
+        // Amount and fee added together for non-student.
       	if (Main.currUser.getPlan() == 'N') {
       		amount += 0.10;
+        // Amount and fee added together for student.
       	} else if (Main.currUser.getPlan() == 'S') {
       		amount += 0.05;
       	}
       	
+        // Deposits back into sender account if transaction failed.
       	deposit(accNumF, amount, true);
+
+        // If current logged in account is not admin, reverses the number of transactions for the sender account.
         if (!admin) {
-        
           int accIndexF = Utilities.getAccIndex(accNumF);
 
           Main.userAccounts.get(accIndexF).setNumTran(
@@ -202,6 +221,7 @@ public class UpdateMaster {
    * @param accNum   account number depositing money
    * @param amount   amount being deposited
    * @param admin    if current logged in is admin
+   * @return         true if deposit succeeded, false if deposit failed
    */
   public static boolean deposit(int accNum, float amount, boolean admin) {
 		
@@ -209,35 +229,47 @@ public class UpdateMaster {
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
     int accTranNum = Main.userAccounts.get(accIndex).getNumTran();
 
+    // If current logged in user is admin.
     if (admin) {
+      // Check if amount is valid.
       if (accBalance + amount < 100000.00 && accBalance + amount >= 0.0) {
+        // Change account balance with amount.
       	Main.userAccounts.get(accIndex).setBalance(accBalance+amount); 
       	return true;
       }
+
+    // If current logged in user is standard.
     } else {
       if (Main.currUser.getPlan() == 'S') {
+        // Check if amount is valid with fee.
       	if (accBalance + amount-(float)0.05 < 100000.00 &&
       		  accBalance + amount-(float)0.05 >= 0.0) {
 
-      	  Main.userAccounts.get(accIndex).setBalance(accBalance+amount-(float)0.05);  
+          // Change account balance with amount and fee.
+      	  Main.userAccounts.get(accIndex).setBalance(accBalance+amount-(float)0.05);
+          // Increase number of transactions for that account.
       	  Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
 
       	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
-      	if (Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 < 100000.00 &&
-      		  Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 >= 0.0) {
+        // Check if amount is valid with fee.
+      	if (Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.10 < 100000.00 &&
+      		  Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.10 >= 0.0) {
 
+          // Change amount balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance+amount-(float)0.10); 
+          // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1); 
 
       	  return true;  
         }
       } else {
+        // Error message for invalid payment plan.
         System.err.println("ERROR: Unable to get payment plan information.");
       }
     }
-
+    // Returns false if transaction is not performed.
     return false;
   }
 
@@ -249,13 +281,14 @@ public class UpdateMaster {
    * @param initBalance    initial balance
    */
   public static void create(String newAccHolder, int newAccNum, float initBalance) {
-    // Check newAccNum is unique
-    // A and N are default for status and plan
 
+    // Check if name is unique, account number is unique and initial balance is valid.
     if (Utilities.isNameUnique(newAccHolder) && Utilities.isNumberUnique(newAccNum) &&
     	  initBalance >= 0 && initBalance < 100000.00) {
 
+      // Create new account with initial values.
       User newUser = new User(newAccHolder, newAccNum, initBalance, 'A', 0, 'N');
+      // Add new account to account list.
       Main.userAccounts.add(Main.userAccounts.size()-1, newUser);
     }
   }
@@ -268,7 +301,7 @@ public class UpdateMaster {
   public static void delete(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
-
+    // Delete account.
     Main.userAccounts.remove(accIndex);
   }
 
@@ -280,7 +313,7 @@ public class UpdateMaster {
   public static void disable(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
-
+    // Disable account if account is active.
     if (Main.userAccounts.get(accIndex).getStatus() == 'A') {
       Main.userAccounts.get(accIndex).setStatus('D');
     }
@@ -295,7 +328,7 @@ public class UpdateMaster {
   public static void changeplan(int accNum, char plan) {
 
     int accIndex = Utilities.getAccIndex(accNum);
-
+    // Change payment plan to given payment plan.
     if (Main.userAccounts.get(accIndex).getPlan() != plan &&
        (plan == 'N' || plan == 'S')) {
       Main.userAccounts.get(accIndex).setPlan(plan);
@@ -310,7 +343,7 @@ public class UpdateMaster {
   public static void enable(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
-
+    // Enable account if account is disabled.
     if (Main.userAccounts.get(accIndex).getStatus() == 'D') {
       Main.userAccounts.get(accIndex).setStatus('A');
     }
@@ -326,7 +359,6 @@ public class UpdateMaster {
     if (Utilities.misc.equals("S ")) {
 
       int accIndex = Utilities.getAccIndex(accNum);
-
       Main.currUser = Main.userAccounts.get(accIndex);
 
     } else if (Utilities.misc.equals("A ")) {

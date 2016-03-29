@@ -107,13 +107,17 @@ public class Utilities {
 
   /**
    * Rewrites the master bank accounts file.
+   *
+   *@param fileName   string containing master bank accounts file name
    */
   public static void rewriteMasterFile(String fileName) {
     
     try {
 
+      // Buffered writer to write to the master bank accounts file.
       BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)));
 
+      // Runs for all accounts.
       for(int i = 0; i < Main.userAccounts.size(); i++) {
 
         String paddedAccNum;
@@ -121,31 +125,36 @@ public class Utilities {
         String paddedBalance;
         String paddedNumTransac;
 
+        // Converts account number to string and pads with 0s at the beginning.
         paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
         while (paddedAccNum.length() < 5) {
           paddedAccNum = "0" + paddedAccNum;
         }
 
+        // Pads account holder name with spaces at the end.
         paddedAccHolder = Main.userAccounts.get(i).getName();
         while (paddedAccHolder.length() < 20) {
           paddedAccHolder = paddedAccHolder + " ";
         }
 
+        // Sets balance precision to 2, converts to a string and pads with 0s at the beginning.
         paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
         while (paddedBalance.length() < 8) {
           paddedBalance = "0" + paddedBalance;
         }
         
-        
+        // Converts number of transactions to a string and pads with 0s at the beginning.
         paddedNumTransac = Integer.toString(Main.userAccounts.get(i).getNumTran());
         while (paddedNumTransac.length() < 4) {
           paddedNumTransac = "0" + paddedNumTransac;
         }
 
+        // Line to print master bank accounts file.
         String line = paddedAccNum + " " + paddedAccHolder + " " + 
                       Main.userAccounts.get(i).getStatus() + " " + paddedBalance +
                       " " + paddedNumTransac + " " + Main.userAccounts.get(i).getPlan() + "\n";
 
+        // Write line to master bank accounts file.
         bw.write(line);
       }
       bw.close();
@@ -159,36 +168,44 @@ public class Utilities {
    */
   public static void rewriteCurrentFile() {
 
+    // Current bank accounts file name.
     String fileName = "current_bank_accounts_file.txt";
 
     try {
 
+      // Buffered writer to write to the current bank accounts file.
       BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)));
 
+      // Runs for all accounts.
       for(int i = 0; i < Main.userAccounts.size(); i++) {
 
         String paddedAccNum;
         String paddedAccHolder;
         String paddedBalance;
 
+        // Converts account number to string and pads with 0s at the beginning.
         paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
         while (paddedAccNum.length() < 5) {
           paddedAccNum = "0" + paddedAccNum;
         }
 
+        // Pads account holder name with spaces at the end.
         paddedAccHolder = Main.userAccounts.get(i).getName();
         while (paddedAccHolder.length() < 20) {
           paddedAccHolder = paddedAccHolder + " ";
         }
 
+        // Sets balance precision to 2, converts to a string and pads with 0s at the beginning.
         paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
         while (paddedBalance.length() < 8) {
           paddedBalance = "0" + paddedBalance;
         }
 
+        // Line to print master bank accounts file.
         String line = paddedAccNum + " " + paddedAccHolder + " " + 
                       Main.userAccounts.get(i).getStatus() + " " + paddedBalance + "\n";
 
+        // Write line to current bank accounts file.
         bw.write(line);
       }
       bw.close();
@@ -235,6 +252,12 @@ public class Utilities {
     return isUnique;
   }
 
+  /**
+   * Gets the index that the account is at
+   *
+   * @param accNum   account number to get index for
+   * @return         index the account is at
+   */
   public static int getAccIndex(int accNum) {
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum) {

@@ -21,14 +21,7 @@ public class User {
   private int numTran;
   private char accPlan;
 
-  User() {
-    accHolder = null;
-    accNum = 0;
-    accBalance = 0;
-    accStatus = ' ';
-    numTran = 0;
-    accPlan = ' ';
-  }
+  User() {}
 
   User(String holder, int num, float balance, char status, int tranCount, char plan) {
 		

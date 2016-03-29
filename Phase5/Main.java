@@ -26,7 +26,7 @@ public class Main {
   public static User currUser;
 
   public static void main(String[] args) {
-
+ 
   	currUser = new User();
 
     if (args.length != 2) {
@@ -34,8 +34,9 @@ public class Main {
       System.err.println("ERROR: Must be 2 arguments: <old_master_accounts> <transaction_file>");
 
     } else {
-
+      // Get master bank accounts file name.
       oldMasterFileName = args[0];
+      // Get transaction file name.
       transferFileName = args[1];
 
       // Read in old master bank accounts file.
