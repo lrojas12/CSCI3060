@@ -6,7 +6,7 @@
 
 2. Do **not** count login or logout when keeping track of the total number of transactions.
 
-**Do**, however, append them to the "master" transaction file anyway.
+	**Do**, however, append them to the "master" transaction file anyway.
 
 
 ######Other, to take into account:
