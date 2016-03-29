@@ -74,7 +74,8 @@ public class UpdateMaster {
 			
       // Changle Plan
       case "08":
-        //changePlan();
+        changeplan(Integer.parseInt(Utilities.accNumT),
+        	       Utilities.misc.charAt(0));
         break;
 
       // Enable
@@ -280,7 +281,8 @@ public class UpdateMaster {
 
     for (int i=0; i<Main.userAccounts.size(); i++) {
       if (Main.userAccounts.get(i).getNum() == accNum &&
-      	  Main.userAccounts.get(i).getPlan() != plan) {
+      	  Main.userAccounts.get(i).getPlan() != plan &&
+      	  (plan == 'N' || plan == 'S')) {
         Main.userAccounts.get(i).setPlan(plan);
         return;
       }
