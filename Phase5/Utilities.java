@@ -6,7 +6,7 @@ import java.util.*;
  * @author Truyen Truong
  * @author Danesh Parthipan
  */
-public class WatermelonHelper {
+public class Utilities {
 
   public static String flag, accHolderT, accNumT, accBalanceT, misc;
   public static String accNumM, accHolderM, accStatus, accBalanceM, numTran, accPlan;

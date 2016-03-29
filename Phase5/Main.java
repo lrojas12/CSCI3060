@@ -68,7 +68,7 @@ public class Main {
       */
 
       // Create a User List based on masterAccounts for easy access to variables
-      WatermelonHelper.getAllMasterAccounts(masterAccounts);
+      Utilities.getAllMasterAccounts(masterAccounts);
 
       // Update the master bank accounts file.
       UpdateMaster.updateMaster();

@@ -17,16 +17,16 @@ public class UpdateMaster {
     // For each line in the merged transfer files list.
     for (int i = 0; i < Main.transferFile.size(); i++) {
       // Tokenize it.
-      WatermelonHelper.tokenizeTransaction(Main.transferFile.get(i));
+      Utilities.tokenizeTransaction(Main.transferFile.get(i));
 
       // Chooses transaction based off flag.
-      switch(WatermelonHelper.flag) {
+      switch(Utilities.flag) {
 
       // Withdrawal
       case "01":
-        withdrawal(Integer.parseInt(WatermelonHelper.accNumT),
-                   Float.valueOf(WatermelonHelper.accBalanceT).floatValue(),
-                   WatermelonHelper.isAdmin(Main.currUser.getPlan()));
+        withdrawal(Integer.parseInt(Utilities.accNumT),
+                   Float.valueOf(Utilities.accBalanceT).floatValue(),
+                   Utilities.isAdmin(Main.currUser.getPlan()));
         break;
 
       // Transfer
@@ -71,7 +71,7 @@ public class UpdateMaster {
 
       // Login
       case "10":
-        login(Integer.parseInt(WatermelonHelper.accNumT));
+        login(Integer.parseInt(Utilities.accNumT));
         break;
 			
       // Logout
@@ -131,7 +131,7 @@ public class UpdateMaster {
    */
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
     // If standard, deduct fee
-    withdrawal(accNumF, amount, WatermelonHelper.isAdmin(Main.currUser.getPlan()));
+    withdrawal(accNumF, amount, Utilities.isAdmin(Main.currUser.getPlan()));
     deposit(accNumT, amount, true); // No fees charged
     System.out.println("Transfer transaction.");
   }
@@ -229,13 +229,13 @@ public class UpdateMaster {
    */
   public static void login(int accNum) {
 
-    if (WatermelonHelper.misc.equals("S ")) {
+    if (Utilities.misc.equals("S ")) {
       for (int i = 0; i < Main.userAccounts.size(); i++) {
         if (Main.userAccounts.get(i).getNum() == accNum) {
           Main.currUser = Main.userAccounts.get(i);
         }
       }
-    } else if (WatermelonHelper.misc.equals("A ")) {
+    } else if (Utilities.misc.equals("A ")) {
       // ?????????
     } else {
       System.err.println("ERROR: Problem with login information.");
