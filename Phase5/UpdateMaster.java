@@ -142,7 +142,7 @@ public class UpdateMaster {
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
   	System.out.println("Transfer transaction.");
     // If standard, deduct fee
-    withdrawal(accNumF, amount, Utilities.isAdmin(Main.currUser.getPlan()));
+    withdrawal(accNumF, amount, admin);
     deposit(accNumT, amount, true); // No fees charged
   }
 
@@ -174,7 +174,7 @@ public class UpdateMaster {
       	if (Main.userAccounts.get(i).getNum() == accNum && 
       		Main.userAccounts.get(i).getBalance() + amount < 100000.00 &&
       		Main.userAccounts.get(i).getBalance() + amount >= 0.0) {
-      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount);  
+      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount); 
       	}
       }
     } else {
@@ -184,6 +184,7 @@ public class UpdateMaster {
       		Main.userAccounts.get(i).getBalance() + amount-(float)0.05 < 100000.00 &&
       		Main.userAccounts.get(i).getBalance() + amount-(float)0.05 >= 0.0) {
       	      Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.05);  
+      	      Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
       	  }
         }
       } else if (Main.currUser.getPlan() == 'N') {
@@ -191,7 +192,8 @@ public class UpdateMaster {
       	  if (Main.userAccounts.get(i).getNum() == accNum && 
       		Main.userAccounts.get(i).getBalance() + amount-(float)0.10 < 100000.00 &&
       		Main.userAccounts.get(i).getBalance() + amount-(float)0.10 >= 0.0) {
-      	      Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10);  
+      	      Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10); 
+              Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1); 
       	  }
         }
       } else {
@@ -229,6 +231,13 @@ public class UpdateMaster {
    */
   public static void disable(int accNum) {
     System.out.println("Disable transaction.");
+
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getNum() == accNum &&
+      	Main.userAccounts.get(i).getStatus() == 'A') {
+        Main.userAccounts.get(i).setStatus('D');
+      }
+    }
   }
 
   /**
@@ -239,6 +248,13 @@ public class UpdateMaster {
    */
   public static void changeplan(int accNum, char plan) {
     System.out.println("Change Plan transaction.");
+
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getNum() == accNum &&
+      	  Main.userAccounts.get(i).getPlan() != plan) {
+        Main.userAccounts.get(i).setPlan(plan);
+      }
+    }
   }
 
   /**
@@ -248,6 +264,13 @@ public class UpdateMaster {
    */
   public static void enable(int accNum) {
     System.out.println("Enable transaction.");
+
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getNum() == accNum &&
+      	Main.userAccounts.get(i).getStatus() == 'D') {
+        Main.userAccounts.get(i).setStatus('A');
+      }
+    }
   }
 
   /**
