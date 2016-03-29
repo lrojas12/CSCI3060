@@ -47,7 +47,6 @@ public class UpdateMaster {
         transfer(accNumF, Integer.parseInt(Utilities.accNumT),
         	     Float.valueOf(Utilities.accBalanceT).floatValue(),
                  Utilities.isAdmin(Main.currUser.getPlan()));
-
         break;
 
       // Paybill
