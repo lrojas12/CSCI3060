@@ -8,6 +8,8 @@
 
 	**Do**, however, append them to the "master" transaction file anyway.
 
+3. Keep track **only** of the standard transactions that the user *actually* gets charged for.
+
 <br>
 ######Other, to take into account:
 
