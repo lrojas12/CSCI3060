@@ -125,7 +125,8 @@ public class UpdateMaster {
       for (int i=0; i<Main.userAccounts.size(); i++) {
       	if (Main.userAccounts.get(i).getNum() == accNum &&
       		Main.userAccounts.get(i).getBalance() >= amount) {
-      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);  
+
+      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);
       	  return true;
       	}
       }
@@ -134,7 +135,9 @@ public class UpdateMaster {
         for (int i=0; i<Main.userAccounts.size(); i++) {
       	  if (Main.userAccounts.get(i).getNum() == accNum &&
       	  	  Main.userAccounts.get(i).getBalance() >= amount+0.05) {
-      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);  
+
+      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);
+            Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);  
       	    return true;
       	  }
         }
@@ -142,7 +145,9 @@ public class UpdateMaster {
         for (int i=0; i<Main.userAccounts.size(); i++) {
       	  if (Main.userAccounts.get(i).getNum() == accNum &&
       	  	  Main.userAccounts.get(i).getBalance() >= amount+0.10) {
+
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.10);
+            Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
       	    return true;
       	  }
         }
@@ -205,6 +210,7 @@ public class UpdateMaster {
       	if (Main.userAccounts.get(i).getNum() == accNum && 
       		Main.userAccounts.get(i).getBalance() + amount < 100000.00 &&
       		Main.userAccounts.get(i).getBalance() + amount >= 0.0) {
+
       	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount); 
       	  return true;
       	}
@@ -215,6 +221,7 @@ public class UpdateMaster {
       	  if (Main.userAccounts.get(i).getNum() == accNum && 
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.05 < 100000.00 &&
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.05 >= 0.0) {
+
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.05);  
       	    Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
       	    return true;
@@ -225,6 +232,7 @@ public class UpdateMaster {
       	  if (Main.userAccounts.get(i).getNum() == accNum && 
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.10 < 100000.00 &&
       		  Main.userAccounts.get(i).getBalance() + amount-(float)0.10 >= 0.0) {
+            
       	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10); 
             Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1); 
       	    return true;  
