@@ -44,24 +44,11 @@ public class Main {
       // Read in transaction file.
       Utilities.storeFile(transferFileName, transferFile);
 
-      
-      System.out.println("\nMaster Bank Accounts File\n");
-      for (int i=0; i<masterAccounts.size(); i++) {
-      	System.out.println(masterAccounts.get(i));
-      }
-
       // Create a User List based on masterAccounts for easy access to variables
       Utilities.getAllMasterAccounts(masterAccounts);
 
       // Update the master bank accounts file.
       UpdateMaster.updateMaster(oldMasterFileName);
-
-      /*
-      System.out.println("\nMaster Bank Accounts File\n");
-      for (int i=0; i<userAccounts.size(); i++) {
-      	System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
-      }
-      */
     }
   }
 }
