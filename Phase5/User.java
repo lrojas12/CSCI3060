@@ -23,6 +23,10 @@ public class User {
 
   User() {}
 
+  User(char plan) {
+    accPlan = plan;
+  }
+
   User(String holder, int num, float balance, char status, int tranCount, char plan) {
 		
     accHolder = holder;

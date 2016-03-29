@@ -22,9 +22,9 @@ public class UpdateMaster {
   public static void updateMaster(String oldMasterFileName) {
 
     // For each line in the merged transfer files list.
-    for (int i = 0; i < Main.transferFile.size(); i++) {
+    for (int i = 0; i < Main.transactionFile.size(); i++) {
       // Tokenize it.
-      Utilities.tokenizeTransaction(Main.transferFile.get(i));
+      Utilities.tokenizeTransaction(Main.transactionFile.get(i));
 
       // Chooses transaction based off flag.
       switch(Utilities.flag) {
@@ -42,7 +42,7 @@ public class UpdateMaster {
         int accNumF = Integer.parseInt(Utilities.accNumT);
 
         i++;
-        Utilities.tokenizeTransaction(Main.transferFile.get(i));
+        Utilities.tokenizeTransaction(Main.transactionFile.get(i));
         
         transfer(accNumF, Integer.parseInt(Utilities.accNumT),
         	     Float.valueOf(Utilities.accBalanceT).floatValue(),
@@ -160,8 +160,8 @@ public class UpdateMaster {
       	 return true;
         }
       } else {
-        // Error message for invalid payment plan.
-        System.err.println("ERROR: Unable to get payment plan information.");
+        // Error message for invalid payment plan in withdrawal
+        System.err.println("ERROR <<withdrawal>>: Unable to get payment plan information.");
       }
     }
 
@@ -182,6 +182,9 @@ public class UpdateMaster {
     if (withdrawal(accNumF, amount, admin)) {
       // Executes deposit and checks for success.
       if(!deposit(accNumT, amount, true)) {
+
+        System.err.println("ERROR <<transfer>>: There was an issue depositing the funds into the destination account.");
+
         // Amount and fee added together for non-student.
       	if (Main.currUser.getPlan() == 'N') {
       		amount += 0.10;
@@ -189,7 +192,7 @@ public class UpdateMaster {
       	} else if (Main.currUser.getPlan() == 'S') {
       		amount += 0.05;
       	}
-      	
+
         // Deposits back into sender account if transaction failed.
       	deposit(accNumF, amount, true);
 
@@ -201,6 +204,8 @@ public class UpdateMaster {
                Main.userAccounts.get(accIndexF).getNumTran()-1);
         }
       }
+    } else {
+      System.err.println("ERROR <<transfer>>: There was an issue withdrawing the funds from the origin account.");
     }
   }
 
@@ -212,7 +217,9 @@ public class UpdateMaster {
    * @param admin    if current logged in is admin
    */
   public static void paybill(int accNum, float amount, boolean admin) {
-    withdrawal(accNum, amount, admin);
+    if (!withdrawal(accNum, amount, admin)) {
+      System.err.println("ERROR <<paybill>>: There was an issue withdrawing the funds from the origin account.");
+    }
   }
 
   /**
@@ -266,7 +273,7 @@ public class UpdateMaster {
         }
       } else {
         // Error message for invalid payment plan.
-        System.err.println("ERROR: Unable to get payment plan information.");
+        System.err.println("ERROR <<deposit>>: Unable to get payment plan information.");
       }
     }
     // Returns false if transaction is not performed.
@@ -290,6 +297,8 @@ public class UpdateMaster {
       User newUser = new User(newAccHolder, newAccNum, initBalance, 'A', 0, 'N');
       // Add new account to account list.
       Main.userAccounts.add(Main.userAccounts.size()-1, newUser);
+    } else {
+      System.err.println("ERROR <<create>>: The constraints inputted (name, account number, balance) are incorrect.");
     }
   }
 
@@ -301,6 +310,12 @@ public class UpdateMaster {
   public static void delete(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
+
+    if (accIndex == -1) {
+      System.err.println("ERROR <<delete>>: The account to be deleted does not exist.");
+      return;
+    }
+
     // Delete account.
     Main.userAccounts.remove(accIndex);
   }
@@ -313,9 +328,17 @@ public class UpdateMaster {
   public static void disable(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
+
+    if (accIndex == -1) {
+      System.err.println("ERROR <<disable>>: The account to be disabled does not exist.");
+      return;
+    }
+
     // Disable account if account is active.
     if (Main.userAccounts.get(accIndex).getStatus() == 'A') {
       Main.userAccounts.get(accIndex).setStatus('D');
+    } else {
+      System.err.println("ERROR <<disable>>: The account to be disabled already is.");
     }
   }
 
@@ -328,11 +351,27 @@ public class UpdateMaster {
   public static void changeplan(int accNum, char plan) {
 
     int accIndex = Utilities.getAccIndex(accNum);
-    // Change payment plan to given payment plan.
-    if (Main.userAccounts.get(accIndex).getPlan() != plan &&
-       (plan == 'N' || plan == 'S')) {
-      Main.userAccounts.get(accIndex).setPlan(plan);
+
+    // Check that the account exists
+    if (accIndex == -1) { // If the getAccIndex returns zero, then the account does not exist.
+      System.err.println("ERROR <<changeplan>>: The account changing plans does not exist.");
+      return;
     }
+
+    // Check that the plan inputted in the function is not the same as the current plan.
+    if (Main.userAccounts.get(accIndex).getPlan() == plan) {
+      System.err.println("ERROR <<changeplan>>: The plan inputted is the current plan.");
+      return;
+    }
+
+    // Check that the plan inputted in the function is either N or S.
+    if (plan != 'N' && plan != 'S') {
+      System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
+      return;
+    } 
+    
+    // Change payment plan to given payment plan.
+    Main.userAccounts.get(accIndex).setPlan(plan);
   }
 
   /**
@@ -343,9 +382,17 @@ public class UpdateMaster {
   public static void enable(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
+
+      if (accIndex == -1) {
+        System.err.println("ERROR <<enable>>: The account to be enabled in does not exist.");
+        return;
+      }
+
     // Enable account if account is disabled.
     if (Main.userAccounts.get(accIndex).getStatus() == 'D') {
       Main.userAccounts.get(accIndex).setStatus('A');
+    } else {
+      System.err.println("ERROR <<enable>>: The account to be enabled already is.");
     }
   }
 
@@ -359,12 +406,19 @@ public class UpdateMaster {
     if (Utilities.misc.equals("S ")) {
 
       int accIndex = Utilities.getAccIndex(accNum);
+
+      if (accIndex == -1) {
+        System.err.println("ERROR <<login>>: The account to be logged in does not exist.");
+        return;
+      }
+
       Main.currUser = Main.userAccounts.get(accIndex);
 
     } else if (Utilities.misc.equals("A ")) {
-      Main.currUser = new User();
+      Main.currUser = new User('A');
     } else {
-      System.err.println("ERROR: Problem with login information.");
+      // The mode should be either S or A
+      System.err.println("ERROR <<login>>: The mode to be logged in as is not valid.");
     }
   }
 

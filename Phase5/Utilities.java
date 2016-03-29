@@ -11,6 +11,8 @@
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utilities {
 
@@ -34,7 +36,7 @@ public class Utilities {
         arrayList.add(line);
       }
     } catch (IOException e) {
-      System.err.println("ERROR: Could not read in file.");
+      System.err.println("ERROR <internal>: Could not read in file.");
     }
   }
 
@@ -44,7 +46,18 @@ public class Utilities {
    * @param line   transaction line being tokenized
    */
   public static void tokenizeTransaction(String line) {
+
+    String pattern = "[\\d]{2} [\\w\\p{Punct} ]{20} [\\d]{5} [\\d ]{5}[\\. ][\\d ]{2} [A-Z ]{2}";
 		
+    Pattern r = Pattern.compile(pattern);
+
+    Matcher m = r.matcher(line);
+    
+    if (!m.matches()) {
+      System.err.println("FATAL ERROR: The format in the transaction file " + Main.transactionFileName + " is incorrect.");
+      System.exit(-1);
+    }
+
     flag = line.substring(0, 2);
     accHolderT = line.substring(3, 23).trim();
     accNumT = line.substring(24, 29);
@@ -53,12 +66,23 @@ public class Utilities {
   }
 
   /**
-   * Tokenizes a line in a master bank accounts file.
+   * Checks the master bank accounts file format and tokenizes its contents.
    *
    * @param line   master bank accounts file line being tokenized
    */
   public static void tokenizeMaster(String line) {
 		
+    String pattern = "[\\d]{5} [\\w\\p{Punct} ]{20} [AD] [\\d ]{5}[\\. ][\\d ]{2} [\\d]{4} [SN]";
+
+    Pattern r = Pattern.compile(pattern);
+
+    Matcher m = r.matcher(line);
+    
+    if (!m.matches()) {
+      System.err.println("FATAL ERROR: The format in the master accounts file " + Main.oldMasterFileName + " is incorrect.");
+      System.exit(-1);
+    }
+
     accNumM = line.substring(0, 5);
     accHolderM = line.substring(6, 26).trim();
     accStatus = line.substring(27, 28);
@@ -76,17 +100,19 @@ public class Utilities {
   public static boolean isAdmin(char accPlan) {
     if (accPlan == 'N' || accPlan == 'S') {
       return false;
-    } else if (accPlan == ' ') {
+    } else if (accPlan == 'A') {
       return true;
     } else {
-      System.err.println("ERROR: Unable to retrieve account mode.");
+      System.err.println("ERROR <internal>: Unable to retrieve account mode.");
       return false;
       // Skip to the next line
     }
   }
 
+
+  //// --------------- FIX THIISSS!!!!------------------
   /**
-   * Tokenizes, and stores the master bank accounts file lines.
+   * Tokenizes, and stores the master bank accounts file lines into an List of type User.
    *
    * @param masterList   list containing the not tokenized master bank account file lines
    */
@@ -265,6 +291,6 @@ public class Utilities {
       }
     }
 
-    return 0;
+    return -1;
   }
 } 

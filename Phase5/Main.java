@@ -18,8 +18,8 @@ import java.util.*;
 public class Main {
 
   public static String oldMasterFileName;
-  public static String transferFileName;
-  public static List<String> transferFile = new ArrayList<String>();
+  public static String transactionFileName;
+  public static List<String> transactionFile = new ArrayList<String>();
   public static List<String> masterAccounts = new ArrayList<String>();
   public static List<String> currentAccounts = new ArrayList<String>();
   public static List<User> userAccounts = new ArrayList<User>();
@@ -31,19 +31,19 @@ public class Main {
 
     if (args.length != 2) {
 
-      System.err.println("ERROR: Must be 2 arguments: <old_master_accounts> <transaction_file>");
+      System.err.println("ERROR: User input must be 2 arguments: <old_master_accounts> <transaction_file>");
 
     } else {
       // Get master bank accounts file name.
       oldMasterFileName = args[0];
       // Get transaction file name.
-      transferFileName = args[1];
+      transactionFileName = args[1];
 
       // Read in old master bank accounts file.
       Utilities.storeFile(oldMasterFileName, masterAccounts);
 
       // Read in transaction file.
-      Utilities.storeFile(transferFileName, transferFile);
+      Utilities.storeFile(transactionFileName, transactionFile);
 
       // Create a User List based on masterAccounts for easy access to variables
       Utilities.getAllMasterAccounts(masterAccounts);

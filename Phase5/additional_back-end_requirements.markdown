@@ -26,11 +26,11 @@
 
 [   ] Format failed constraint errors: The error message should contain the **type** and **description** of the error and the **transaction** that caused it to occur.
 
-[   ] Format *fatal* errors: The message should contain the **type**, **description** and **file** that cause the error.
+[ **x** ] Format *fatal* errors: The message should contain the **type**, **description** and **file** that cause the error.
 
 [ **x** ] Add the transaction tracking where missing.
 
-[   ] Check transaction file formatting (*fatal error*)
+[ **x** ] Check transaction file formatting (*fatal error*)
 
 [ **x** ] Check account numbers assigned to accounts in the front end are, indeed, unique
 
