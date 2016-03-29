@@ -69,7 +69,7 @@ public class UpdateMaster {
 			
       // Disable
       case "07":
-        //disable();
+        disable(Integer.parseInt(Utilities.accNumT));
         break;
 			
       // Changle Plan
@@ -79,7 +79,7 @@ public class UpdateMaster {
 
       // Enable
       case "09":
-        //enable();
+        enable(Integer.parseInt(Utilities.accNumT));
         break;
 
       // Login
@@ -211,7 +211,7 @@ public class UpdateMaster {
       	  }
         }
       } else {
-        // Error
+        System.err.println("ERROR: Problem reading in current user plan.");
       }
     }
   }

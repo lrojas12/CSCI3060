@@ -69,13 +69,6 @@ public class Main {
       	System.out.println(masterAccounts.get(i));
       }
 
-      /*
-      System.out.println("\nMerged Transfer Files\n");
-      for (int i=0; i<transferFile.size(); i++) {
-      	System.out.println(transferFile.get(i));
-      }
-      */
-
       // Create a User List based on masterAccounts for easy access to variables
       Utilities.getAllMasterAccounts(masterAccounts);
 
@@ -84,7 +77,7 @@ public class Main {
 
       System.out.println("\nMaster Bank Accounts File\n");
       for (int i=0; i<userAccounts.size(); i++) {
-      	System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance());
+      	System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
       }
     }
   }
