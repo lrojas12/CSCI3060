@@ -129,7 +129,7 @@ public class UpdateMaster {
 
     if (accIndex == -1) {
       System.err.println("ERROR <<withdrawal>>: The account to be withdrawn from does not exist.");
-      return;
+      return false;
     }
 
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
@@ -242,7 +242,7 @@ public class UpdateMaster {
 
     if (accIndex == -1) {
       System.err.println("ERROR <<deposit>>: The account to be deposited into does not exist.");
-      return;
+      return false;
     }
 
     float accBalance = Main.userAccounts.get(accIndex).getBalance();
