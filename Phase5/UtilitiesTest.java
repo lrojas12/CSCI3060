@@ -17,19 +17,31 @@ import org.junit.Test;
 public class UtilitiesTest {
     
     @Test
-    public void isAdminTest1() {
+    public void storeFileTest1() {
+    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        String expectedOutput = "ERROR <internal>: Could not read in file.";
+    	Utilities.storeFile("test.txt", transactionFile);
+
+    	assertEquals(outContent.toString(), expectedOutput);
+
+    }
+    
+    @Test
+    public void isAdmintest1() {
 
     	assertEquals(false, Utilities.isAdmin('N'));
 	}
 
     @Test
-    public void isAdminTest2() {
+    public void isAdmintest2() {
 
     	assertEquals(true, Utilities.isAdmin(' '));
 	}
 
     @Test
-    public void isAdminTest3() {
+    public void isAdmintest3() {
 
     	assertEquals(false, Utilities.isAdmin('R'));
 	}
