@@ -141,11 +141,14 @@ public class Utilities {
           paddedAccHolder = paddedAccHolder + " ";
         }
 
-        paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
+        paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
+
+        //paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
         while (paddedBalance.length() < 8) {
           paddedBalance = "0" + paddedBalance;
         }
-
+        
+        
         paddedNumTransac = Integer.toString(Main.userAccounts.get(i).getNumTran());
         while (paddedNumTransac.length() < 4) {
           paddedNumTransac = "0" + paddedNumTransac;
@@ -154,8 +157,6 @@ public class Utilities {
         String line = paddedAccNum + " " + paddedAccHolder + " " + 
                       Main.userAccounts.get(i).getStatus() + " " + paddedBalance +
                       " " + paddedNumTransac + " " + Main.userAccounts.get(i).getPlan() + "\n";
-
-        System.out.print(line);
 
         bw.write(line);
       }
@@ -171,7 +172,44 @@ public class Utilities {
   public static void rewriteCurrentFile() {
     // Output currentAccounts to a current_bank_accounts_file.txt
 
-    String filename = "current_bank_accounts_file.txt";
+    String fileName = "current_bank_accounts_file.txt";
+
+    try {
+
+      BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)));
+
+      for(int i = 0; i < Main.userAccounts.size(); i++) {
+
+        String paddedAccNum;
+        String paddedAccHolder;
+        String paddedBalance;
+
+        paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
+        while (paddedAccNum.length() < 5) {
+          paddedAccNum = "0" + paddedAccNum;
+        }
+
+        paddedAccHolder = Main.userAccounts.get(i).getName();
+        while (paddedAccHolder.length() < 20) {
+          paddedAccHolder = paddedAccHolder + " ";
+        }
+
+        paddedBalance = String.format("%.2f", Main.userAccounts.get(i).getBalance()); 
+
+        //paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
+        while (paddedBalance.length() < 8) {
+          paddedBalance = "0" + paddedBalance;
+        }
+
+        String line = paddedAccNum + " " + paddedAccHolder + " " + 
+                      Main.userAccounts.get(i).getStatus() + " " + paddedBalance + "\n";
+
+        bw.write(line);
+      }
+      bw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
