@@ -32,7 +32,7 @@
 
 [   ] Check transaction file formatting (*fatal error*)
 
-[  **x** ] Check account numbers assigned to accounts in the front end are, indeed, unique
+[ **x** ] Check account numbers assigned to accounts in the front end are, indeed, unique
 
 [ **x** ] Get rid of redundancy
 
