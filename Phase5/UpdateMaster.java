@@ -97,12 +97,24 @@ public class UpdateMaster {
     System.out.println("Withdrawal transaction.");
 		
     if (admin == true) {
-      // Deduct amount from balance
+      for (int i=0; i<Main.userAccounts.size(); i++) {
+      	if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount) {
+      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);  
+      	}
+      }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-        // Deduct amount and fee from balance
+        for (int i=0; i<Main.userAccounts.size(); i++) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount+0.05) {
+      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);  
+      	  }
+        }
       } else if (Main.currUser.getPlan() == 'N') {
-        // Deduct amount and fee from balance
+        for (int i=0; i<Main.userAccounts.size(); i++) {
+      	  if (Main.userAccounts.get(i).getNum() == accNum && Main.userAccounts.get(i).getBalance() >= amount+0.10) {
+      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.10);
+      	  }
+        }
       } else {
         // Error
       }

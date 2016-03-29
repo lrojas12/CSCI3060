@@ -54,12 +54,13 @@ public class Main {
       // Read in transaction file.
       storeFile(transferFileName, transferFile);
 
-      /*
+      
       System.out.println("\nMaster Bank Accounts File\n");
       for (int i=0; i<masterAccounts.size(); i++) {
       	System.out.println(masterAccounts.get(i));
       }
 
+      /*
       System.out.println("\nMerged Transfer Files\n");
       for (int i=0; i<transferFile.size(); i++) {
       	System.out.println(transferFile.get(i));
@@ -71,6 +72,11 @@ public class Main {
 
       // Update the master bank accounts file.
       UpdateMaster.updateMaster();
+
+      System.out.println("\nMaster Bank Accounts File\n");
+      for (int i=0; i<masterAccounts.size(); i++) {
+      	System.out.println(masterAccounts.get(i));
+      }
     }
   }
 }
