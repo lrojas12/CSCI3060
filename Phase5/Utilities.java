@@ -118,43 +118,50 @@ public class Utilities {
    * Rewrites the master bank accounts file.
    */
   
-  public static void rewriteMasterFile(String oldMasterFileName) {
+  public static void rewriteMasterFile(String fileName) {
+    
+    try {
 
-    String fileName = oldMasterFileName;
-    for(int i = 0; i < Main.userAccounts.size(); i++) {
+      BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)));
 
-      String paddedAccNum;
-      String paddedAccHolder;
-      String paddedBalance;
-      String paddedNumTransac;
+      for(int i = 0; i < Main.userAccounts.size(); i++) {
 
-      paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
-      while (paddedAccNum.length() < 5) {
-        paddedAccNum = "0" + paddedAccNum;
+        String paddedAccNum;
+        String paddedAccHolder;
+        String paddedBalance;
+        String paddedNumTransac;
+
+        paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
+        while (paddedAccNum.length() < 5) {
+          paddedAccNum = "0" + paddedAccNum;
+        }
+
+        paddedAccHolder = Main.userAccounts.get(i).getName();
+        while (paddedAccHolder.length() < 20) {
+          paddedAccHolder = paddedAccHolder + " ";
+        }
+
+        paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
+        while (paddedBalance.length() < 8) {
+          paddedBalance = "0" + paddedBalance;
+        }
+
+        paddedNumTransac = Integer.toString(Main.userAccounts.get(i).getNumTran());
+        while (paddedNumTransac.length() < 4) {
+          paddedNumTransac = "0" + paddedNumTransac;
+        }
+
+        String line = paddedAccNum + " " + paddedAccHolder + " " + 
+                      Main.userAccounts.get(i).getStatus() + " " + paddedBalance +
+                      " " + paddedNumTransac + " " + Main.userAccounts.get(i).getPlan() + "\n";
+
+        System.out.print(line);
+
+        bw.write(line);
       }
-
-      paddedAccHolder = Main.userAccounts.get(i).getName();
-      while (paddedAccHolder.length() < 20) {
-        paddedAccHolder = paddedAccHolder + " ";
-      }
-
-      paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
-      while (paddedBalance.length() < 8) {
-        paddedBalance = "0" + paddedBalance;
-      }
-
-      paddedNumTransac = Integer.toString(Main.userAccounts.get(i).getNumTran());
-      while (paddedNumTransac.length() < 4) {
-        paddedNumTransac = "0" + paddedNumTransac;
-      }
-
-      System.out.println(paddedAccNum + " " + paddedAccHolder + " " + 
-                    Main.userAccounts.get(i).getStatus() + " " + paddedBalance +
-                    " " + paddedNumTransac + " " + Main.userAccounts.get(i).getPlan());
-
-      String line = "";
-      //System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
-
+      bw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 

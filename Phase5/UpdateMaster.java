@@ -108,8 +108,8 @@ public class UpdateMaster {
       }
     }
 
-    //Utilities.rewriteMasterFile(Main.oldMasterFileName);
-    //Utilities.rewriteCurrentFile();
+    Utilities.rewriteMasterFile(Main.oldMasterFileName);
+    Utilities.rewriteCurrentFile();
   }
 
   /**
