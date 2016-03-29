@@ -21,8 +21,12 @@ public class MainTest {
     
     @Test
     public void mainTest1() {
-    	
-    }
+
+    	String[] args = {"2", "4", "3", "r"};
+		assertEquals(8, SimpleRecurrence.main(args));
+
+    	assertEquals(false, Utilities.isAdmin('N'));
+	}
 
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(MainTest.class);
