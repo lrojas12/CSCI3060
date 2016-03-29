@@ -16,33 +16,14 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	
+
+  public static String oldMasterFileName;
+  public static String transferFileName;
   public static List<String> transferFile = new ArrayList<String>();
   public static List<String> masterAccounts = new ArrayList<String>();
   public static List<String> currentAccounts = new ArrayList<String>();
   public static List<User> userAccounts = new ArrayList<User>();
   public static User currUser;
-
-  /**
-   * Reads in the old master bank accounts file and stores it.
-   *
-   * @param fileName    file from which the old master bank accounts file is being read from
-   * @param arrayList   list to which the old master bank accounts file is being stored in
-   */
-  public static void storeFile(String fileName, List<String> arrayList) {
-
-  	// Creates a buffered reader for the file based on file name given.
-  	try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-      String line;
-      // Reads in the file line by line
-      while ((line = br.readLine()) != null) {
-      	// Stores the line based on list to store in.
-        arrayList.add(line);
-      }
-    } catch (IOException e) {
-      System.err.println("ERROR: Could not read in file.");
-    }
-  }
 
   public static void main(String[] args) {
 
@@ -54,14 +35,14 @@ public class Main {
 
     } else {
 
-      String oldMasterFileName = args[0];
-      String transferFileName = args[1];
+      oldMasterFileName = args[0];
+      transferFileName = args[1];
 
       // Read in old master bank accounts file.
-      storeFile(oldMasterFileName, masterAccounts);
+      Utilities.storeFile(oldMasterFileName, masterAccounts);
 
       // Read in transaction file.
-      storeFile(transferFileName, transferFile);
+      Utilities.storeFile(transferFileName, transferFile);
 
       
       System.out.println("\nMaster Bank Accounts File\n");
@@ -73,12 +54,14 @@ public class Main {
       Utilities.getAllMasterAccounts(masterAccounts);
 
       // Update the master bank accounts file.
-      UpdateMaster.updateMaster();
+      UpdateMaster.updateMaster(oldMasterFileName);
 
+      /*
       System.out.println("\nMaster Bank Accounts File\n");
       for (int i=0; i<userAccounts.size(); i++) {
       	System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
       }
+      */
     }
   }
 }

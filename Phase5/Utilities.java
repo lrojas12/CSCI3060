@@ -18,6 +18,27 @@ public class Utilities {
   public static String accNumM, accHolderM, accStatus, accBalanceM, numTran, accPlan;
 
   /**
+   * Reads in the old master bank accounts file and stores it.
+   *
+   * @param fileName    file from which the old master bank accounts file is being read from
+   * @param arrayList   list to which the old master bank accounts file is being stored in
+   */
+  public static void storeFile(String fileName, List<String> arrayList) {
+
+    // Creates a buffered reader for the file based on file name given.
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+      String line;
+      // Reads in the file line by line
+      while ((line = br.readLine()) != null) {
+        // Stores the line based on list to store in.
+        arrayList.add(line);
+      }
+    } catch (IOException e) {
+      System.err.println("ERROR: Could not read in file.");
+    }
+  }
+
+  /**
    * Tokenizes a line in a bank transaction file.
    *
    * @param line   transaction line being tokenized
@@ -96,15 +117,54 @@ public class Utilities {
   /**
    * Rewrites the master bank accounts file.
    */
-  public static void rewriteMasterFile() {
-    // Output masterAccounts to a master_bank_accounts_file.txt
-  }
+  /*
+  public static void rewriteMasterFile(String oldMasterFileName) {
+
+    String fileName = oldMasterFileName;
+    for(int i = 0; i < Main.userAccounts.size(); i++) {
+
+      String paddedAccNum;
+      String paddedAccHolder;
+      String paddedBalance;
+      String paddedNumTransac;
+
+      paddedAccNum = Integer.toString(Main.userAccounts.get(i).getNum());
+      while (paddedAccNum.length() < 5) {
+        paddedAccNum = "0" + paddedAccNum;
+      }
+
+      paddedAccHolder = Main.userAccounts.get(i).getName();
+      while (paddedAccHolder.length() < 20) {
+        paddedAccHolder = paddedAccHolder + " ";
+      }
+
+      paddedBalance = Float.toString(Main.userAccounts.get(i).getBalance());
+      while (paddedBalance.length() < 8) {
+        paddedBalance = "0" + paddedBalance;
+      }
+
+      paddedNumTransac = Integer.toString(Main.userAccounts.get(i).getNumTran());
+      while (paddedNumTransac.length() < 4) {
+        paddedNumTransac = "0" + paddedNumTransac;
+      }
+
+      System.out.println(paddedAccNum + " " + paddedAccHolder + " " + 
+                    Main.userAccounts.get(i).getStatus() + " " + paddedBalance +
+                    " " + paddedNumTransac + " " + Main.userAccounts.get(i).getPlan());
+
+      String line = "";
+      //System.out.println(userAccounts.get(i).getName() + " " + userAccounts.get(i).getBalance() + " " + userAccounts.get(i).getStatus() + " " + userAccounts.get(i).getPlan());
+
+    }
+  }*/
 
   /**
    * Rewrites the current bank accounts file.
    */
   public static void rewriteCurrentFile() {
     // Output currentAccounts to a current_bank_accounts_file.txt
+
+    String filename = "current_bank_accounts_file.txt";
   }
 
   /**
