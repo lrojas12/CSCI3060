@@ -20,7 +20,7 @@
 <br>
 ######To do
 
-[   ] Add headers to *all* source code files.
+[ **x** ] Add headers to *all* source code files.
 
 [ **x** ] Change `WatermelonHelper.java` class name to something else.
 
@@ -28,12 +28,12 @@
 
 [   ] Format *fatal* errors: The message should contain the **type**, **description** and **file** that cause the error.
 
-
 [   ] Add the transaction tracking where missing.
 
-[   ] Check transaction file formatting
+[   ] Check transaction file formatting (*fatal error*)
 
-[   ] Check account numbers assigned to accounts in the front end are, indeed, unique.
+[  **x** ] Check account numbers assigned to accounts in the front end are, indeed, unique
 
-[   ] Get rid of redundance
+[   ] Get rid of redundancy
 
+[   ] Add comments and code format
