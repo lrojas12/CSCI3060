@@ -234,4 +234,14 @@ public class Utilities {
 
     return isUnique;
   }
+
+  public static int getAccIndex(int accNum) {
+    for (int i=0; i<Main.userAccounts.size(); i++) {
+      if (Main.userAccounts.get(i).getNum() == accNum) {
+        return i;
+      }
+    }
+
+    return 0;
+  }
 } 

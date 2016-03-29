@@ -121,35 +121,30 @@ public class UpdateMaster {
    */
   public static boolean withdrawal(int accNum, float amount, boolean admin) {
 		
-    if (admin) {
-      for (int i=0; i<Main.userAccounts.size(); i++) {
-      	if (Main.userAccounts.get(i).getNum() == accNum &&
-      		Main.userAccounts.get(i).getBalance() >= amount) {
+    int accIndex = Utilities.getAccIndex(accNum);
 
-      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount);
+    if (admin) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount) {
+
+      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount);
       	  return true;
-      	}
       }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-        for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum &&
-      	  	  Main.userAccounts.get(i).getBalance() >= amount+0.05) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.05) {
 
-      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.05);
-            Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);  
-      	    return true;
-      	  }
+      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount-(float)0.05);
+          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);  
+
+      	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
-        for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum &&
-      	  	  Main.userAccounts.get(i).getBalance() >= amount+0.10) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.10) {
 
-      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()-amount-(float)0.10);
-            Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
-      	    return true;
-      	  }
+      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()-amount-(float)0.10);
+          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);
+
+      	 return true;
         }
       } else {
         System.err.println("ERROR: Unable to get payment plan information.");
@@ -169,18 +164,20 @@ public class UpdateMaster {
    */
   public static void transfer(int accNumF, int accNumT, float amount, boolean admin) {
 
-    // If standard, deduct fee
     if (withdrawal(accNumF, amount, admin)) {
       if(!deposit(accNumT, amount, true)) {
       	if (Main.currUser.getPlan() == 'N') {
       		amount += 0.10;
       	} else if (Main.currUser.getPlan() == 'S') {
       		amount += 0.05;
-      	} else {
-      		System.err.println("ERROR: Unable to get payment plan information.");
       	}
       	
       	deposit(accNumF, amount, true);
+        if (!admin) {
+
+          Main.userAccounts.get(Utilities.getAccIndex(accNumF)).setNumTran(
+               Main.userAccounts.get(Utilities.getAccIndex(accNumF)).getNumTran()-1);
+        }
       }
     }
   }
@@ -205,38 +202,31 @@ public class UpdateMaster {
    */
   public static boolean deposit(int accNum, float amount, boolean admin) {
 		
-    if (admin) {
-      for (int i=0; i<Main.userAccounts.size(); i++) {
-      	if (Main.userAccounts.get(i).getNum() == accNum && 
-      		Main.userAccounts.get(i).getBalance() + amount < 100000.00 &&
-      		Main.userAccounts.get(i).getBalance() + amount >= 0.0) {
+    int accIndex = Utilities.getAccIndex(accNum);
 
-      	  Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount); 
-      	  return true;
-      	}
+    if (admin) {
+      if (Main.userAccounts.get(accIndex).getBalance() + amount < 100000.00 &&
+      	  Main.userAccounts.get(accIndex).getBalance() + amount >= 0.0) {
+
+      	Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount); 
+      	return true;
       }
     } else {
       if (Main.currUser.getPlan() == 'S') {
-        for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum && 
-      		  Main.userAccounts.get(i).getBalance() + amount-(float)0.05 < 100000.00 &&
-      		  Main.userAccounts.get(i).getBalance() + amount-(float)0.05 >= 0.0) {
+      	if (Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.05 < 100000.00 &&
+      		  Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.05 >= 0.0) {
 
-      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.05);  
-      	    Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1);
-      	    return true;
-      	  }
+      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.05);  
+      	  Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1);
+      	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
-        for (int i=0; i<Main.userAccounts.size(); i++) {
-      	  if (Main.userAccounts.get(i).getNum() == accNum && 
-      		  Main.userAccounts.get(i).getBalance() + amount-(float)0.10 < 100000.00 &&
-      		  Main.userAccounts.get(i).getBalance() + amount-(float)0.10 >= 0.0) {
-            
-      	    Main.userAccounts.get(i).setBalance(Main.userAccounts.get(i).getBalance()+amount-(float)0.10); 
-            Main.userAccounts.get(i).setNumTran(Main.userAccounts.get(i).getNumTran()+1); 
-      	    return true;  
-      	  }
+      	if (Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 < 100000.00 &&
+      		  Main.userAccounts.get(accIndex).getBalance() + amount-(float)0.10 >= 0.0) {
+
+      	  Main.userAccounts.get(accIndex).setBalance(Main.userAccounts.get(accIndex).getBalance()+amount-(float)0.10); 
+          Main.userAccounts.get(accIndex).setNumTran(Main.userAccounts.get(accIndex).getNumTran()+1); 
+      	  return true;  
         }
       } else {
         System.err.println("ERROR: Unable to get payment plan information.");
@@ -258,7 +248,7 @@ public class UpdateMaster {
     // A and N are default for status and plan
 
     if (Utilities.isNameUnique(newAccHolder) && Utilities.isNumberUnique(newAccNum) &&
-    	initBalance >= 0 && initBalance < 100000.00) {
+    	  initBalance >= 0 && initBalance < 100000.00) {
 
       User newUser = new User(newAccHolder, newAccNum, initBalance, 'A', 0, 'N');
       Main.userAccounts.add(Main.userAccounts.size()-1, newUser);
@@ -272,12 +262,9 @@ public class UpdateMaster {
    */
   public static void delete(int accNum) {
 
-    for (int i=0; i<Main.userAccounts.size(); i++) {
-      if (Main.userAccounts.get(i).getNum() == accNum) {
-        Main.userAccounts.remove(i);
-        return;
-      }
-    }
+    int accIndex = Utilities.getAccIndex(accNum);
+
+    Main.userAccounts.remove(accIndex);
   }
 
   /**
@@ -287,12 +274,10 @@ public class UpdateMaster {
    */
   public static void disable(int accNum) {
 
-    for (int i=0; i<Main.userAccounts.size(); i++) {
-      if (Main.userAccounts.get(i).getNum() == accNum &&
-      	Main.userAccounts.get(i).getStatus() == 'A') {
-        Main.userAccounts.get(i).setStatus('D');
-        return;
-      }
+    int accIndex = Utilities.getAccIndex(accNum);
+
+    if (Main.userAccounts.get(accIndex).getStatus() == 'A') {
+      Main.userAccounts.get(accIndex).setStatus('D');
     }
   }
 
@@ -304,13 +289,11 @@ public class UpdateMaster {
    */
   public static void changeplan(int accNum, char plan) {
 
-    for (int i=0; i<Main.userAccounts.size(); i++) {
-      if (Main.userAccounts.get(i).getNum() == accNum &&
-      	  Main.userAccounts.get(i).getPlan() != plan &&
-      	  (plan == 'N' || plan == 'S')) {
-        Main.userAccounts.get(i).setPlan(plan);
-        return;
-      }
+    int accIndex = Utilities.getAccIndex(accNum);
+
+    if (Main.userAccounts.get(accIndex).getPlan() != plan &&
+       (plan == 'N' || plan == 'S')) {
+      Main.userAccounts.get(accIndex).setPlan(plan);
     }
   }
 
@@ -321,12 +304,10 @@ public class UpdateMaster {
    */
   public static void enable(int accNum) {
 
-    for (int i=0; i<Main.userAccounts.size(); i++) {
-      if (Main.userAccounts.get(i).getNum() == accNum &&
-      	Main.userAccounts.get(i).getStatus() == 'D') {
-        Main.userAccounts.get(i).setStatus('A');
-        return;
-      }
+    int accIndex = Utilities.getAccIndex(accNum);
+
+    if (Main.userAccounts.get(accIndex).getStatus() == 'D') {
+      Main.userAccounts.get(accIndex).setStatus('A');
     }
   }
 
@@ -338,11 +319,11 @@ public class UpdateMaster {
   public static void login(int accNum) {
 
     if (Utilities.misc.equals("S ")) {
-      for (int i = 0; i < Main.userAccounts.size(); i++) {
-        if (Main.userAccounts.get(i).getNum() == accNum) {
-          Main.currUser = Main.userAccounts.get(i);
-        }
-      }
+
+      int accIndex = Utilities.getAccIndex(accNum);
+
+      Main.currUser = Main.userAccounts.get(accIndex);
+
     } else if (Utilities.misc.equals("A ")) {
       Main.currUser = new User();
     } else {
