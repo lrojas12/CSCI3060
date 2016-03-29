@@ -35,3 +35,5 @@
 
 [   ] Check account numbers assigned to accounts in the front end are, indeed, unique.
 
+[   ] Get rid of redundance
+
