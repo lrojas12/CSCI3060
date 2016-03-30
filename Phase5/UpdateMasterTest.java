@@ -309,14 +309,52 @@ System.out.println(Main.userAccounts.get(0).getPlan());
 
     @Test
     public void depositTest1() {
-        ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-        System.setErr(new PrintStream(errContent));
 
-        UpdateMaster.deposit(0, (float)20.00, true);
+        assertEquals(false, UpdateMaster.deposit(0, (float)20.00, true));
+    }
 
-        String expectedOutput = "ERROR <<deposit>>: The account to be deposited into does not exist.\n";
+    @Test
+    public void depositTest2() {
 
-        assertEquals(expectedOutput, errContent.toString());
+        Main.currUser = new User('A');
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+        assertEquals(true, UpdateMaster.deposit(1, (float)20.00, true));
+    }
+
+    @Test
+    public void depositTest3() {
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+        Main.currUser = Main.userAccounts.get(0);
+
+        assertEquals(true, UpdateMaster.deposit(1, (float)20.00, false));
+    }
+
+    @Test
+    public void depositTest4() {
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+
+        Main.currUser = Main.userAccounts.get(0);
+
+        assertEquals(true, UpdateMaster.deposit(1, (float)20.00, false));
+    }
+
+    @Test
+    public void depositTest5() {
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'F'));
+
+        Main.currUser = Main.userAccounts.get(0);
+
+        assertEquals(false, UpdateMaster.deposit(1, (float)20.00, false));
     }
 
     @Test
