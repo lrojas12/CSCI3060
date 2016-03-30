@@ -377,9 +377,6 @@ public class UpdateMaster {
     } else {
     	System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
     }
-    
-    // Change payment plan to given payment plan.
-    Main.userAccounts.get(accIndex).setPlan(plan);
   }
 
   /**

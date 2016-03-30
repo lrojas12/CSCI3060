@@ -120,7 +120,7 @@ public class UtilitiesTest {
 
 		Utilities.getAllMasterAccounts(masterList);
 
-		assertEquals(userAccounts.size(), 0);
+		assertEquals(1, userAccounts.size());
 	}
 
 	@Test
@@ -134,7 +134,7 @@ public class UtilitiesTest {
 
 		Utilities.getAllMasterAccounts(masterList);
 
-		assertEquals(userAccounts.size(), 1);
+		assertEquals(1, userAccounts.size());
 	}
 
 	@Test
@@ -150,7 +150,7 @@ public class UtilitiesTest {
 
 		Utilities.getAllMasterAccounts(masterList);
 
-		assertEquals(userAccounts.size(), 2);
+		assertEquals(2, userAccounts.size());
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class UtilitiesTest {
 
 		Utilities.getAllMasterAccounts(masterList);
 
-		assertEquals(userAccounts.size(), 3);
+		assertEquals(3, userAccounts.size());
 	}
 
 	@Test
