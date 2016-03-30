@@ -15,7 +15,6 @@ import org.junit.*;
 import java.io.*;
 import java.lang.Object.*;
 
-
 public class MainTest {
 
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
