@@ -15,14 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import java.io.*;
 import java.util.*;
-import java.lang.system.ExpectedSystemExit;
 
 // Taken from Stack example
 public class UtilitiesTest {
     
-	@Rule
+	/*@Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
-
+	*/
     @Test
     public void storeFileTest1() {
 
@@ -45,38 +44,121 @@ public class UtilitiesTest {
     	assertEquals("S ", Utilities.misc);
     }
 
-    @Test
+    /*@Test
     public void tokenizeTransactionTest2() {
 
     	ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(errContent));
     	String line = "10 Tarzan               0001a          S ";
-    	String expectedOutput = "FATAL ERROR: The format in the transaction file " + Main.transactionFileName + " is incorrect.\n";
+    	String expectedOutput = "FATAL ERROR: The format in the transaction file transaction_file.tra is incorrect.\n";
 
     	exit.expectSystemExitWithStatus(-1);
     	Utilities.tokenizeTransaction(line);
 
     	assertEquals(expectedOutput, errContent.toString());
-    }
+    }*/
 
     @Test
-    public void isAdmintest1() {
+    public void tokenizeMasterTest1() {
+    	String line = "00001 Tarzan               A 01000.00 0000 N";
+
+    	Utilities.tokenizeMaster(line);
+
+    	assertEquals("N", Utilities.accPlan);
+    }
+
+    /*@Test
+    public void tokenizeMasterTest2() {
+
+    	ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
+    	String line = "00001 Tarzan               A 01000.00 0000 g";
+    	String expectedOutput = "FATAL ERROR: The format in the master_bank_accounts_file.txt is incorrect.\n";
+
+    	exit.expectSystemExitWithStatus(-1);
+    	Utilities.tokenizeTransaction(line);
+
+    	assertEquals(expectedOutput, errContent.toString());
+    }*/
+
+    @Test
+    public void isAdminTest1() {
 
     	assertEquals(false, Utilities.isAdmin('N'));
 	}
 
     @Test
-    public void isAdmintest2() {
+    public void isAdminTest2() {
 
     	assertEquals(true, Utilities.isAdmin('A'));
 	}
 
     @Test
-    public void isAdmintest3() {
+    public void isAdminTest3() {
 
     	assertEquals(false, Utilities.isAdmin('R'));
 	}
-    
+
+	@Test
+	public void getAllMasterAccountsLoopTestZero() {
+
+		List<String> masterList = new ArrayList<String>();
+
+		List<User> userAccounts = new ArrayList<User>();
+
+		Utilities.getAllMasterAccounts(masterList);
+
+		assertEquals(userAccounts.size(), 0);
+	}
+
+	@Test
+	public void getAllMasterAccountsLoopTestOne() {
+
+		List<String> masterList = new ArrayList<String>();
+		masterList.add("00001 Tarzan               A 01000.00 0000 N");
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+
+		Utilities.getAllMasterAccounts(masterList);
+
+		assertEquals(userAccounts.size(), 1);
+	}
+
+	@Test
+	public void getAllMasterAccountsLoopTestTwo() {
+
+		List<String> masterList = new ArrayList<String>();
+		masterList.add("00001 Tarzan               A 01000.00 0000 N");
+		masterList.add("00002 Wayne                A 01000.00 0000 N");
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+
+		Utilities.getAllMasterAccounts(masterList);
+
+		assertEquals(userAccounts.size(), 2);
+	}
+
+	@Test
+	public void getAllMasterAccountsLoopTestMany() {
+
+		List<String> masterList = new ArrayList<String>();
+		masterList.add("00001 Tarzan               A 01000.00 0000 N");
+		masterList.add("00002 Wayne                A 01000.00 0000 N");
+		masterList.add("00003 Bruce                A 01000.00 0000 N");
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
+
+		Utilities.getAllMasterAccounts(masterList);
+
+		assertEquals(userAccounts.size(), 3);
+	}
+
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(UtilitiesTest.class);
     }
@@ -89,7 +171,7 @@ public class UtilitiesTest {
  * 
  * Causes every statement in the program to be executed at least
  * once, giving us confidence that every statement is at least
- * capable of executing correctly
+ * capable of executing correctly.get
  * 
  * System: Make a test case for each statement in the program,
  * independent of the others.
