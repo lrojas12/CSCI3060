@@ -17,7 +17,6 @@ import java.io.*;
 import java.util.*;
 // import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
-// Taken from Stack example
 public class UtilitiesTest {
     
 	/*@Rule
@@ -173,6 +172,12 @@ public class UtilitiesTest {
 
 	@Test
 	public void isNameUniqueTest1() {
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
+
 		String name = "Tarzan";
 
 		assertEquals(false, Utilities.isNameUnique(name));
@@ -180,6 +185,12 @@ public class UtilitiesTest {
 
 	@Test
 	public void isNameUniqueTest2() {
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
+
 		String name = "Luisa";
 
 		assertEquals(true, Utilities.isNameUnique(name));
@@ -187,6 +198,12 @@ public class UtilitiesTest {
 
 	@Test
 	public void isNumberUniqueTest1() {
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
+
 		int accNum = 1;
 
 		assertEquals(false, Utilities.isNumberUnique(accNum));
@@ -194,6 +211,12 @@ public class UtilitiesTest {
 
 	@Test
 	public void isNumberUniqueTest2() {
+
+		List<User> userAccounts = new ArrayList<User>();
+		userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
+		userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
+
 		int accNum = 20;
 
 		assertEquals(true, Utilities.isNumberUnique(accNum));
@@ -201,9 +224,9 @@ public class UtilitiesTest {
 
 	@Test
 	public void getAccIndexTest1() {
+		
 		Main.userAccounts = new ArrayList<User>();
 		Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-		
 
 		assertEquals(0, Utilities.getAccIndex(1));
 	}
