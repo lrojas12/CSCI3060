@@ -206,6 +206,8 @@ System.out.println(Main.userAccounts.get(0).getPlan());
   @Test
   public void withdrawalTest1() {
 
+  //  withdrawal(int accNum, float amount, boolean admin) {
+
     assertEquals(false, UpdateMaster.withdrawal(0, (float)20.00, true));
   }
 
