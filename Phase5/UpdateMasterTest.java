@@ -379,13 +379,13 @@ public class UpdateMasterTest {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     System.setErr(new PrintStream(errContent));
 
+    Main.userAccounts = new ArrayList<User>();
     UpdateMaster.create("Tarzan", 1, (float)100000.00);
 
     String expectedOutput = "ERROR <<create>>: The constraints inputted (name, account number, balance) are incorrect.\n";
 
     assertEquals(expectedOutput, errContent.toString());
-    assertEquals(1, Main.userAccounts.size());
-
+    assertEquals(0, Main.userAccounts.size());
   }
 
   @Test
