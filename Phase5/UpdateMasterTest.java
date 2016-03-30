@@ -262,6 +262,45 @@ System.out.println(Main.userAccounts.get(0).getPlan());
 
   @Test
   public void transferTest1() {
+    Main.userAccounts =  new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+    Main.userAccounts.add(new User("Wayne", 2, (float)99999.99, 'A', 0, 'N'));
+
+    Main.currUser = Main.userAccounts.get(0);
+
+    UpdateMaster.transfer(1, 2, (float)100.00, false);
+
+    assertEquals((float)1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
+  }
+
+  @Test
+  public void transferTest2() {
+    Main.userAccounts =  new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+    Main.userAccounts.add(new User("Wayne", 2, (float)99999.99, 'A', 0, 'S'));
+
+    Main.currUser = Main.userAccounts.get(0);
+
+    UpdateMaster.transfer(1, 2, (float)100.00, false);
+
+    assertEquals((float)1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
+  }
+
+  @Test
+  public void transferTest3() {
+    Main.userAccounts =  new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+    Main.userAccounts.add(new User("Wayne", 2, (float)99999.99, 'A', 0, 'N'));
+
+    Main.currUser = Main.userAccounts.get(0);
+
+    UpdateMaster.transfer(1, 2, (float)100.00, false);
+
+    assertEquals(0, Main.userAccounts.get(0).getNumTran());
+  }
+
+  @Test
+  public void transferTest4() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     System.setErr(new PrintStream(errContent));
 
@@ -272,22 +311,6 @@ System.out.println(Main.userAccounts.get(0).getPlan());
     UpdateMaster.transfer(1, 2, (float)1001.00, true);
 
     String expectedOutput = "ERROR <<transfer>>: There was an issue withdrawing the funds from the origin account.\n";
-
-    assertEquals(expectedOutput, errContent.toString());
-  }
-
-  @Test
-  public void transferTest2() {
-    ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    System.setErr(new PrintStream(errContent));
-
-    Main.userAccounts = new ArrayList<User>();
-    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-    Main.userAccounts.add(new User("Wayne", 2, (float)99999.99, 'A', 0, 'N'));
-
-    UpdateMaster.transfer(1, 2, (float)100.00, true);
-
-    String expectedOutput = "ERROR <<transfer>>: There was an issue depositing the funds into the destination account.\n";
 
     assertEquals(expectedOutput, errContent.toString());
   }
