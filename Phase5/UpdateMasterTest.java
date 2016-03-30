@@ -177,9 +177,7 @@ public class UpdateMasterTest {
 
     Main.userAccounts =  new ArrayList<User>();
     Main.userAccounts.add(new User("Ramond", 8, (float)1000.00, 'A', 0, 'N'));
-System.out.println(Main.userAccounts.get(0).getPlan());
     UpdateMaster.updateMaster();
-    System.out.println(Main.userAccounts.get(0).getPlan());
     assertEquals('S', Main.userAccounts.get(0).getPlan());
   }
 
@@ -237,11 +235,11 @@ System.out.println(Main.userAccounts.get(0).getPlan());
   public void withdrawalTest4() {
 
     Main.userAccounts =  new ArrayList<User>();
-    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'F'));
 
     Main.currUser = Main.userAccounts.get(0);
 
-    assertEquals(false, UpdateMaster.withdrawal(1, (float)99999.99, false));
+    assertEquals(false, UpdateMaster.withdrawal(1, (float)500.00, false));
   }
 
   @Test
