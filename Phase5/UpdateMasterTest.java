@@ -549,6 +549,18 @@ public class UpdateMasterTest {
 
   @Test 
   public void loginTest2() {
+
+    Main.userAccounts = new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+    Utilities.misc = "S ";
+
+    UpdateMaster.login(1);
+
+    assertEquals('N', Main.currUser.getPlan());
+  }
+
+  @Test 
+  public void loginTest3() {
     Main.currUser = new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N');
     Utilities.misc = "A ";
 
@@ -558,7 +570,7 @@ public class UpdateMasterTest {
   }
 
   @Test
-  public void loginTest3() {
+  public void loginTest4() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     System.setErr(new PrintStream(errContent));
 
