@@ -26,8 +26,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest1() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 10 and 01
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -47,8 +45,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest2() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 00
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -67,8 +63,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest3() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 02
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -90,8 +84,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest4() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 03
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -110,8 +102,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest5() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 04
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -130,8 +120,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest6() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 05
     	Main.transactionFile.add("10                                     A ");
@@ -151,8 +139,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest7() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 06
     	Main.transactionFile.add("10                                     A ");
@@ -173,8 +159,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest8() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 07
     	Main.transactionFile.add("10                                     A ");
@@ -193,8 +177,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest9() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 08
     	Main.transactionFile.add("10                                     A ");
@@ -213,8 +195,6 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest10() {
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	// case 09
     	Main.transactionFile.add("10                                     A ");
@@ -227,26 +207,28 @@ public class UpdateMasterTest {
     	assertEquals('A', Main.userAccounts.get(0).getStatus());
     }
 
-    /*
-	@Test
-    public void withdrawalTest1() {
+    // Actual result is 0.05 cents off for some reason???????????????????????????????????????????????????
+    // Only happens for student plan. Non-student works fine (refer to first test of this class)
+    // Line UpdateMaster.withdrawal(1, (float)20.00, false); MUST be the problem (only difference)
+    @Test
+    public void withdrawalTest1() { 
     	
-    	Main.currUser = new User();
-
     	Main.transactionFile =  new ArrayList<String>();
     	Main.transactionFile.add("10 Tarzan               00001          S ");
     	Main.transactionFile.add("01 Tarzan               00001 00020.00   ");
+        //Main.transactionFile.add("00 Tarzan               00001          S ");
 
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
 
-        System.out.println("Plan before: " + Main.userAccounts.get(0).getPlan());
-    	UpdateMaster.withdrawal(1, (float)20.00, false);
-        System.out.println("Plan after: " + Main.userAccounts.get(0).getPlan());
+        //System.out.println("Plan before: " + Main.userAccounts.get(0).getPlan());
+    	UpdateMaster.withdrawal(1, 20.00, false);
+        //System.out.println("Plan after: " + Main.userAccounts.get(0).getPlan());
 
     	assertEquals(979.95, Main.userAccounts.get(0).getBalance(), 0.02);
     }
 
+    /*
 	@Test
     public void withdrawalTest2() {
     	

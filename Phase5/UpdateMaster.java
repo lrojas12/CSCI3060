@@ -141,23 +141,29 @@ public class UpdateMaster {
     } else {
       if (Main.currUser.getPlan() == 'S') {
         // Check if balance is valid with fee.
-      	if (accBalance >= amount+0.05) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+(float)0.05) {
           // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.05);
           // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);  
-
       	  return true;
+
+        } else {
+        	System.out.println("ERROR <<withdrawal>>: The amount to be withdrawn is not valid.");
+        	return false;
         }
       } else if (Main.currUser.getPlan() == 'N') {
         // Check if balance is valid with fee.
-      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.10) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+(float)0.10) {
           // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.10);
           // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
 
       	 return true;
+        } else {
+        	System.out.println("ERROR <<withdrawal>>: The amount to be withdrawn is not valid.");
+        	return false;	
         }
       } else {
         // Error message for invalid payment plan in withdrawal
