@@ -22,7 +22,7 @@ public class UpdateMasterTest {
   private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
   
   /**
-   * At the switch statement, check for case 01 (withdrawal) and case 10 (login)
+   * At the switch statement, check for cases 01 (withdrawal), 10 (login) and 00 (logout)
    */
   @Test
   public void updateMasterTest1() {
@@ -42,30 +42,12 @@ public class UpdateMasterTest {
     assertEquals(979.90, Main.userAccounts.get(0).getBalance(), 0.02);
   }
 
-  /**
-   * At the switch statement, check for case 00 (logout)
-   */
-  @Test
-  public void updateMasterTest2() {
-    
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
-    Main.transactionFile =  new ArrayList<String>();
-    // case 00
-    Main.transactionFile.add("10 Tarzan               00001          S ");
-    Main.transactionFile.add("00 Tarzan               00001          S ");
-
-    Main.userAccounts =  new ArrayList<User>();
-    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
-
-    UpdateMaster.updateMaster();
-    assertEquals(1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
-  }
 
   /**
    * At the switch statement, check for case 02 (transfer)
    */
   @Test
-  public void updateMasterTest3() {
+  public void updateMasterTest2() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -87,7 +69,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 03 (paybill)
    */
   @Test
-  public void updateMasterTest4() {
+  public void updateMasterTest3() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -106,7 +88,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 04 (deposit)
    */
   @Test
-  public void updateMasterTest5() {
+  public void updateMasterTest4() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -125,7 +107,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 05 (create)
    */
   @Test
-  public void updateMasterTest6() {
+  public void updateMasterTest5() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -145,7 +127,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 06 (delete)
    */
   @Test
-  public void updateMasterTest7() {
+  public void updateMasterTest6() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -166,7 +148,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 07 (disable)
    */
   @Test
-  public void updateMasterTest8() {
+  public void updateMasterTest7() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -185,7 +167,7 @@ public class UpdateMasterTest {
    * At the switch statement, check for case 08 (changeplan)
    */
   @Test
-  public void updateMasterTest9() {
+  public void updateMasterTest8() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.transactionFile =  new ArrayList<String>();
@@ -205,7 +187,7 @@ System.out.println(Main.userAccounts.get(0).getPlan());
    * At the switch statement, check for case 09 (enable)
    */
   @Test
-  public void updateMasterTest10() {
+  public void updateMasterTest9() {
     
     Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     Main.currUser = new User('A');
