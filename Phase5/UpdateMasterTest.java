@@ -11,7 +11,9 @@
 
 import static org.junit.Assert.*;
 import junit.framework.JUnit4TestAdapter;
-import org.junit.Test;
+import org.junit.*;
+import java.io.*;
+import java.lang.Object.*;
 
 // Taken from Stack example
 public class UpdateMasterTest {
