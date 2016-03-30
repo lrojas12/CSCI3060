@@ -95,7 +95,9 @@ public class UpdateMaster {
       case "10":
       	if (Utilities.accNumT.trim().length() > 0) {
         	login(Integer.parseInt(Utilities.accNumT));
-    	}
+    	  } else if (Utilities.misc.equals("A ")) {
+          login(0);
+        }
         break;
 			
       // Logout
@@ -107,6 +109,12 @@ public class UpdateMaster {
 
       }
     }
+
+    // Rewrites the master bank accounts file.
+    Utilities.rewriteMasterFile(Main.oldMasterFileName);
+
+    // Rewrites the current bank accounts file.
+    Utilities.rewriteCurrentFile();
   }
 
   /**
@@ -141,29 +149,23 @@ public class UpdateMaster {
     } else {
       if (Main.currUser.getPlan() == 'S') {
         // Check if balance is valid with fee.
-      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+(float)0.05) {
+      	if (accBalance >= amount+0.05) {
           // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.05);
           // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);  
-      	  return true;
 
-        } else {
-        	System.out.println("ERROR <<withdrawal>>: The amount to be withdrawn is not valid.");
-        	return false;
+      	  return true;
         }
       } else if (Main.currUser.getPlan() == 'N') {
         // Check if balance is valid with fee.
-      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+(float)0.10) {
+      	if (Main.userAccounts.get(accIndex).getBalance() >= amount+0.10) {
           // Change account balance with amount and fee.
       	  Main.userAccounts.get(accIndex).setBalance(accBalance-amount-(float)0.10);
           // Increase number of transactions for that account.
           Main.userAccounts.get(accIndex).setNumTran(accTranNum+1);
 
       	 return true;
-        } else {
-        	System.out.println("ERROR <<withdrawal>>: The amount to be withdrawn is not valid.");
-        	return false;	
         }
       } else {
         // Error message for invalid payment plan in withdrawal
@@ -376,13 +378,14 @@ public class UpdateMaster {
       return;
     }
 
-    if (Main.userAccounts.get(accIndex).getPlan() == 'N') {
-    	Main.userAccounts.get(accIndex).setPlan('S');
-    } else if (Main.userAccounts.get(accIndex).getPlan() == 'S') {
-    	Main.userAccounts.get(accIndex).setPlan('N');
-    } else {
-    	System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
-    }
+    // Check that the plan inputted in the function is either N or S.
+    if (plan != 'N' && plan != 'S') {
+      System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
+      return;
+    } 
+    
+    // Change payment plan to given payment plan.
+    Main.userAccounts.get(accIndex).setPlan(plan);
   }
 
   /**
@@ -415,7 +418,6 @@ public class UpdateMaster {
   public static void login(int accNum) {
 
     if (Utilities.misc.equals("S ")) {
-
       int accIndex = Utilities.getAccIndex(accNum);
 
       if (accIndex == -1) {

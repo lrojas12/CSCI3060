@@ -42,7 +42,7 @@ public class UtilitiesTest {
 
         Main.transactionFile = new ArrayList<String>();
 
-        Utilities.storeFile("transaction_file.tra", Main.transactionFile);
+        Utilities.storeFile("transaction_file_storeFileTest2.tra", Main.transactionFile);
 
     	assertEquals("10 Tarzan               00001          S ", Main.transactionFile.get(0));
     }
@@ -120,7 +120,7 @@ public class UtilitiesTest {
 
 		Utilities.getAllMasterAccounts(masterList);
 
-		assertEquals(1, userAccounts.size());
+		assertEquals(0, userAccounts.size());
 	}
 
 	@Test
