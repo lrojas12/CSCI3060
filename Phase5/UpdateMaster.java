@@ -19,7 +19,7 @@ public class UpdateMaster {
    * Updates the master bank accounts file based on the merged transaction files
    * and the transaction's specific constraints.
    */
-  public static void updateMaster(String oldMasterFileName) {
+  public static void updateMaster() {
 
     // For each line in the merged transfer files list
     for (int i = 0; i < Main.transactionFile.size(); i++) {

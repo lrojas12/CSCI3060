@@ -49,7 +49,7 @@ public class Main {
       Utilities.getAllMasterAccounts(masterAccounts);
 
       // Update the master bank accounts file.
-      UpdateMaster.updateMaster(oldMasterFileName);
+      UpdateMaster.updateMaster();
 
       // Rewrites the master bank accounts file.
       Utilities.rewriteMasterFile(oldMasterFileName);
