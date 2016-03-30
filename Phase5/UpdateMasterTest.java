@@ -27,7 +27,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest1() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 10 and 01
     Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -49,7 +49,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest2() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 02
     Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -71,7 +71,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest3() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 03
     Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -90,7 +90,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest4() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 04
     Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -109,7 +109,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest5() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 05
     Main.transactionFile.add("10                                     A ");
@@ -129,7 +129,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest6() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 06
     Main.transactionFile.add("10                                     A ");
@@ -150,7 +150,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest7() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 07
     Main.transactionFile.add("10                                     A ");
@@ -169,7 +169,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest8() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.transactionFile =  new ArrayList<String>();
     // case 08
     Main.transactionFile.add("10                                     A ");
@@ -187,7 +187,7 @@ public class UpdateMasterTest {
   @Test
   public void updateMasterTest9() {
     
-    Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+    Main.oldMasterFileName = "master_bank_accounts_file_test.txt";
     Main.currUser = new User('A');
 
     Main.transactionFile =  new ArrayList<String>();
