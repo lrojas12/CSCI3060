@@ -235,6 +235,17 @@ public class UpdateMasterTest {
   public void withdrawalTest4() {
 
     Main.userAccounts =  new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+
+    Main.currUser = Main.userAccounts.get(0);
+
+    assertEquals(false, UpdateMaster.withdrawal(1, (float)500.00, false));
+  }
+
+  @Test
+  public void withdrawalTest5() {
+
+    Main.userAccounts =  new ArrayList<User>();
     Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'F'));
 
     Main.currUser = Main.userAccounts.get(0);
