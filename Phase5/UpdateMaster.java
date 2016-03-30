@@ -370,11 +370,13 @@ public class UpdateMaster {
       return;
     }
 
-    // Check that the plan inputted in the function is either N or S.
-    if (plan != 'N' && plan != 'S') {
-      System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
-      return;
-    } 
+    if (Main.userAccounts.get(accIndex).getPlan() == 'N') {
+    	Main.userAccounts.get(accIndex).setPlan('S');
+    } else if (Main.userAccounts.get(accIndex).getPlan() == 'S') {
+    	Main.userAccounts.get(accIndex).setPlan('N');
+    } else {
+    	System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
+    }
     
     // Change payment plan to given payment plan.
     Main.userAccounts.get(accIndex).setPlan(plan);
