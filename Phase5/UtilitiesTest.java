@@ -171,6 +171,41 @@ public class UtilitiesTest {
   }
 
   @Test
+  public void rewriteMasterFileTest1() {
+
+    String line;
+    Main.userAccounts = new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+
+    Utilities.rewriteMasterFile("master_bank_accounts_file_test.txt");
+
+    try (BufferedReader br = new BufferedReader(new FileReader("master_bank_accounts_file_test.txt"))) {
+      line = br.readLine();
+
+      assertEquals("00001 Tarzan               A 01000.00 0000 N", line);
+    } catch (IOException e) {
+      System.err.println("ERROR <internal>: Could not read in file.");
+    }
+  }
+
+  @Test
+  public void rewriteCurrentFileTest1() {
+    String line;
+    Main.userAccounts = new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+
+    Utilities.rewriteCurrentFile();
+
+    try (BufferedReader br = new BufferedReader(new FileReader("current_bank_accounts_file.txt"))) {
+      line = br.readLine();
+
+      assertEquals("00001 Tarzan               A 01000.00", line);
+    } catch (IOException e) {
+      System.err.println("ERROR <internal>: Could not read in file.");
+    }
+  }
+
+  @Test
   public void isNameUniqueTest1() {
 
     List<User> userAccounts = new ArrayList<User>();
