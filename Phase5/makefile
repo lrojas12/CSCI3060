@@ -17,7 +17,7 @@ testUser: back
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore UserTest
 
 testUpdateMaster: back
-	@javac -cp junit-4.10.jar:. -Xlint UpdateMasterTest.java
+	@javac -cp junit-4.10.jar:. UpdateMasterTest.java
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore UpdateMasterTest
 
 clean:

@@ -212,7 +212,6 @@ public class UtilitiesTest {
 	public void getAccIndexTest2() {
 		Main.userAccounts = new ArrayList<User>();
 		Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-		
 
 		assertEquals(-1, Utilities.getAccIndex(2));
 	}
