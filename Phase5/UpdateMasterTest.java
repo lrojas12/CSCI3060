@@ -239,7 +239,7 @@ public class UpdateMasterTest {
 
     Main.currUser = Main.userAccounts.get(0);
 
-    assertEquals(false, UpdateMaster.withdrawal(1, (float)500.00, false));
+    assertEquals(true, UpdateMaster.withdrawal(1, (float)500.00, false));
   }
 
   @Test
@@ -384,6 +384,8 @@ public class UpdateMasterTest {
     String expectedOutput = "ERROR <<create>>: The constraints inputted (name, account number, balance) are incorrect.\n";
 
     assertEquals(expectedOutput, errContent.toString());
+    assertEquals(1, Main.userAccounts.size());
+
   }
 
   @Test
