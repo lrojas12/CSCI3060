@@ -15,6 +15,7 @@ import org.junit.*;
 import java.io.*;
 import java.util.*;
 import java.lang.Object.*;
+import java.text.DecimalFormat;
 
 public class UpdateMasterTest {
 
@@ -221,9 +222,7 @@ public class UpdateMasterTest {
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
 
-        //System.out.println("Plan before: " + Main.userAccounts.get(0).getPlan());
-    	UpdateMaster.withdrawal(1, 20.00, false);
-        //System.out.println("Plan after: " + Main.userAccounts.get(0).getPlan());
+    	UpdateMaster.withdrawal(1, (float)20.00, false); // 20.00 gets read in as 20.00, even with float cast
 
     	assertEquals(979.95, Main.userAccounts.get(0).getBalance(), 0.02);
     }
