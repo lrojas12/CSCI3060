@@ -48,7 +48,7 @@ public class Utilities {
   public static void tokenizeTransaction(String line) {
 
     String pattern = "[\\d]{2} [\\w\\p{Punct} ]{20} [\\d ]{5} [\\d ]{5}[\\. ][\\d ]{2} [A-Z ]{2}";
-		
+    
     Pattern r = Pattern.compile(pattern);
 
     Matcher m = r.matcher(line);
@@ -71,7 +71,7 @@ public class Utilities {
    * @param line   master bank accounts file line being tokenized
    */
   public static void tokenizeMaster(String line) {
-		
+    
     String pattern = "[\\d]{5} [\\w\\p{Punct} ]{20} [AD] [\\d ]{5}[\\. ][\\d ]{2} [\\d]{4} [SN]";
 
     Pattern r = Pattern.compile(pattern);

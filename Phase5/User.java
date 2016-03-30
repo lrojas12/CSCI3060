@@ -28,7 +28,7 @@ public class User {
   }
 
   User(String holder, int num, float balance, char status, int tranCount, char plan) {
-		
+    
     accHolder = holder;
     accNum = num;
     accBalance = balance;
@@ -50,28 +50,28 @@ public class User {
   public int getNum() {
     return this.accNum;
   }
-  	
+    
   /**
    * Get the account balance.
    */
   public float getBalance() {
     return this.accBalance;
   }
-  	
+    
   /**
    * Get the account status.
    */
   public char getStatus() {
     return this.accStatus;
   }
-  	
+    
   /**
    * Get the transcation count for this user.
    */
   public int getNumTran() {
     return this.numTran;
   }
-  	
+    
   /**
    * Get the account plan.
    */
@@ -85,35 +85,35 @@ public class User {
   public void setName(String name) {
     this.accHolder = name;
   }
-  	
+    
   /** 
    * Change the account number.
    */
   public void setNum(int num) {
     this.accNum = num;
   }
-  	
+    
   /**
    * Change the account balance.
    */
   public void setBalance(float balance) {
     this.accBalance = balance;
   }
-  	
+    
   /**
    * Change the account status.
    */
   public void setStatus(char status) {
     this.accStatus = status;
   }
-	
+  
   /**
   * Get the transcation count for this user.
   */
   public void setNumTran(int tranCount) {
     this.numTran = tranCount;
   }
-  	
+    
   /** 
    * Change the account plan.
    */

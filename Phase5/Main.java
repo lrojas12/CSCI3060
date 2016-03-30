@@ -27,7 +27,7 @@ public class Main {
 
   public static void main(String[] args) {
  
-  	currUser = new User();
+    currUser = new User();
 
     if (args.length != 2) {
 
