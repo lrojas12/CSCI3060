@@ -13,14 +13,15 @@ import static org.junit.Assert.*;
 import junit.framework.JUnit4TestAdapter;
 import org.junit.*;
 import java.io.*;
+import java.util.*;
 import java.lang.Object.*;
 
 // Taken from Stack example
 public class UpdateMasterTest {
     
     @Test
-    public void test1() {
-    	
+    public void updateMasterTest1() {
+
     }
     
     public static junit.framework.Test suite(){
