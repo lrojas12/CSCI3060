@@ -264,6 +264,7 @@ public class UpdateMasterTest {
     UpdateMaster.transfer(1, 2, (float)100.00, false);
 
     assertEquals((float)1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
+    assertEquals(0, Main.userAccounts.get(0).getNumTran());
   }
 
   @Test
@@ -281,19 +282,6 @@ public class UpdateMasterTest {
 
   @Test
   public void transferTest3() {
-    Main.userAccounts =  new ArrayList<User>();
-    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
-    Main.userAccounts.add(new User("Wayne", 2, (float)99999.99, 'A', 0, 'N'));
-
-    Main.currUser = Main.userAccounts.get(0);
-
-    UpdateMaster.transfer(1, 2, (float)100.00, false);
-
-    assertEquals(0, Main.userAccounts.get(0).getNumTran());
-  }
-
-  @Test
-  public void transferTest4() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     System.setErr(new PrintStream(errContent));
 
@@ -325,6 +313,9 @@ public class UpdateMasterTest {
 
   @Test
   public void depositTest1() {
+
+    Main.userAccounts =  new ArrayList<User>();
+    Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
 
     assertEquals(false, UpdateMaster.deposit(0, (float)20.00, true));
   }
