@@ -23,12 +23,12 @@ public class UpdateMasterTestLoop0 {
     @Test
     public void updateMasterTest() {
 
-        Main mainObj = new Main();
-
-    	List<String> mainObj.transactionFile =  new ArrayList<String>();
+    	Main.transactionFile =  new ArrayList<String>();
+    	UpdateMaster.updateMaster("master_bank_accounts_file");
+    	assertEquals();
     }
 
     public static junit.framework.Test suite(){
-       return new JUnit4TestAdapter(UpdateMasterTestTest.class);
+       return new JUnit4TestAdapter(UpdateMasterTestLoop0.class);
     }
 }

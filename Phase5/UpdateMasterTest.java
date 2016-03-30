@@ -22,10 +22,15 @@ public class UpdateMasterTest {
     @Test
     public void updateMasterTest1() {
 
+    	Main.transactionFile =  new ArrayList<String>();
+    	// case 01
+    	Main.transactionFile.add("01 Tarzan               00001 00020.00   ");
+    	UpdateMaster.updateMaster("master_bank_accounts_file");
+    	assertEquals(980.00, Main.userAccounts.get(0).getBalance());
     }
     
     public static junit.framework.Test suite(){
-       return new JUnit4TestAdapter(UpdateMasterTestTest.class);
+       return new JUnit4TestAdapter(UpdateMasterTest.class);
     }
 }
 
