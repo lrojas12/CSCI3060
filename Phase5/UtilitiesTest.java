@@ -11,23 +11,54 @@
 
 import static org.junit.Assert.*;
 import junit.framework.JUnit4TestAdapter;
+import org.junit.Rule;
 import org.junit.Test;
+import java.io.*;
+import java.util.*;
+import java.lang.system.ExpectedSystemExit;
 
 // Taken from Stack example
 public class UtilitiesTest {
     
+	@Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
     @Test
     public void storeFileTest1() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
 
-        String expectedOutput = "ERROR <internal>: Could not read in file.";
-    	Utilities.storeFile("test.txt", transactionFile);
+    	ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
+        List<String> transactionFile = new ArrayList<String>();
 
-    	assertEquals(outContent.toString(), expectedOutput);
+        Utilities.storeFile("test.txt", transactionFile);
+        String expectedOutput = "ERROR <internal>: Could not read in file.\n";
 
+    	assertEquals(expectedOutput, errContent.toString());
     }
     
+    @Test
+    public void tokenizeTransactionTest1() {
+    	String line = "10 Tarzan               00001          S ";
+
+    	Utilities.tokenizeTransaction(line);
+
+    	assertEquals("S ", Utilities.misc);
+    }
+
+    @Test
+    public void tokenizeTransactionTest2() {
+
+    	ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
+    	String line = "10 Tarzan               0001a          S ";
+    	String expectedOutput = "FATAL ERROR: The format in the transaction file " + Main.transactionFileName + " is incorrect.\n";
+
+    	exit.expectSystemExitWithStatus(-1);
+    	Utilities.tokenizeTransaction(line);
+
+    	assertEquals(expectedOutput, errContent.toString());
+    }
+
     @Test
     public void isAdmintest1() {
 
@@ -37,7 +68,7 @@ public class UtilitiesTest {
     @Test
     public void isAdmintest2() {
 
-    	assertEquals(true, Utilities.isAdmin(' '));
+    	assertEquals(true, Utilities.isAdmin('A'));
 	}
 
     @Test

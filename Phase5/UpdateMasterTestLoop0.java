@@ -23,7 +23,9 @@ public class UpdateMasterTestLoop0 {
     @Test
     public void updateMasterTest() {
 
-    	List<String> Main.transactionFile =  new ArrayList<String>();
+        Main mainObj = new Main();
+
+    	List<String> mainObj.transactionFile =  new ArrayList<String>();
     }
 
     public static junit.framework.Test suite(){
