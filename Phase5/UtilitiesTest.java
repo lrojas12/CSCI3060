@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import java.io.*;
 import java.util.*;
+// import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 // Taken from Stack example
 public class UtilitiesTest {
@@ -22,6 +23,7 @@ public class UtilitiesTest {
 	/*@Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 	*/
+
     @Test
     public void storeFileTest1() {
 
@@ -29,10 +31,20 @@ public class UtilitiesTest {
         System.setErr(new PrintStream(errContent));
         List<String> transactionFile = new ArrayList<String>();
 
-        Utilities.storeFile("test.txt", transactionFile);
+        Utilities.storeFile("test.tra", transactionFile);
         String expectedOutput = "ERROR <internal>: Could not read in file.\n";
 
     	assertEquals(expectedOutput, errContent.toString());
+    }
+
+    @Test
+    public void storeFileTest2() {
+
+        Main.transactionFile = new ArrayList<String>();
+
+        Utilities.storeFile("transaction_file.tra", Main.transactionFile);
+
+    	assertEquals("10 Tarzan               00001          S ", Main.transactionFile.get(0));
     }
     
     @Test
@@ -159,57 +171,53 @@ public class UtilitiesTest {
 		assertEquals(userAccounts.size(), 3);
 	}
 
+	@Test
+	public void isNameUniqueTest1() {
+		String name = "Tarzan";
+
+		assertEquals(false, Utilities.isNameUnique(name));
+	}
+
+	@Test
+	public void isNameUniqueTest2() {
+		String name = "Luisa";
+
+		assertEquals(true, Utilities.isNameUnique(name));
+	}
+
+	@Test
+	public void isNumberUniqueTest1() {
+		int accNum = 1;
+
+		assertEquals(false, Utilities.isNumberUnique(accNum));
+	}
+
+	@Test
+	public void isNumberUniqueTest2() {
+		int accNum = 20;
+
+		assertEquals(true, Utilities.isNumberUnique(accNum));
+	}
+
+	@Test
+	public void getAccIndexTest1() {
+		Main.userAccounts = new ArrayList<User>();
+		Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		
+
+		assertEquals(0, Utilities.getAccIndex(1));
+	}
+
+	@Test
+	public void getAccIndexTest2() {
+		Main.userAccounts = new ArrayList<User>();
+		Main.userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
+		
+
+		assertEquals(-1, Utilities.getAccIndex(2));
+	}
+
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(UtilitiesTest.class);
     }
 }
-
-
-
-/**
- * STATEMENT COVERAGE
- * 
- * Causes every statement in the program to be executed at least
- * once, giving us confidence that every statement is at least
- * capable of executing correctly.get
- * 
- * System: Make a test case for each statement in the program,
- * independent of the others.
- *
- * Test must simply cause the statement to be
- * run, ignoring its actions and sub-statements (but still must check that
- * result of test is correct)
- *
- * Completion criterion: A test case for every statement
- */
-
-/**
- * DECISION COVERAGE
- *
- * Causes every decision (if, switch, while, etc.) in the program
- * to be made both ways (or every possible way for switch).
- *
- * System: Design a test case to exercise each decision in the
- * program each way (true / false).
- * 
- * Completion criterion: A test case for each side of each decision.
- */
-
-/**
- * LOOP COVERAGE
- * 
- * This method makes tests to exercise each loop in the program
- * in four different states :
- * - execute body zero times (do not enter loop)
- * - execute body once (i.e., do not repeat)
- * - execute body twice (i.e., repeat once)
- * - execute body many times
- * 
- * Usually used as an enhancement of a statement, block,
- * decision or condition coverage method
- *
- * System: Devise test cases to exercise each loop with zero, one,
- * two and many repetitions
- *
- * Completion criterion: A test for each of these cases for each loop
- */
