@@ -107,12 +107,6 @@ public class UpdateMaster {
 
       }
     }
-
-    // Rewrites the master bank accounts file.
-    Utilities.rewriteMasterFile(Main.oldMasterFileName);
-
-    // Rewrites the current bank accounts file.
-    Utilities.rewriteCurrentFile();
   }
 
   /**

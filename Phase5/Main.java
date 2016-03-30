@@ -50,6 +50,12 @@ public class Main {
 
       // Update the master bank accounts file.
       UpdateMaster.updateMaster(oldMasterFileName);
+
+      // Rewrites the master bank accounts file.
+      Utilities.rewriteMasterFile(oldMasterFileName);
+
+      // Rewrites the current bank accounts file.
+      Utilities.rewriteCurrentFile();
     }
   }
 }
