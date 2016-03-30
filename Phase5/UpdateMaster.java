@@ -25,7 +25,6 @@ public class UpdateMaster {
     for (int i = 0; i < Main.transactionFile.size(); i++) {
       // Tokenize it
       Utilities.tokenizeTransaction(Main.transactionFile.get(i));
-
       // Chooses transaction based off flag
       switch(Utilities.flag) {
 
@@ -82,8 +81,7 @@ public class UpdateMaster {
 			
       // Changle Plan
       case "08":
-        changeplan(Integer.parseInt(Utilities.accNumT),
-        	       Utilities.misc.charAt(0));
+        changeplan(Integer.parseInt(Utilities.accNumT));
         break;
 
       // Enable
@@ -109,7 +107,6 @@ public class UpdateMaster {
 
       }
     }
-
     // Rewrites the master bank accounts file.
     Utilities.rewriteMasterFile(Main.oldMasterFileName);
 
@@ -362,7 +359,7 @@ public class UpdateMaster {
    * @param accNum   account number changing transaction payment plan
    * @param plan     plan being changed to
    */
-  public static void changeplan(int accNum, char plan) {
+  public static void changeplan(int accNum) {
 
     int accIndex = Utilities.getAccIndex(accNum);
 
@@ -371,21 +368,13 @@ public class UpdateMaster {
       System.err.println("ERROR <<changeplan>>: The account changing plans does not exist.");
       return;
     }
-
-    // Check that the plan inputted in the function is not the same as the current plan.
-    if (Main.userAccounts.get(accIndex).getPlan() == plan) {
-      System.err.println("ERROR <<changeplan>>: The plan inputted is the current plan.");
-      return;
-    }
-
-    // Check that the plan inputted in the function is either N or S.
-    if (plan != 'N' && plan != 'S') {
-      System.err.println("ERROR <<changeplan>>: The plan inputted is not valid.");
-      return;
-    } 
     
     // Change payment plan to given payment plan.
-    Main.userAccounts.get(accIndex).setPlan(plan);
+    if (Main.userAccounts.get(accIndex).getPlan() == 'N') {
+      Main.userAccounts.get(accIndex).setPlan('S');
+    } else {
+      Main.userAccounts.get(accIndex).setPlan('N');
+    }
   }
 
   /**

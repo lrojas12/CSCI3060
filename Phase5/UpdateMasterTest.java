@@ -24,9 +24,10 @@ public class UpdateMasterTest {
     /**
      * At the switch statement, check for case 01 (withdrawal) and case 10 (login)
      */
-   /* @Test
+    @Test
     public void updateMasterTest1() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 10 and 01
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -37,15 +38,17 @@ public class UpdateMasterTest {
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
 
     	UpdateMaster.updateMaster();
+
     	assertEquals(979.90, Main.userAccounts.get(0).getBalance(), 0.02);
-    }*/
+    }
 
     /**
      * At the switch statement, check for case 00 (logout)
      */
-   /* @Test
+    @Test
     public void updateMasterTest2() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 00
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -56,14 +59,15 @@ public class UpdateMasterTest {
 
     	UpdateMaster.updateMaster();
     	assertEquals(1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
-    }*/
+    }
 
     /**
      * At the switch statement, check for case 02 (transfer)
      */
-    /*@Test
+    @Test
     public void updateMasterTest3() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 02
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -77,14 +81,15 @@ public class UpdateMasterTest {
     	UpdateMaster.updateMaster();
     	assertEquals(979.90, Main.userAccounts.get(0).getBalance(), 0.04);
     	assertEquals(1020.00, Main.userAccounts.get(1).getBalance(), 0.04);
-    }*/
+    }
 
     /**
      * At the switch statement, check for case 03 (paybill)
      */
-    /*@Test
+    @Test
     public void updateMasterTest4() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 03
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -95,14 +100,15 @@ public class UpdateMasterTest {
 
     	UpdateMaster.updateMaster();
     	assertEquals(899.90, Main.userAccounts.get(0).getBalance(), 0.04);
-    }*/
+    }
 
     /**
      * At the switch statement, check for case 04 (deposit)
      */
-    /*@Test
+    @Test
     public void updateMasterTest5() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 04
     	Main.transactionFile.add("10 Tarzan               00001          S ");
@@ -118,9 +124,10 @@ public class UpdateMasterTest {
     /**
      * At the switch statement, check for case 05 (create)
      */
-    /*@Test
+    @Test
     public void updateMasterTest6() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 05
     	Main.transactionFile.add("10                                     A ");
@@ -137,9 +144,10 @@ public class UpdateMasterTest {
     /**
      * At the switch statement, check for case 06 (delete)
      */
-   /* @Test
+    @Test
     public void updateMasterTest7() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 06
     	Main.transactionFile.add("10                                     A ");
@@ -157,9 +165,10 @@ public class UpdateMasterTest {
     /**
      * At the switch statement, check for case 07 (disable)
      */
-    /*@Test
+    @Test
     public void updateMasterTest8() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 07
     	Main.transactionFile.add("10                                     A ");
@@ -175,9 +184,10 @@ public class UpdateMasterTest {
     /**
      * At the switch statement, check for case 08 (changeplan)
      */
-    /*@Test
+    @Test
     public void updateMasterTest9() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
     	Main.transactionFile =  new ArrayList<String>();
     	// case 08
     	Main.transactionFile.add("10                                     A ");
@@ -185,20 +195,23 @@ public class UpdateMasterTest {
 
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Ramond", 8, (float)1000.00, 'A', 0, 'N'));
-
+System.out.println(Main.userAccounts.get(0).getPlan());
     	UpdateMaster.updateMaster();
+        System.out.println(Main.userAccounts.get(0).getPlan());
     	assertEquals('S', Main.userAccounts.get(0).getPlan());
     }
 
     /**
      * At the switch statement, check for case 09 (enable)
      */
-    /*@Test
+    @Test
     public void updateMasterTest10() {
     	
+        Main.oldMasterFileName = "master_bank_accounts_file_tests.txt";
+        Main.currUser = new User('A');
+
     	Main.transactionFile =  new ArrayList<String>();
     	// case 09
-    	Main.transactionFile.add("10                                     A ");
     	Main.transactionFile.add("09 Harvey               00006            ");  
 
     	Main.userAccounts =  new ArrayList<User>();
@@ -206,20 +219,18 @@ public class UpdateMasterTest {
 
     	UpdateMaster.updateMaster();
     	assertEquals('A', Main.userAccounts.get(0).getStatus());
-    }*/
+    }
 
     // Actual result is 0.05 cents off for some reason???????????????????????????????????????????????????
     // Only happens for student plan. Non-student works fine (refer to first test of this class)
     // Line UpdateMaster.withdrawal(1, (float)20.00, false); MUST be the problem (only difference)
     @Test
-    public void withdrawalTest1() { 
-    	
-    	Main.transactionFile =  new ArrayList<String>();
-    	Main.transactionFile.add("10 Tarzan               00001          S ");
-    	Main.transactionFile.add("01 Tarzan               00001 00020.00   ");
+    public void withdrawalTest1() {
 
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+        Main.currUser = Main.userAccounts.get(0);
 
     	UpdateMaster.withdrawal(1, (float)20.00, false); // 20.00 gets read in as 20.00, even with float cast
 
@@ -251,7 +262,7 @@ public class UpdateMasterTest {
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
 
-    	UpdateMaster.changeplan(1, 'N');
+    	UpdateMaster.changeplan(1);
     	assertEquals('N', Main.userAccounts.get(0).getPlan());
     }
 
@@ -267,7 +278,7 @@ public class UpdateMasterTest {
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
 
-    	UpdateMaster.changeplan(1, 'S');
+    	UpdateMaster.changeplan(1);
     	assertEquals('S', Main.userAccounts.get(0).getPlan());
     }
 
