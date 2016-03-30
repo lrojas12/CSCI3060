@@ -105,7 +105,6 @@ public class Utilities {
     } else {
       System.err.println("ERROR <internal>: Unable to retrieve account mode.");
       return false;
-      // Skip to the next line
     }
   }
 
