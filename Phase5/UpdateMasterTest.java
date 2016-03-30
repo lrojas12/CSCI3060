@@ -229,7 +229,7 @@ public class UpdateMasterTest {
     }
 
 	@Test
-    public void withdrawalTest() {
+    public void withdrawalTest1() {
     	
     	Main.currUser = new User();
 
@@ -245,7 +245,7 @@ public class UpdateMasterTest {
     }
 
 	@Test
-    public void withdrawalTest() {
+    public void withdrawalTest2() {
     	
     	Main.currUser = new User();
 
@@ -262,7 +262,7 @@ public class UpdateMasterTest {
     }
 
    	@Test
-    public void changeplanTest() {
+    public void changeplanTest1() {
     	
     	Main.currUser = new User();
 
@@ -278,7 +278,7 @@ public class UpdateMasterTest {
     }
 
    	@Test
-    public void changeplanTest() {
+    public void changeplanTest2() {
     	
     	Main.currUser = new User();
 
