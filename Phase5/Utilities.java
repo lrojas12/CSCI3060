@@ -47,12 +47,12 @@ public class Utilities {
    */
   public static void tokenizeTransaction(String line) {
 
+    // Regular expression pattern for transaction file line format.
     String pattern = "[\\d]{2} [\\w\\p{Punct} ]{20} [\\d ]{5} [\\d ]{5}[\\. ][\\d ]{2} [A-Z ]{2}";
-    
     Pattern r = Pattern.compile(pattern);
-
     Matcher m = r.matcher(line);
     
+    // Checks line for match. Fatal errors if does not match format.
     if (!m.matches()) {
       System.err.println("FATAL ERROR: The format in the transaction file " + Main.transactionFileName + " is incorrect.");
       System.exit(-1);
@@ -72,12 +72,12 @@ public class Utilities {
    */
   public static void tokenizeMaster(String line) {
     
+    // Regular expression pattern for master bank accounts file line format.
     String pattern = "[\\d]{5} [\\w\\p{Punct} ]{20} [AD] [\\d ]{5}[\\. ][\\d ]{2} [\\d]{4} [SN]";
-
     Pattern r = Pattern.compile(pattern);
-
     Matcher m = r.matcher(line);
     
+    // Checks line for match. Fatal errors if does not match format.
     if (!m.matches()) {
       System.err.println("FATAL ERROR: The format in the master accounts file " + Main.oldMasterFileName + " is incorrect.");
       System.exit(-1);
@@ -108,10 +108,8 @@ public class Utilities {
     }
   }
 
-
-  //// --------------- FIX THIISSS!!!!------------------
   /**
-   * Tokenizes, and stores the master bank accounts file lines into an List of type User.
+   * Stores the master version of bank accounts.
    *
    * @param masterList   list containing the not tokenized master bank account file lines
    */
@@ -289,7 +287,6 @@ public class Utilities {
         return i;
       }
     }
-
     return -1;
   }
 } 
