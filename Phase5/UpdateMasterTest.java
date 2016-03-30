@@ -16,9 +16,13 @@ import java.io.*;
 import java.util.*;
 import java.lang.Object.*;
 
-// Taken from Stack example
 public class UpdateMasterTest {
+
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     
+    /**
+     * At the switch statement, check for case 01 (withdrawal) and case 10 (login)
+     */
     @Test
     public void updateMasterTest1() {
     	
@@ -37,6 +41,9 @@ public class UpdateMasterTest {
     	assertEquals(979.90, Main.userAccounts.get(0).getBalance(), 0.02);
     }
 
+    /**
+     * At the switch statement, check for case 00 (logout)
+     */
     @Test
     public void updateMasterTest2() {
     	
@@ -54,6 +61,9 @@ public class UpdateMasterTest {
     	assertEquals(1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
     }
 
+    /**
+     * At the switch statement, check for case 02 (transfer)
+     */
     @Test
     public void updateMasterTest3() {
     	
@@ -74,6 +84,9 @@ public class UpdateMasterTest {
     	assertEquals(1020.00, Main.userAccounts.get(1).getBalance(), 0.04);
     }
 
+    /**
+     * At the switch statement, check for case 03 (paybill)
+     */
     @Test
     public void updateMasterTest4() {
     	
@@ -91,6 +104,9 @@ public class UpdateMasterTest {
     	assertEquals(899.90, Main.userAccounts.get(0).getBalance(), 0.04);
     }
 
+    /**
+     * At the switch statement, check for case 04 (deposit)
+     */
     @Test
     public void updateMasterTest5() {
     	
@@ -108,7 +124,9 @@ public class UpdateMasterTest {
     	assertEquals(1019.90, Main.userAccounts.get(0).getBalance(), 0.04);
     }
 
-    // DOESNT WORK
+    /**
+     * At the switch statement, check for case 05 (create)
+     */
     @Test
     public void updateMasterTest6() {
     	
@@ -116,64 +134,166 @@ public class UpdateMasterTest {
 
     	Main.transactionFile =  new ArrayList<String>();
     	// case 05
-    	Main.transactionFile.add("10                                      A ");
-    	Main.transactionFile.add("05 LuisaRojas0123456789 00020 00500.00    ");  
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("05 LuisaRojas0123456789 00020 00500.00   ");  
 
     	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+    	Main.userAccounts.add(new User("END_OF_FILE", 99999, (float)0000.00, 'D', 0, 'N'));
 
     	UpdateMaster.updateMaster();
-    	assertEquals("LuisaRojas0123456789", Main.userAccounts.get(0).getName());
+    	assertEquals("LuisaRojas0123456789", Main.userAccounts.get(1).getName());
+    }
+
+    /**
+     * At the switch statement, check for case 06 (delete)
+     */
+    @Test
+    public void updateMasterTest7() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	// case 06
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("06 Bruce                00003            ");  
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+    	Main.userAccounts.add(new User("Bruce", 3, (float)1000.00, 'A', 0, 'N'));
+    	Main.userAccounts.add(new User("Kent", 4, (float)1000.00, 'A', 0, 'N'));
+
+    	UpdateMaster.updateMaster();
+    	assertEquals("Kent", Main.userAccounts.get(1).getName());
+    }
+
+    /**
+     * At the switch statement, check for case 07 (disable)
+     */
+    @Test
+    public void updateMasterTest8() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	// case 07
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("07 Kent                 00004            ");  
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Kent", 4, (float)1000.00, 'A', 0, 'N'));
+
+    	UpdateMaster.updateMaster();
+    	assertEquals('D', Main.userAccounts.get(0).getStatus());
+    }
+
+    /**
+     * At the switch statement, check for case 08 (changeplan)
+     */
+    @Test
+    public void updateMasterTest9() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	// case 08
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("08 Ramond               00008            ");  
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Ramond", 8, (float)1000.00, 'A', 0, 'N'));
+
+    	UpdateMaster.updateMaster();
+
+    	assertEquals('S', Main.userAccounts.get(0).getPlan());
+    }
+
+    /**
+     * At the switch statement, check for case 09 (enable)
+     */
+    @Test
+    public void updateMasterTest10() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	// case 09
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("09 Harvey               00006            ");  
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Harvey", 6, (float)200.00, 'D', 0, 'N'));
+
+    	UpdateMaster.updateMaster();
+    	assertEquals('A', Main.userAccounts.get(0).getStatus());
+    }
+
+	@Test
+    public void withdrawalTest() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	Main.transactionFile.add("10 Tarzan               00001          S ");
+    	Main.transactionFile.add("01 Tarzan               00001 00020.00   ");
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+    	UpdateMaster.withdrawal(1, (float)20.00, false);
+    	assertEquals(979.95, Main.userAccounts.get(0).getBalance(), 0.02);
+    }
+
+	@Test
+    public void withdrawalTest() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("01 Tarzan               00001 00020.00   ");
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+    	UpdateMaster.withdrawal(1, (float)20.00, false);
+    	// No fee gets charged since an admin is performing the transaction
+    	assertEquals(980.00, Main.userAccounts.get(0).getBalance(), 0.02);
+    }
+
+   	@Test
+    public void changeplanTest() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("08 Tarzan               00001            ");
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+    	UpdateMaster.changeplan(1, 'N');
+    	assertEquals('N', Main.userAccounts.get(0).getPlan());
+    }
+
+   	@Test
+    public void changeplanTest() {
+    	
+    	Main.currUser = new User();
+
+    	Main.transactionFile =  new ArrayList<String>();
+    	Main.transactionFile.add("10                                     A ");
+    	Main.transactionFile.add("08 Tarzan               00001            ");
+
+    	Main.userAccounts =  new ArrayList<User>();
+    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+
+    	UpdateMaster.changeplan(1, 'N');
+    	assertEquals('S', Main.userAccounts.get(0).getPlan());
     }
 
     public static junit.framework.Test suite(){
        return new JUnit4TestAdapter(UpdateMasterTest.class);
     }
 }
-
-/**
- * STATEMENT COVERAGE
- * 
- * Causes every statement in the program to be executed at least
- * once, giving us confidence that every statement is at least
- * capable of executing correctly
- * 
- * System: Make a test case for each statement in the program,
- * independent of the others.
- *
- * Test must simply cause the statement to be
- * run, ignoring its actions and sub-statements (but still must check that
- * result of test is correct)
- *
- * Completion criterion: A test case for every statement
- */
-
-/**
- * DECISION COVERAGE
- *
- * Causes every decision (if, switch, while, etc.) in the program
- * to be made both ways (or every possible way for switch).
- *
- * System: Design a test case to exercise each decision in the
- * program each way (true / false).
- * 
- * Completion criterion: A test case for each side of each decision.
- */
-
-/**
- * LOOP COVERAGE
- * 
- * This method makes tests to exercise each loop in the program
- * in four different states :
- * - execute body zero times (do not enter loop)
- * - execute body once (i.e., do not repeat)
- * - execute body twice (i.e., repeat once)
- * - execute body many times
- * 
- * Usually used as an enhancement of a statement, block,
- * decision or condition coverage method
- *
- * System: Devise test cases to exercise each loop with zero, one,
- * two and many repetitions
- *
- * Completion criterion: A test for each of these cases for each loop
- */

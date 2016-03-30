@@ -20,6 +20,9 @@ public class MainTest {
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     Main mainObj = new Main();
 
+    /**
+     * Before and After will set up the err streams for the byte array
+     */
 	@Before
 	public void setUpStreams() {
 		System.setErr(new PrintStream(errContent));
@@ -30,6 +33,9 @@ public class MainTest {
 		System.setErr(null);
 	}
     
+    /**
+     * Test for number of arguments different than 2
+     */
     @Test
     public void mainTest1() {
 
@@ -39,6 +45,9 @@ public class MainTest {
 
 	}
 
+	/**
+	* Test for number of arguments equal to 2
+	*/
 	@Test
 	public void mainTest2() {
 		String[] args = {"arg1", "arg2"};

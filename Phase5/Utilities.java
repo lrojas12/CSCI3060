@@ -47,7 +47,7 @@ public class Utilities {
    */
   public static void tokenizeTransaction(String line) {
 
-    String pattern = "[\\d]{2} [\\w\\p{Punct} ]{20} [\\d]{5} [\\d ]{5}[\\. ][\\d ]{2} [A-Z ]{2}";
+    String pattern = "[\\d]{2} [\\w\\p{Punct} ]{20} [\\d ]{5} [\\d ]{5}[\\. ][\\d ]{2} [A-Z ]{2}";
 		
     Pattern r = Pattern.compile(pattern);
 
