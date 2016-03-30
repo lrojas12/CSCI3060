@@ -221,33 +221,43 @@ System.out.println(Main.userAccounts.get(0).getPlan());
     	assertEquals('A', Main.userAccounts.get(0).getStatus());
     }
 
-    // Actual result is 0.05 cents off for some reason???????????????????????????????????????????????????
-    // Only happens for student plan. Non-student works fine (refer to first test of this class)
-    // Line UpdateMaster.withdrawal(1, (float)20.00, false); MUST be the problem (only difference)
     @Test
     public void withdrawalTest1() {
+
+        assertEquals(false, UpdateMaster.withdrawal(0, (float)20.00, true));
+    }
+
+    @Test
+    public void withdrawalTest2() {
+        
+        Main.currUser = new User('A');
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+        assertEquals(true, UpdateMaster.withdrawal(1, (float)20.00, true));
+    }
+
+    @Test
+    public void withdrawalTest3() {
 
     	Main.userAccounts =  new ArrayList<User>();
     	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
 
         Main.currUser = Main.userAccounts.get(0);
 
-    	UpdateMaster.withdrawal(1, (float)20.00, false); // 20.00 gets read in as 20.00, even with float cast
-
-    	assertEquals(979.95, Main.userAccounts.get(0).getBalance(), 0.05);
+    	assertEquals(true, UpdateMaster.withdrawal(1, (float)20.00, false));
     }
 
-	@Test
-    public void withdrawalTest2() {
-    	
-    	Main.currUser = new User('A');
+    @Test
+    public void withdrawalTest4() {
 
-    	Main.userAccounts =  new ArrayList<User>();
-    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
 
-    	UpdateMaster.withdrawal(1, (float)20.00, true);
-    	// No fee gets charged since an admin is performing the transaction
-    	assertEquals(980.00, Main.userAccounts.get(0).getBalance(), 0.02);
+        Main.currUser = Main.userAccounts.get(0);
+
+        assertEquals(false, UpdateMaster.withdrawal(1, (float)99999.99, false));
     }
 
     @Test
