@@ -21,12 +21,12 @@ public class UpdateMaster {
    */
   public static void updateMaster(String oldMasterFileName) {
 
-    // For each line in the merged transfer files list.
+    // For each line in the merged transfer files list
     for (int i = 0; i < Main.transactionFile.size(); i++) {
-      // Tokenize it.
+      // Tokenize it
       Utilities.tokenizeTransaction(Main.transactionFile.get(i));
 
-      // Chooses transaction based off flag.
+      // Chooses transaction based off flag
       switch(Utilities.flag) {
 
       // Withdrawal
