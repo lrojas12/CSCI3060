@@ -250,38 +250,6 @@ System.out.println(Main.userAccounts.get(0).getPlan());
     	assertEquals(980.00, Main.userAccounts.get(0).getBalance(), 0.02);
     }
 
-   	@Test
-    public void changeplanTest1() {
-    	
-    	Main.currUser = new User();
-
-    	Main.transactionFile =  new ArrayList<String>();
-    	Main.transactionFile.add("10                                     A ");
-    	Main.transactionFile.add("08 Tarzan               00001            ");
-
-    	Main.userAccounts =  new ArrayList<User>();
-    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
-
-    	UpdateMaster.changeplan(1);
-    	assertEquals('N', Main.userAccounts.get(0).getPlan());
-    }
-
-   	@Test
-    public void changeplanTest2() {
-    	
-    	Main.currUser = new User();
-
-    	Main.transactionFile =  new ArrayList<String>();
-    	Main.transactionFile.add("10                                     A ");
-    	Main.transactionFile.add("08 Tarzan               00001            ");
-
-    	Main.userAccounts =  new ArrayList<User>();
-    	Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
-
-    	UpdateMaster.changeplan(1);
-    	assertEquals('S', Main.userAccounts.get(0).getPlan());
-    }
-
     @Test
     public void transferTest1() {
         ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -425,6 +393,51 @@ System.out.println(Main.userAccounts.get(0).getPlan());
     }
 
     @Test
+    public void changeplanTest1() {
+        
+        ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
+
+        UpdateMaster.changeplan(0);
+
+        String expectedOutput = "ERROR <<changeplan>>: The account changing plans does not exist.\n";
+
+        assertEquals(expectedOutput, errContent.toString());
+    }
+
+    @Test
+    public void changeplanTest2() {
+        
+        Main.currUser = new User();
+
+        Main.transactionFile =  new ArrayList<String>();
+        Main.transactionFile.add("10                                     A ");
+        Main.transactionFile.add("08 Tarzan               00001            ");
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'S'));
+
+        UpdateMaster.changeplan(1);
+        assertEquals('N', Main.userAccounts.get(0).getPlan());
+    }
+
+    @Test
+    public void changeplanTest3() {
+        
+        Main.currUser = new User();
+
+        Main.transactionFile =  new ArrayList<String>();
+        Main.transactionFile.add("10                                     A ");
+        Main.transactionFile.add("08 Tarzan               00001            ");
+
+        Main.userAccounts =  new ArrayList<User>();
+        Main.userAccounts.add(new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N'));
+
+        UpdateMaster.changeplan(1);
+        assertEquals('S', Main.userAccounts.get(0).getPlan());
+    }
+
+    @Test
     public void enableTest1() {
         ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(errContent));
@@ -457,7 +470,6 @@ System.out.println(Main.userAccounts.get(0).getPlan());
         UpdateMaster.enable(1);
 
         String expectedOutput = "ERROR <<enable>>: The account to be enabled already is.\n";
-
 
         assertEquals(expectedOutput, errContent.toString());
     }
