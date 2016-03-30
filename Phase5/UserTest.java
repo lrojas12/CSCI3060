@@ -15,6 +15,9 @@ import org.junit.Test;
 
 public class UserTest {
     
+    /**
+     * Tests User constructor that accepts only plan.
+     */
     @Test
     public void userConstructorTest1() {
       User testUser = new User('A');
@@ -22,6 +25,9 @@ public class UserTest {
       assertEquals('A', testUser.getPlan());
   }
 
+  /**
+   * Tests User constructor that accepts values for all variables.
+   */
   @Test
     public void userConstructorTest2() {
       User testUser = new User("Tarzan", 1, (float)1000.00, 'A', 0, 'N');
