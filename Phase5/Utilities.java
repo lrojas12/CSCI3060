@@ -182,7 +182,7 @@ public class Utilities {
       }
       bw.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      System.err.println("ERROR <internal>: Could not write to file.");
     }
   }
 
@@ -233,7 +233,7 @@ public class Utilities {
       }
       bw.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      System.err.println("ERROR <internal>: Could not write to file.");
     }
   }
 

@@ -584,6 +584,7 @@ public class UpdateMasterTest {
 
   @Test
   public void logoutTest1() {
+    
     Main.currUser = new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N');
 
     UpdateMaster.logout();
