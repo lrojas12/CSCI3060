@@ -19,12 +19,11 @@ import java.util.*;
 
 public class UtilitiesTest {
     
-  /*@Rule
-    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
-  */
+  //@Rule
+  //public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
   /**
-   * 
+   * Executes storeFile with a unexistant file. Should error through the catch.
    */
   @Test
   public void storeFileTest1() {
@@ -40,7 +39,8 @@ public class UtilitiesTest {
   }
   
   /**
-   * 
+   * Checks if storeFile actually reads in from the file. If it does, it can
+   * be assumed that the lines previous to it were executed.
    */
   @Test
   public void storeFileTest2() {
@@ -53,7 +53,9 @@ public class UtilitiesTest {
   }
     
   /**
-   * 
+   * Tests for when a line is tokenized successfully. Checks if the misc
+   * variable has the correct value in it. If it's correct, it can be
+   * assumed that the lines previous to it were executed.
    */
   @Test
   public void tokenizeTransactionTest1() {
@@ -65,7 +67,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when the format is incorrect and the proper error message
+   * was printed.
    */
   /*@Test
   public void tokenizeTransactionTest2() {
@@ -82,7 +85,9 @@ public class UtilitiesTest {
   }*/
 
   /**
-   * 
+   * Tests for when a line is tokenized successfully. Checks if the accPlan
+   * variable has the correct value in it. If it's correct, it can be
+   * assumed that the lines previous to it were executed.
    */
   @Test
   public void tokenizeMasterTest1() {
@@ -94,7 +99,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when the format is incorrect and the proper error message
+   * was printed.
    */
   /*@Test
   public void tokenizeMasterTest2() {
@@ -111,7 +117,8 @@ public class UtilitiesTest {
   }*/
 
   /**
-   * 
+   * Tests when a standard user is logged in, if they are an admin.
+   * (Should return false)
    */
   @Test
   public void isAdminTest1() {
@@ -120,7 +127,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests when an admin is logged in, if they are an admin.
+   * (Should return true)
    */
   @Test
   public void isAdminTest2() {
@@ -129,7 +137,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests when an invalid mode is checked for admin.
+   * Should return the correct error message.s
    */
   @Test
   public void isAdminTest3() {
@@ -138,7 +147,14 @@ public class UtilitiesTest {
   }
   
   /**
-   * 
+   * For the getAllMasterAccounts function, it was also tested for
+   * loop coverage. The loop coverage also serves as statement
+   * coverage in this case.
+   */
+
+  /**
+   * Tests the getAllMasterAccounts for zero times.
+   * (When the list is empty)
    */
   @Test
   public void getAllMasterAccountsLoopTestZero() {
@@ -153,7 +169,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests the getAllMasterAccounts for one time.
+   * (When the list has one account in it)
    */
   @Test
   public void getAllMasterAccountsLoopTestOne() {
@@ -170,7 +187,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests the getAllMasterAccounts for two times.
+   * (When the list has two accounts in it)
    */
   @Test
   public void getAllMasterAccountsLoopTestTwo() {
@@ -189,8 +207,9 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
-   */ 
+   * Tests the getAllMasterAccounts for many times.
+   * (When the list has more than two accounts in it)
+   */
   @Test
   public void getAllMasterAccountsLoopTestMany() {
 
@@ -210,7 +229,8 @@ public class UtilitiesTest {
   }
   
   /**
-   * 
+   * Tests if the printed out line is as expected. It can be assumed
+   * that if the line is correct, then all lines were executed.
    */
   @Test
   public void rewriteMasterFileTest1() {
@@ -231,7 +251,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests if the printed out line is as expected. It can be assumed
+   * that if the line is correct, then all lines were executed.
    */
   @Test
   public void rewriteCurrentFileTest1() {
@@ -251,15 +272,14 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when a name is not unique.
+   * (Should return false)
    */
   @Test
   public void isNameUniqueTest1() {
 
     List<User> userAccounts = new ArrayList<User>();
     userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
 
     String name = "Tarzan";
 
@@ -267,15 +287,14 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when a name is unique.
+   * (Should return true)
    */
   @Test
   public void isNameUniqueTest2() {
 
     List<User> userAccounts = new ArrayList<User>();
     userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
 
     String name = "Luisa";
 
@@ -283,15 +302,14 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when an account number is not unique.
+   * (Should return false)
    */
   @Test
   public void isNumberUniqueTest1() {
 
     List<User> userAccounts = new ArrayList<User>();
     userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
 
     int accNum = 1;
 
@@ -299,15 +317,14 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when an account number is unique.
+   * (Should return true)
    */
   @Test
   public void isNumberUniqueTest2() {
 
     List<User> userAccounts = new ArrayList<User>();
     userAccounts.add(new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Wayne", 2, (float)1000.0, 'A', 0, 'N'));
-    userAccounts.add(new User("Bruce", 3, (float)1000.0, 'A', 0, 'N'));
 
     int accNum = 20;
 
@@ -315,7 +332,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when the account number does exist.
+   * (Should return the proper index)
    */
   @Test
   public void getAccIndexTest1() {
@@ -327,7 +345,8 @@ public class UtilitiesTest {
   }
 
   /**
-   * 
+   * Tests for when the account number does not exist.
+   * (Should return -1)
    */
   @Test
   public void getAccIndexTest2() {
