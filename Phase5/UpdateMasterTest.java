@@ -42,7 +42,6 @@ public class UpdateMasterTest {
     assertEquals(979.90, Main.userAccounts.get(0).getBalance(), 0.02);
   }
 
-
   /**
    * At the switch statement, check for case 02 (transfer)
    */
@@ -201,14 +200,20 @@ public class UpdateMasterTest {
     assertEquals('A', Main.userAccounts.get(0).getStatus());
   }
 
+  /**
+   * Tests for when the account number does not exist.
+   * (Should return false)
+   */
   @Test
   public void withdrawalTest1() {
-
-  //  withdrawal(int accNum, float amount, boolean admin) {
 
     assertEquals(false, UpdateMaster.withdrawal(0, (float)20.00, true));
   }
 
+  /**
+   * Tests for when withdrawing when logged in as admin.
+   * (Should return true)
+   */
   @Test
   public void withdrawalTest2() {
     
@@ -220,6 +225,10 @@ public class UpdateMasterTest {
     assertEquals(true, UpdateMaster.withdrawal(1, (float)20.00, true));
   }
 
+  /**
+   * Tests for when withdrawing when logged in as student standard.
+   * (Should return true)
+   */
   @Test
   public void withdrawalTest3() {
 
@@ -231,6 +240,10 @@ public class UpdateMasterTest {
     assertEquals(true, UpdateMaster.withdrawal(1, (float)20.00, false));
   }
 
+  /**
+   * Tests for when withdrawing when logged in as non-student standard.
+   * (Should return true)
+   */
   @Test
   public void withdrawalTest4() {
 
@@ -242,6 +255,10 @@ public class UpdateMasterTest {
     assertEquals(true, UpdateMaster.withdrawal(1, (float)500.00, false));
   }
 
+  /**
+   * Tests for when there is an invalid payment plan.
+   * (Should return false)
+   */
   @Test
   public void withdrawalTest5() {
 
@@ -253,6 +270,10 @@ public class UpdateMasterTest {
     assertEquals(false, UpdateMaster.withdrawal(1, (float)500.00, false));
   }
 
+  /**
+   * Tests for success when logged in as non-student standard and that
+   * the number of transactions for that account did not change.
+   */
   @Test
   public void transferTest1() {
     Main.userAccounts =  new ArrayList<User>();
@@ -267,6 +288,9 @@ public class UpdateMasterTest {
     assertEquals(0, Main.userAccounts.get(0).getNumTran());
   }
 
+  /**
+   * Tests for success when logged in as student standard.
+   */
   @Test
   public void transferTest2() {
     Main.userAccounts =  new ArrayList<User>();
@@ -280,6 +304,9 @@ public class UpdateMasterTest {
     assertEquals((float)1000.00, Main.userAccounts.get(0).getBalance(), 0.02);
   }
 
+  /**
+   * Tests when the withdrawing portion failed.
+   */
   @Test
   public void transferTest3() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -296,6 +323,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the paybill does not succeed.
+   */
   @Test
   public void paybillTest1() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -311,6 +341,10 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the account to deposit into does not exist.
+   * (Should return false)
+   */
   @Test
   public void depositTest1() {
 
@@ -320,6 +354,10 @@ public class UpdateMasterTest {
     assertEquals(false, UpdateMaster.deposit(0, (float)20.00, true));
   }
 
+  /**
+   * Tests for success when depositing while logged in an admin account.
+   * (Should return true)
+   */
   @Test
   public void depositTest2() {
 
@@ -331,6 +369,10 @@ public class UpdateMasterTest {
     assertEquals(true, UpdateMaster.deposit(1, (float)20.00, true));
   }
 
+  /**
+   * Tests for success when depositing when logged in as a student standard account.
+   * (Should return true)
+   */
   @Test
   public void depositTest3() {
 
@@ -342,6 +384,10 @@ public class UpdateMasterTest {
     assertEquals(true, UpdateMaster.deposit(1, (float)20.00, false));
   }
 
+  /**
+   * Tests for success when depositing when logged in as a non-student standard account.
+   * (Should return true)
+   */
   @Test
   public void depositTest4() {
 
@@ -352,7 +398,11 @@ public class UpdateMasterTest {
 
     assertEquals(true, UpdateMaster.deposit(1, (float)20.00, false));
   }
-
+  
+  /**
+   * Tests for when the account plan is not valid.
+   * (Should return false)
+   */
   @Test
   public void depositTest5() {
 
@@ -364,6 +414,9 @@ public class UpdateMasterTest {
     assertEquals(false, UpdateMaster.deposit(1, (float)20.00, false));
   }
 
+  /**
+   * Tests for success when all constraints are met, and the account is created.
+   */
   @Test
   public void createTest1() {
     Main.userAccounts = new ArrayList<User>();
@@ -374,6 +427,9 @@ public class UpdateMasterTest {
     assertEquals(2, Main.userAccounts.size());
   }
 
+  /**
+   * Tests for when a constraint fails and the account is not created.
+   */
   @Test
   public void createTest2() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -388,6 +444,9 @@ public class UpdateMasterTest {
     assertEquals(0, Main.userAccounts.size());
   }
 
+  /**
+   * Tests for when the account to delete does not exist.
+   */
   @Test
   public void deleteTest1() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -400,6 +459,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the account to delete is successfully deleted.
+   */
   @Test
   public void deleteTest2() {
 
@@ -411,6 +473,9 @@ public class UpdateMasterTest {
     assertEquals(0, Main.userAccounts.size());
   }
 
+  /**
+   * Tests for when the account to be disabled does not exist.
+   */
   @Test
   public void disableTest1() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -423,6 +488,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the account to be disabled is successfully disabled.
+   */
   @Test
   public void disableTest2() {
     Main.userAccounts = new ArrayList<User>();
@@ -433,6 +501,9 @@ public class UpdateMasterTest {
     assertEquals('D', Main.userAccounts.get(0).getStatus());
   }
 
+  /**
+   * Tests for when the account to be disabled is already disabled.
+   */
   @Test
   public void disableTest3() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -449,6 +520,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the account to change plans does not exist.
+   */
   @Test
   public void changeplanTest1() {
     
@@ -462,6 +536,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when the account is changed from student to non-student.
+   */
   @Test
   public void changeplanTest2() {
     
@@ -478,6 +555,9 @@ public class UpdateMasterTest {
     assertEquals('N', Main.userAccounts.get(0).getPlan());
   }
 
+  /**
+   * Tests for when the account is changed from non-student to student.
+   */
   @Test
   public void changeplanTest3() {
     
@@ -494,6 +574,9 @@ public class UpdateMasterTest {
     assertEquals('S', Main.userAccounts.get(0).getPlan());
   }
 
+  /**
+   * Tests for when the account to be enabled does not exist.
+   */
   @Test
   public void enableTest1() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -506,6 +589,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for when a disabled account is successfully enabled.
+   */
   @Test
   public void enableTest2() {
     Main.userAccounts = new ArrayList<User>();
@@ -516,6 +602,9 @@ public class UpdateMasterTest {
     assertEquals('A', Main.userAccounts.get(0).getStatus());
   }
 
+  /**
+   * Tests for when trying to enable and account that is already enabled.
+   */
   @Test
   public void enableTest3() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -531,6 +620,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for the account to login to does not exist.
+   */
   @Test
   public void loginTest1() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -547,6 +639,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for successfully logging into a standard account.
+   */
   @Test 
   public void loginTest2() {
 
@@ -559,6 +654,9 @@ public class UpdateMasterTest {
     assertEquals('N', Main.currUser.getPlan());
   }
 
+  /**
+   * Tests for successfully logging into an admin account.
+   */
   @Test 
   public void loginTest3() {
     Main.currUser = new User("Tarzan", 1, (float)1000.0, 'A', 0, 'N');
@@ -569,6 +667,9 @@ public class UpdateMasterTest {
     assertEquals('A', Main.currUser.getPlan());
   }
 
+  /**
+   * Tests for when the there is an invalid mode to log in as.
+   */
   @Test
   public void loginTest4() {
     ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -582,6 +683,9 @@ public class UpdateMasterTest {
     assertEquals(expectedOutput, errContent.toString());
   }
 
+  /**
+   * Tests for sucessfully logout.
+   */
   @Test
   public void logoutTest1() {
     
