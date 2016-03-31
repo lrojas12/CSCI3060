@@ -9,6 +9,7 @@ testMain: back
 	@javac -cp junit-4.10.jar:. MainTest.java
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore MainTest
 	@rm *.class
+	@rm current_bank_accounts_file.txt
 	@echo " ========================================== "
 
 testUpdateMaster: back
@@ -17,6 +18,7 @@ testUpdateMaster: back
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore UpdateMasterTest
 	@rm *.class
 	@rm master_bank_accounts_file_test.txt
+	@rm current_bank_accounts_file.txt
 	@echo " ========================================== "
 
 testUser: back
@@ -24,6 +26,7 @@ testUser: back
 	@javac -cp junit-4.10.jar:. UserTest.java
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore UserTest
 	@rm *.class
+	@rm current_bank_accounts_file.txt
 	@echo " ========================================== "
 
 testUtilities: back
@@ -32,6 +35,7 @@ testUtilities: back
 	@java -cp junit-4.10.jar:. org.junit.runner.JUnitCore UtilitiesTest
 	@rm *.class
 	@rm master_bank_accounts_file_test.txt
+	@rm current_bank_accounts_file.txt
 	@echo " ========================================== "
 
 testAll: back testMain testUpdateMaster testUser testUtilities
