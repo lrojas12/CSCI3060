@@ -48,7 +48,7 @@ int main (int argc, char *argv[]) {
   // For command line input only
   if (argc >= 2) {
 
-    system("rm transaction_file_*.tra");
+    system("rm transaction_file_*.tra 2> /dev/null");
 
     file_name = argv[1];
 
