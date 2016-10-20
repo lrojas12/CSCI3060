@@ -1,3 +1,0 @@
-all:
-	@g++ -I/usr/local/Cellar/boost/1.59.0/include -std=c++11 front_end/*.cpp -o exe
-	@./exe new.cbaf
